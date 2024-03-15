@@ -33,7 +33,7 @@
 /* Begin PBXFileReference section */
 		2BA135231CAC53F9027D45C0 /* Pods-Reqres App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reqres App.release.xcconfig"; path = "Target Support Files/Pods-Reqres App/Pods-Reqres App.release.xcconfig"; sourceTree = "<group>"; };
 		40941FF66713473BA0444405 /* Pods_Reqres_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reqres_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F416D73E26C900FA00BDD354 /* Reqres App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reqres App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F416D73E26C900FA00BDD354 /* digitalbank App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "digitalbank App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F416D74126C900FA00BDD354 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F416D74326C900FA00BDD354 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F416D74826C900FA00BDD354 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		F416D73F26C900FA00BDD354 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F416D73E26C900FA00BDD354 /* Reqres App.app */,
+				F416D73E26C900FA00BDD354 /* digitalbank App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,9 +184,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F416D73D26C900FA00BDD354 /* Reqres App */ = {
+		F416D73D26C900FA00BDD354 /* digitalbank App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F416D75226C900FB00BDD354 /* Build configuration list for PBXNativeTarget "Reqres App" */;
+			buildConfigurationList = F416D75226C900FB00BDD354 /* Build configuration list for PBXNativeTarget "digitalbank App" */;
 			buildPhases = (
 				03047486E1B0041ED445CB91 /* [CP] Check Pods Manifest.lock */,
 				F416D73A26C900FA00BDD354 /* Sources */,
@@ -198,9 +198,9 @@
 			);
 			dependencies = (
 			);
-			name = "Reqres App";
+			name = "digitalbank App";
 			productName = "Reqres App";
-			productReference = F416D73E26C900FA00BDD354 /* Reqres App.app */;
+			productReference = F416D73E26C900FA00BDD354 /* digitalbank App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -230,7 +230,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F416D73D26C900FA00BDD354 /* Reqres App */,
+				F416D73D26C900FA00BDD354 /* digitalbank App */,
 			);
 		};
 /* End PBXProject section */
@@ -465,7 +465,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.girish.reqresapp.Reqres-App";
+				PRODUCT_BUNDLE_IDENTIFIER = perforce.digitalbank.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -484,7 +484,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.girish.reqresapp.Reqres-App";
+				PRODUCT_BUNDLE_IDENTIFIER = perforce.digitalbank.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -503,7 +503,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F416D75226C900FB00BDD354 /* Build configuration list for PBXNativeTarget "Reqres App" */ = {
+		F416D75226C900FB00BDD354 /* Build configuration list for PBXNativeTarget "digitalbank App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F416D75326C900FB00BDD354 /* Debug */,
