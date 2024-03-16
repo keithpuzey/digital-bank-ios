@@ -1,6 +1,6 @@
 import Foundation
 struct LoginResponse : Decodable {
-    var token: String?
+    var authToken: String?
 }
 struct LoginResponseError : Decodable {
     var error: String?

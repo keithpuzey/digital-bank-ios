@@ -2,7 +2,7 @@
 //  AppConst.swift
 //  UnSplash App
 //
-//  Created by Girish Parate on 22/09/21.
+//  Created by Keith Puzey on 22/09/21.
 //
 
 struct AppConst {

@@ -1,13 +1,5 @@
-//
-//  LoginController.swift
-//  Reqres App
-//
-//  Created by Girish Parate on 21/08/21.
-//
-
 import UIKit
 import Alamofire
-import SwiftAlertView
 
 class LoginController: UIViewController {
     
@@ -19,35 +11,53 @@ class LoginController: UIViewController {
     }
     
     @IBAction func onLoginPress(_ sender: Any) {
-        if(emailInput.text?.isEmpty ?? false && passwordInput.text?.isEmpty ?? false){
-            AppToast().ShowToast(self: self, message: "Please fill all the details")
-        } else {
-            let email : String = emailInput.text ?? ""
-            let password :String = passwordInput.text ?? ""
-            UserLoginApi(email: email, password: password)
+        guard let email = emailInput.text, !email.isEmpty else {
+            showToast(message: "Please enter your email")
+            return
         }
+        
+        guard let password = passwordInput.text, !password.isEmpty else {
+            showToast(message: "Please enter your password")
+            return
+        }
+        
+        userLoginApi(email: email, password: password)
     }
-}
-
-// MARK: - Alamofire API CAll
-extension LoginController {
-    func UserLoginApi(email : String,password : String) {
-        let postdata: [String: Any] = [
-            "email" : "eve.holt@reqres.in",
-            "password":"cityslicka"
+    
+    func userLoginApi(email: String, password: String) {
+        let postData: [String: Any] = [
+            "username": email,
+            "password": password
         ]
-        AF.request("\(AppConst.baseurl)login",method: .post,parameters: postdata).validate().responseJSON { response in
+        
+        AF.request("http://dbankdemo.com/bank/api/v1/auth", method: .post, parameters: postData).validate().responseJSON { [weak self] response in
+            guard let self = self else { return }
             
-            if ApiError.checkApiError(response: response.response!, data: response.data ?? nil, self: self) == true {
-                guard let data = try? JSONDecoder().decode(LoginResponse.self, from: response.data! ) else {
-                    print("Error: Couldn't decode data into LoginResponse")
-                    return
+            switch response.result {
+            case .success(let value):
+                print("API Success: \(value)")
+                
+                if let json = value as? [String: Any], let token = json["authToken"] as? String {
+                    self.showToast(message: token)
+                    // Save logged-in user information
+                   // UserFlow.saveLoggedInUser(isUserLoggedIn: true)
+                    self.performSegue(withIdentifier: "toMainAppVC", sender: nil)
+                } else {
+                    print("Token not found in response")
                 }
-                AppToast().ShowToast(self: self, message: data.token!)
-                let isUserLogedIn = true
-                UserFlow.saveLoginedInUser(isUserLogedIn: isUserLogedIn)
-                self.performSegue(withIdentifier: "toMainAppVC", sender: nil)
+                
+            case .failure(let error):
+                print("API Error: \(error)")
+                
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
+    }
+    
+    func showToast(message: String) {
+        // Implement your toast functionality here
+        print(message)
     }
 }
