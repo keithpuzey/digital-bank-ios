@@ -101,7 +101,7 @@
 		F416D73526C900FA00BDD354 = {
 			isa = PBXGroup;
 			children = (
-				F416D74026C900FA00BDD354 /* Reqres App */,
+				F416D74026C900FA00BDD354 /* digitalbank App */,
 				F416D73F26C900FA00BDD354 /* Products */,
 				80583B12CE28740780DD5882 /* Pods */,
 				126DCAD6FAA1A0174AE80612 /* Frameworks */,
@@ -116,7 +116,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F416D74026C900FA00BDD354 /* Reqres App */ = {
+		F416D74026C900FA00BDD354 /* digitalbank App */ = {
 			isa = PBXGroup;
 			children = (
 				F46FEE7D276F40B300B1825C /* Modal */,
@@ -131,7 +131,7 @@
 				F416D74C26C900FB00BDD354 /* LaunchScreen.storyboard */,
 				F416D74F26C900FB00BDD354 /* Info.plist */,
 			);
-			path = "Reqres App";
+			path = "digitalbank App";
 			sourceTree = "<group>";
 		};
 		F42D1B8F26D0F1CB00B01019 /* AppToastMessage */ = {
@@ -217,7 +217,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F416D73926C900FA00BDD354 /* Build configuration list for PBXProject "Reqres App" */;
+			buildConfigurationList = F416D73926C900FA00BDD354 /* Build configuration list for PBXProject "digitalbank App" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -460,7 +460,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Reqres App/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/digitalbank App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -479,7 +479,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Reqres App/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/digitalbank App/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -494,7 +494,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F416D73926C900FA00BDD354 /* Build configuration list for PBXProject "Reqres App" */ = {
+		F416D73926C900FA00BDD354 /* Build configuration list for PBXProject "digitalbank App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F416D75026C900FB00BDD354 /* Debug */,

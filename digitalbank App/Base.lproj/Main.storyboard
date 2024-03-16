@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="cwf-UL-bnt">
-                                <rect key="frame" x="20" y="293" width="386.5" height="50"/>
+                                <rect key="frame" x="20" y="293" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="vKl-rN-F0S"/>
                                 </constraints>
@@ -27,7 +27,7 @@
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="jcV-rR-F1E">
-                                <rect key="frame" x="20" y="369" width="386.5" height="50"/>
+                                <rect key="frame" x="20" y="369" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FNT-L4-JpL"/>
                                 </constraints>
@@ -35,13 +35,13 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create New Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysW-lt-wVE">
-                                <rect key="frame" x="20" y="183" width="386.5" height="32"/>
+                                <rect key="frame" x="20" y="183" width="374" height="32"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uBT-Rl-WUO">
-                                <rect key="frame" x="136" y="453" width="142" height="47"/>
+                                <rect key="frame" x="136" y="453" width="129.5" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="Haw-d5-gQz"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="129.5" id="bGL-ED-TS6"/>
@@ -367,15 +367,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="continue" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="8br-ea-zrl">
-                                <rect key="frame" x="20" y="340" width="374" height="55"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Fbp-pk-6Gi"/>
-                                    <constraint firstAttribute="height" constant="55" id="g52-QA-ZCh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djK-UO-raC">
                                 <rect key="frame" x="136" y="429" width="138" height="47"/>
                                 <constraints>
@@ -394,6 +385,23 @@
                                     <action selector="onLoginPress:" destination="OVz-FO-LPh" eventType="touchUpInside" id="jGm-w2-Ibg"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="8br-ea-zrl">
+                                <rect key="frame" x="0.0" y="344" width="374" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Fbp-pk-6Gi"/>
+                                    <constraint firstAttribute="height" constant="55" id="g52-QA-ZCh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="dblogo" translatesAutoresizingMaskIntoConstraints="NO" id="PE6-Kv-geE">
+                                <rect key="frame" x="18" y="62" width="356" height="131"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="gear" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="s2V-1J-g3G">
+                                <rect key="frame" x="176" y="804" width="22" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fq4-SD-n5C"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -415,7 +423,9 @@
                             <constraint firstItem="djK-UO-raC" firstAttribute="leading" secondItem="fq4-SD-n5C" secondAttribute="leading" constant="136" id="uch-e0-jdA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="h6i-oW-33B"/>
+                    <navigationItem key="navigationItem" id="h6i-oW-33B">
+                        <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" id="BYK-Sx-gFc"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailInput" destination="giO-E8-p8h" id="iVI-7Q-vTl"/>
                         <outlet property="passwordInput" destination="8br-ea-zrl" id="2pz-85-7W8"/>
@@ -424,7 +434,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CP-z8-4u9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-990" y="-74"/>
+            <point key="canvasLocation" x="-991.304347826087" y="-74.330357142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6aA-oj-faV">
@@ -470,6 +480,8 @@
         <segue reference="gZx-qu-lck"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="dblogo" width="700" height="200"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="placeholder" width="1280" height="960"/>
         <namedColor name="AccentColor">
             <color red="0.18823529411764706" green="0.47843137254901963" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

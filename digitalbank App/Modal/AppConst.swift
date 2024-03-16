@@ -6,8 +6,8 @@
 //
 
 struct AppConst {
-    static let baseurl = "https://reqres.in/api/"
-    static let LoginUrl = "login"
+    static let baseurl = "http://dbankdemo.com/bank/"
+    static let LoginUrl = "api/v1/auth"
     static let usersListUrl = "users"
 }
 
