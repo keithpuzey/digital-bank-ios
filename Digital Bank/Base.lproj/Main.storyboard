@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -88,133 +89,43 @@
             </objects>
             <point key="canvasLocation" x="-272" y="-74"/>
         </scene>
-        <!--Main App-->
-        <scene sceneID="Mof-2F-BgS">
-            <objects>
-                <viewController storyboardIdentifier="WelcomeController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UdD-IU-2oi" customClass="WelcomeController" customModule="Digital_Bank" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DOy-0E-Bgn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JIB-VQ-lQF" userLabel="User List">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendCell" rowHeight="82" id="A8V-a6-zTk" customClass="UserListItemCell" customModule="Digital_Bank" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="82"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A8V-a6-zTk" id="AMv-SS-J3W">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="MlY-Jt-bYm">
-                                                    <rect key="frame" x="20" y="9" width="60" height="60"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="700-vU-JL9"/>
-                                                        <constraint firstAttribute="height" constant="60" id="emh-G4-xBy"/>
-                                                        <constraint firstAttribute="width" constant="60" id="ojm-uE-ZVk"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQ9-DY-cPB">
-                                                    <rect key="frame" x="94" y="9" width="300" height="28"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2VN-Km-9lW">
-                                                    <rect key="frame" x="94" y="45" width="300" height="23"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="PQ9-DY-cPB" firstAttribute="top" secondItem="AMv-SS-J3W" secondAttribute="top" constant="9" id="5rp-YX-8F5"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="2VN-Km-9lW" secondAttribute="trailing" id="AMg-vS-TpE"/>
-                                                <constraint firstItem="2VN-Km-9lW" firstAttribute="top" secondItem="PQ9-DY-cPB" secondAttribute="bottom" constant="8" symbolic="YES" id="B4N-eA-CBw"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="2VN-Km-9lW" secondAttribute="bottom" constant="3" id="FLN-0F-54k"/>
-                                                <constraint firstAttribute="trailing" secondItem="PQ9-DY-cPB" secondAttribute="trailing" constant="20" id="IKX-fV-bZq"/>
-                                                <constraint firstItem="MlY-Jt-bYm" firstAttribute="leading" secondItem="AMv-SS-J3W" secondAttribute="leadingMargin" id="PAj-aD-2CV"/>
-                                                <constraint firstItem="2VN-Km-9lW" firstAttribute="top" secondItem="PQ9-DY-cPB" secondAttribute="bottom" constant="8" symbolic="YES" id="WCC-zq-bDF"/>
-                                                <constraint firstItem="2VN-Km-9lW" firstAttribute="leading" secondItem="MlY-Jt-bYm" secondAttribute="trailing" constant="14" id="Xsr-hx-FWc"/>
-                                                <constraint firstItem="MlY-Jt-bYm" firstAttribute="top" secondItem="AMv-SS-J3W" secondAttribute="topMargin" constant="-2" id="c2R-Nj-cPg"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="MlY-Jt-bYm" secondAttribute="bottom" constant="2" id="jWQ-ZU-GKs"/>
-                                                <constraint firstItem="PQ9-DY-cPB" firstAttribute="leading" secondItem="MlY-Jt-bYm" secondAttribute="trailing" constant="14" id="vjZ-lN-Fra"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="userEmailItem" destination="2VN-Km-9lW" id="evj-yJ-piu"/>
-                                            <outlet property="userImageItem" destination="MlY-Jt-bYm" id="tsq-03-xnv"/>
-                                            <outlet property="userNameItem" destination="PQ9-DY-cPB" id="fuQ-PY-LIG"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="yHI-P2-Pso"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="JIB-VQ-lQF" firstAttribute="trailing" secondItem="yHI-P2-Pso" secondAttribute="trailing" id="DJm-bd-ISe"/>
-                            <constraint firstItem="JIB-VQ-lQF" firstAttribute="bottom" secondItem="yHI-P2-Pso" secondAttribute="bottom" constant="34" id="IVV-hz-tA9"/>
-                            <constraint firstItem="JIB-VQ-lQF" firstAttribute="leading" secondItem="yHI-P2-Pso" secondAttribute="leading" id="KCt-fs-YAP"/>
-                            <constraint firstItem="JIB-VQ-lQF" firstAttribute="top" secondItem="yHI-P2-Pso" secondAttribute="top" id="bd3-DT-MEh"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Main App" id="GaA-Rq-Scs">
-                        <barButtonItem key="rightBarButtonItem" title="Logout" id="bSM-Hg-RAv">
-                            <color key="tintColor" name="AccentColor"/>
-                            <connections>
-                                <action selector="onLogOut:" destination="UdD-IU-2oi" id="jdO-8i-CNT"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="userList" destination="JIB-VQ-lQF" id="70k-Vs-0K5"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ahh-KM-3Zp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3528" y="975"/>
-        </scene>
-        <!--Welcome-->
+        <!--Home-->
         <scene sceneID="2ym-qI-PnE">
             <objects>
-                <tableViewController storyboardIdentifier="Main App" useStoryboardIdentifierAsRestorationIdentifier="YES" id="osF-sC-YKr" customClass="WelcomeTableViewController" customModule="Digital_Bank" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="vao-Hy-S7o">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="osF-sC-YKr" id="lLt-gA-s2O"/>
-                            <outlet property="delegate" destination="osF-sC-YKr" id="wfQ-Kk-4I1"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
+                <tableViewController storyboardIdentifier="Main App" title="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="osF-sC-YKr" customClass="WelcomeTableViewController" customModule="Digital_Bank" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems>
+                        <barButtonItem title="My Accounts" style="plain" id="h3R-W5-B99">
+                            <imageReference key="image" image="tray.fill" catalog="system" symbolScale="large" renderingMode="template"/>
+                            <color key="tintColor" name="AccentColor"/>
+                        </barButtonItem>
+                        <barButtonItem title="DashBoard" style="plain" id="zCM-co-e3Q">
+                            <imageReference key="image" image="chart.pie.fill" catalog="system" symbolScale="large" renderingMode="template"/>
+                            <color key="tintColor" name="AccentColor"/>
+                        </barButtonItem>
+                        <barButtonItem title="Transfer" style="plain" id="YX7-Uv-vDG">
+                            <imageReference key="image" image="dollarsign.square.fill" catalog="system" renderingMode="template"/>
+                            <color key="tintColor" name="AccentColor"/>
+                        </barButtonItem>
+                        <barButtonItem title="ATM" width="42" style="plain" id="RCT-Tb-To8">
+                            <imageReference key="image" image="map" catalog="system" renderingMode="template"/>
+                            <color key="tintColor" name="AccentColor"/>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Welcome" id="hmG-oj-JGB">
-                        <barButtonItem key="rightBarButtonItem" title="LogOut" id="PU3-Dj-oNO">
+                        <barButtonItem key="rightBarButtonItem" title="LogOut" image="person.circle" catalog="system" id="PU3-Dj-oNO">
                             <color key="tintColor" name="AccentColor"/>
                             <connections>
                                 <action selector="logOutTaped:" destination="osF-sC-YKr" id="6gr-Lx-lpW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <connections>
                         <segue destination="XHU-y6-QcK" kind="show" identifier="goToUserInfo" id="CLg-FF-iOT"/>
                         <segue destination="mlI-mn-6Qk" kind="showDetail" identifier="MainAppToAuthVC" id="kyI-AZ-qzA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p27-pQ-ZzP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="K3o-Ay-a6T">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <items>
-                        <barButtonItem title="My Accounts" image="tray.fill" catalog="system" style="plain" id="SE1-Yv-AaP"/>
-                        <barButtonItem title="Dashboard" image="chart.pie.fill" catalog="system" style="plain" id="oza-Zr-H72"/>
-                        <barButtonItem title="Transfer" image="dollarsign.circle.fill" catalog="system" style="plain" id="kw3-GB-hAH"/>
-                        <barButtonItem title="ATM Search" image="location.circle.fill" catalog="system" style="plain" id="8BY-2z-kUe"/>
-                    </items>
-                </toolbar>
             </objects>
             <point key="canvasLocation" x="-991" y="668"/>
         </scene>
@@ -223,11 +134,11 @@
             <objects>
                 <viewController storyboardIdentifier="UserInfoController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="XHU-y6-QcK" customClass="UserInfoController" customModule="Digital_Bank" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="doj-VR-Pgg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="NSS-wu-6Qc">
-                                <rect key="frame" x="127" y="153" width="160" height="160"/>
+                                <rect key="frame" x="127" y="13" width="160" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="LGu-eN-flz"/>
                                     <constraint firstAttribute="width" constant="160" id="ZF6-NA-W0V"/>
@@ -435,14 +346,15 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="l9h-z8-0b8"/>
+        <segue reference="gZx-qu-lck"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="chart.pie.fill" catalog="system" width="128" height="121"/>
         <image name="dblogo" width="700" height="200"/>
-        <image name="dollarsign.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="dollarsign.square.fill" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="location.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="map" catalog="system" width="128" height="110"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="placeholder" width="1280" height="960"/>
         <image name="tray.fill" catalog="system" width="128" height="88"/>
         <namedColor name="AccentColor">

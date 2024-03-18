@@ -1,15 +1,8 @@
-//
-//  WelcomeTableViewController.swift
-//  Digital Bank App
-//
-//  Created by Keith Puzey on 05/02/22.
-//
-
 import UIKit
 import Alamofire
 
-class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating ,UISearchBarDelegate, UISearchControllerDelegate,UICollectionViewDelegateFlowLayout{
-
+class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating ,UISearchBarDelegate, UISearchControllerDelegate, UICollectionViewDelegateFlowLayout {
+    
     var userListData : UserListResponse!
     var orignalUserList : UserListResponse!
     // For Search
@@ -17,24 +10,11 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
     let searchController = UISearchController()
     var searchText : String = ""
     
-    // MARK: Search query
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text  else {
-            userListData.data = orignalUserList.data
-            self.tableView.reloadData()
-            return;
-        }
-        if(text == ""){
-            userListData.data = orignalUserList.data
-            self.tableView.reloadData()
-            return;
-        }
-        self.searchText = text
-        let newArray = orignalUserList.data?.filter({ return $0.first_name?.contains(text) as! Bool })
-        userListData.data = newArray
-        self.tableView.reloadData()
-       
-    }
+    // Toolbar buttons
+    var myAccountsButton: UIBarButtonItem!
+    var dashboardButton: UIBarButtonItem!
+    var transferButton: UIBarButtonItem!
+    var atmButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,47 +38,69 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
         searchController.delegate = self
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
+        
+        // Toolbar items with custom-sized icons and flexible space
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        if let myAccountsImage = UIImage(systemName: "person")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30)) {
+            myAccountsButton = UIBarButtonItem(image: myAccountsImage, style: .plain, target: self, action: #selector(myAccountsButtonTapped))
+        }
+        
+        if let dashboardImage = UIImage(systemName: "chart.pie")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30)) {
+            dashboardButton = UIBarButtonItem(image: dashboardImage, style: .plain, target: self, action: #selector(dashboardButtonTapped))
+        }
+        
+        if let transferImage = UIImage(systemName: "arrow.up.arrow.down")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30)) {
+            transferButton = UIBarButtonItem(image: transferImage, style: .plain, target: self, action: #selector(transferButtonTapped))
+        }
+        
+        if let atmImage = UIImage(systemName: "creditcard")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30)) {
+            atmButton = UIBarButtonItem(image: atmImage, style: .plain, target: self, action: #selector(atmButtonTapped))
+        }
+        
+        // Set toolbar items
+        setToolbarItems([myAccountsButton, flexibleSpace, dashboardButton, flexibleSpace, transferButton, flexibleSpace, atmButton].compactMap { $0 }, animated: true)
+        
+        // Show toolbar
+        navigationController?.isToolbarHidden = false
     }
     
-    //On Search Enter
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("Do Search API Here!")
-    }
-    //On remove search View
-    func didDismissSearchController(_ searchController: UISearchController) {
-        // When Search is removed
-        print("Search is removed")
+    @objc func myAccountsButtonTapped() {
+        // Handle my accounts button tap
     }
     
-    @IBAction func logOutTaped(_ sender: Any) {
-        // Delete Local Storage
-        deleteUser()
+    @objc func dashboardButtonTapped() {
+        // Handle dashboard button tap
     }
     
-    func deleteUser(){
-        let alert = UIAlertController(title: "Logout?", message: "Are you sure?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler:nil ))
-        alert.addAction(UIAlertAction(title: "Okay",style: .destructive,handler: logOutUser))
-        DispatchQueue.main.async { self.present(alert, animated: true) }
+    @objc func transferButtonTapped() {
+        // Handle transfer button tap
     }
     
-    func logOutUser(alert: UIAlertAction!)  {
-        let isUserLogedIn = false
-        UserFlow.saveLoginedInUser(isUserLogedIn: isUserLogedIn)
-        performSegue(withIdentifier: "MainAppToAuthVC", sender: nil)
+    @objc func atmButtonTapped() {
+        // Handle ATM button tap
     }
     
-    func goToInfo(item:UserListResponseData) {
-        // Save UserObj in Class
-        SelectedUserSingleton.selectedUserInfo.userData = item
-        performSegue(withIdentifier: "goToUserInfo", sender: nil)
-    }
-    @objc func goBack(){
-        dismiss(animated: true, completion: nil)
+    // MARK: Search query
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text  else {
+            userListData.data = orignalUserList.data
+            self.tableView.reloadData()
+            return;
+        }
+        if(text == ""){
+            userListData.data = orignalUserList.data
+            self.tableView.reloadData()
+            return;
+        }
+        self.searchText = text
+        let newArray = orignalUserList.data?.filter({ return $0.first_name?.contains(text) as! Bool })
+        userListData.data = newArray
+        self.tableView.reloadData()
+        
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    }
+    // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userListData?.data?.count ?? 0
@@ -118,12 +120,11 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = userListData?.data?[indexPath.row]
-        self.goToInfo(item: item!)
+        // Handle cell selection action here
     }
-}
-
-
-extension WelcomeTableViewController {
+    
+    // MARK: - API Requests
+    
     func getUserList() {
         let parameters: [String: Any] = [
             "page":"1",
@@ -141,5 +142,4 @@ extension WelcomeTableViewController {
         }
     }
 }
-
 
