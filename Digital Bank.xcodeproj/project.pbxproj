@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4745F6FB2BA9B42F007DF662 /* ATMTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745F6FA2BA9B42F007DF662 /* ATMTableViewController.swift */; };
+		4745F6FD2BA9B44E007DF662 /* TransferTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745F6FC2BA9B44E007DF662 /* TransferTableViewController.swift */; };
+		4745F6FF2BA9B45F007DF662 /* DashBoardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745F6FE2BA9B45F007DF662 /* DashBoardTableViewController.swift */; };
 		DEA06B9027F29F913328479A /* Pods_Digital_Bank.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A02944FA716BFDBE4A023E /* Pods_Digital_Bank.framework */; };
 		F416D74226C900FA00BDD354 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416D74126C900FA00BDD354 /* AppDelegate.swift */; };
 		F416D74426C900FA00BDD354 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F416D74326C900FA00BDD354 /* SceneDelegate.swift */; };
@@ -32,6 +35,9 @@
 
 /* Begin PBXFileReference section */
 		2BA135231CAC53F9027D45C0 /* Pods-Reqres App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reqres App.release.xcconfig"; path = "Target Support Files/Pods-Reqres App/Pods-Reqres App.release.xcconfig"; sourceTree = "<group>"; };
+		4745F6FA2BA9B42F007DF662 /* ATMTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATMTableViewController.swift; sourceTree = "<group>"; };
+		4745F6FC2BA9B44E007DF662 /* TransferTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferTableViewController.swift; sourceTree = "<group>"; };
+		4745F6FE2BA9B45F007DF662 /* DashBoardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardTableViewController.swift; sourceTree = "<group>"; };
 		58A02944FA716BFDBE4A023E /* Pods_Digital_Bank.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Digital_Bank.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B635B86E1F638571B2B9CB6 /* Pods-Digital Bank.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Digital Bank.debug.xcconfig"; path = "Target Support Files/Pods-Digital Bank/Pods-Digital Bank.debug.xcconfig"; sourceTree = "<group>"; };
 		B4B92DE729B9DEEA3A2D3361 /* Pods-Digital Bank.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Digital Bank.release.xcconfig"; path = "Target Support Files/Pods-Digital Bank/Pods-Digital Bank.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +100,9 @@
 		F414F33D26C91BCC000511CA /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4745F6FE2BA9B45F007DF662 /* DashBoardTableViewController.swift */,
+				4745F6FC2BA9B44E007DF662 /* TransferTableViewController.swift */,
+				4745F6FA2BA9B42F007DF662 /* ATMTableViewController.swift */,
 				F466F45A26D0CF0B00E624DA /* LoginController.swift */,
 				F42D1B9226D0FF4900B01019 /* CreateAccountController.swift */,
 				F42D1B9626D1083000B01019 /* UserInfoController.swift */,
@@ -299,10 +308,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4745F6FD2BA9B44E007DF662 /* TransferTableViewController.swift in Sources */,
 				F46B4C14279C17CA003E0D0D /* SelectedUser.swift in Sources */,
 				F42A2E5A27AE729300064052 /* WelcomeTableViewController.swift in Sources */,
 				F42D1B9126D0F1F400B01019 /* AppToast.swift in Sources */,
+				4745F6FF2BA9B45F007DF662 /* DashBoardTableViewController.swift in Sources */,
 				F4D3E58A276F65DB0083D1D1 /* RegisterResponse.swift in Sources */,
+				4745F6FB2BA9B42F007DF662 /* ATMTableViewController.swift in Sources */,
 				F42D1B9726D1083000B01019 /* UserInfoController.swift in Sources */,
 				F46A3A0E278068CF002B4E63 /* Alert.swift in Sources */,
 				F42D1B9326D0FF4900B01019 /* CreateAccountController.swift in Sources */,

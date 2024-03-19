@@ -8,11 +8,23 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set default values for email and password
+        emailInput.text = "jsmith@demo.io"
+        passwordInput.text = "Demo123!"
     }
     
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
+    }
     @IBAction func onLoginPress(_ sender: Any) {
         guard let email = emailInput.text, !email.isEmpty else {
             showToast(message: "Please enter your email")
+            return
+        }
+        
+        guard isValidEmail(email) else {
+            showToast(message: "Please enter a valid email address")
             return
         }
         
@@ -23,7 +35,7 @@ class LoginController: UIViewController {
         
         userLoginApi(email: email, password: password)
     }
-    
+
     func userLoginApi(email: String, password: String) {
         let postData: [String: Any] = [
             "username": email,

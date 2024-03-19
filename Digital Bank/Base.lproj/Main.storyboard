@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -93,24 +92,7 @@
         <scene sceneID="2ym-qI-PnE">
             <objects>
                 <tableViewController storyboardIdentifier="Main App" title="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="osF-sC-YKr" customClass="WelcomeTableViewController" customModule="Digital_Bank" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems>
-                        <barButtonItem title="My Accounts" style="plain" id="h3R-W5-B99">
-                            <imageReference key="image" image="tray.fill" catalog="system" symbolScale="large" renderingMode="template"/>
-                            <color key="tintColor" name="AccentColor"/>
-                        </barButtonItem>
-                        <barButtonItem title="DashBoard" style="plain" id="zCM-co-e3Q">
-                            <imageReference key="image" image="chart.pie.fill" catalog="system" symbolScale="large" renderingMode="template"/>
-                            <color key="tintColor" name="AccentColor"/>
-                        </barButtonItem>
-                        <barButtonItem title="Transfer" style="plain" id="YX7-Uv-vDG">
-                            <imageReference key="image" image="dollarsign.square.fill" catalog="system" renderingMode="template"/>
-                            <color key="tintColor" name="AccentColor"/>
-                        </barButtonItem>
-                        <barButtonItem title="ATM" width="42" style="plain" id="RCT-Tb-To8">
-                            <imageReference key="image" image="map" catalog="system" renderingMode="template"/>
-                            <color key="tintColor" name="AccentColor"/>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Welcome" id="hmG-oj-JGB">
                         <barButtonItem key="rightBarButtonItem" title="LogOut" image="person.circle" catalog="system" id="PU3-Dj-oNO">
                             <color key="tintColor" name="AccentColor"/>
@@ -344,19 +326,72 @@
             </objects>
             <point key="canvasLocation" x="-1707" y="668"/>
         </scene>
+        <!--DashBoard-->
+        <scene sceneID="sGP-nz-8LE">
+            <objects>
+                <tableViewController storyboardIdentifier="DashBoard" title="DashBoard" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iWh-ph-Y8L" customClass="DashBoardTableViewController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Welcome" id="ulb-zu-hnh">
+                        <barButtonItem key="rightBarButtonItem" title="LogOut" image="person.circle" catalog="system" id="2ge-9q-rlT">
+                            <color key="tintColor" name="AccentColor"/>
+                            <connections>
+                                <action selector="logOutTaped:" destination="iWh-ph-Y8L" id="xoq-AW-cfY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cxv-43-DVa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-991" y="668"/>
+        </scene>
+        <!--Transfer-->
+        <scene sceneID="Lty-Me-Gaz">
+            <objects>
+                <tableViewController storyboardIdentifier="Transfer" title="Transfer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zC0-P6-apT" customClass="TransferTableViewController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Welcome" id="AOL-ac-j6Z">
+                        <barButtonItem key="rightBarButtonItem" title="LogOut" image="person.circle" catalog="system" id="Hvh-8f-xBk">
+                            <color key="tintColor" name="AccentColor"/>
+                            <connections>
+                                <action selector="logOutTaped:" destination="zC0-P6-apT" id="t0v-HW-M0B"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e4k-Je-bhT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-991" y="668"/>
+        </scene>
+        <!--ATM-->
+        <scene sceneID="3ki-dJ-zpb">
+            <objects>
+                <tableViewController storyboardIdentifier="ATM" title="ATM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nny-2L-mYF" customClass="ATMTableViewController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Welcome" id="btE-PB-7tT">
+                        <barButtonItem key="rightBarButtonItem" title="LogOut" image="person.circle" catalog="system" id="1Tn-TW-2Ds">
+                            <color key="tintColor" name="AccentColor"/>
+                            <connections>
+                                <action selector="logOutTaped:" destination="nny-2L-mYF" id="zOK-fr-44p"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1lp-ut-h33" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-991" y="668"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="gZx-qu-lck"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="chart.pie.fill" catalog="system" width="128" height="121"/>
         <image name="dblogo" width="700" height="200"/>
-        <image name="dollarsign.square.fill" catalog="system" width="128" height="114"/>
         <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="map" catalog="system" width="128" height="110"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="placeholder" width="1280" height="960"/>
-        <image name="tray.fill" catalog="system" width="128" height="88"/>
         <namedColor name="AccentColor">
             <color red="0.18823529411764706" green="0.47843137254901963" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

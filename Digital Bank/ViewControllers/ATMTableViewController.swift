@@ -1,7 +1,7 @@
 import UIKit
 import Alamofire
 
-class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating ,UISearchBarDelegate, UISearchControllerDelegate, UICollectionViewDelegateFlowLayout {
+class ATMTableViewController: UITableViewController, UISearchResultsUpdating ,UISearchBarDelegate, UISearchControllerDelegate, UICollectionViewDelegateFlowLayout {
     
     var userListData : UserListResponse!
     var orignalUserList : UserListResponse!
@@ -18,32 +18,18 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Welcome"
-        navigationItem.leftBarButtonItem = nil
+        title = "ATM"
         self.tableView.dataSource = self
-        self.tableView.delegate = self
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationItem.leftBarButtonItem = nil
+        
         setUpSeachView()
-     //   getUserList()
+//        getUserList()
     }
     
     
     func setUpSeachView(){
- 
 
-        
-        
-        // Search View
-        // searchController.searchResultsUpdater = self;
-        //resultSearchController.delegate = self
-        //resultSearchController.showsScopeBar = true
-        //searchController.searchBar.delegate = self
-        //searchController.automaticallyShowsSearchResultsController = false
-        //searchController.showsSearchResultsController = false
-        //searchController.delegate = self
-        //  searchController.delegate = self
-        // navigationItem.hidesSearchBarWhenScrolling = false
-// navigationItem.searchController = searchController
+
         
         // Toolbar items with custom-sized icons and flexible space
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -73,33 +59,23 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
     
     @objc func myAccountsButtonTapped() {
         let WelcomeTableViewController = WelcomeTableViewController()
-        // Set left navigation button to nil to hide it
-        navigationItem.leftBarButtonItem = nil
         navigationController?.pushViewController(WelcomeTableViewController, animated: true)
     }
     
     @objc func dashboardButtonTapped() {
         let DashBoardTableViewController = DashBoardTableViewController()
-        // Set left navigation button to nil to hide it
-        navigationItem.leftBarButtonItem = nil
         navigationController?.pushViewController(DashBoardTableViewController, animated: true)
     }
     
     @objc func transferButtonTapped() {
         let TransferTableViewController = TransferTableViewController()
-        // Set left navigation button to nil to hide it
-        navigationItem.leftBarButtonItem = nil
         navigationController?.pushViewController(TransferTableViewController, animated: true)
     }
     
-    
     @objc func atmButtonTapped() {
         let ATMTableViewController = ATMTableViewController()
-        // Set left navigation button to nil to hide it
-        navigationItem.leftBarButtonItem = nil
         navigationController?.pushViewController(ATMTableViewController, animated: true)
     }
-    
     // MARK: Search query
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text  else {
@@ -160,11 +136,6 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
             self.tableView.reloadData()
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationItem.leftBarButtonItem = nil
-    }
-    
 }
+
 
