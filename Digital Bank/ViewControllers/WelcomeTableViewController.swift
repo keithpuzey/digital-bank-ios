@@ -1,21 +1,29 @@
 import UIKit
 import Alamofire
 
+
 class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating ,UISearchBarDelegate, UISearchControllerDelegate, UICollectionViewDelegateFlowLayout {
+    @IBOutlet weak var welcomeLabel: UILabel!
     
     var userListData : UserListResponse!
     var orignalUserList : UserListResponse!
+    var originalUserList: UserListResponse! // Add this line
     // For Search
     var resultSearchController = UISearchBar()
     let searchController = UISearchController()
     var searchText : String = ""
-    
+    var authToken: String? // Token to be stored
+    var userEmail: String?
+   
+
     // Toolbar buttons
     var myAccountsButton: UIBarButtonItem!
     var dashboardButton: UIBarButtonItem!
     var transferButton: UIBarButtonItem!
     var atmButton: UIBarButtonItem!
-    
+    @IBOutlet weak var welcome: UILabel!
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Welcome"
@@ -24,26 +32,12 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
         self.tableView.delegate = self
         navigationController?.setNavigationBarHidden(false, animated: false)
         setUpSeachView()
-     //   getUserList()
+        getUserList()
+        welcome.text = "Test"
     }
     
-    
-    func setUpSeachView(){
- 
 
-        
-        
-        // Search View
-        // searchController.searchResultsUpdater = self;
-        //resultSearchController.delegate = self
-        //resultSearchController.showsScopeBar = true
-        //searchController.searchBar.delegate = self
-        //searchController.automaticallyShowsSearchResultsController = false
-        //searchController.showsSearchResultsController = false
-        //searchController.delegate = self
-        //  searchController.delegate = self
-        // navigationItem.hidesSearchBarWhenScrolling = false
-// navigationItem.searchController = searchController
+    func setUpSeachView(){
         
         // Toolbar items with custom-sized icons and flexible space
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -75,21 +69,21 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
         let WelcomeTableViewController = WelcomeTableViewController()
         // Set left navigation button to nil to hide it
         navigationItem.leftBarButtonItem = nil
-        navigationController?.pushViewController(WelcomeTableViewController, animated: true)
+        navigationController?.pushViewController(WelcomeTableViewController, animated: false)
     }
     
     @objc func dashboardButtonTapped() {
         let DashBoardTableViewController = DashBoardTableViewController()
         // Set left navigation button to nil to hide it
         navigationItem.leftBarButtonItem = nil
-        navigationController?.pushViewController(DashBoardTableViewController, animated: true)
+        navigationController?.pushViewController(DashBoardTableViewController, animated: false)
     }
     
     @objc func transferButtonTapped() {
         let TransferTableViewController = TransferTableViewController()
         // Set left navigation button to nil to hide it
         navigationItem.leftBarButtonItem = nil
-        navigationController?.pushViewController(TransferTableViewController, animated: true)
+        navigationController?.pushViewController(TransferTableViewController, animated: false)
     }
     
     
@@ -97,7 +91,7 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
         let ATMTableViewController = ATMTableViewController()
         // Set left navigation button to nil to hide it
         navigationItem.leftBarButtonItem = nil
-        navigationController?.pushViewController(ATMTableViewController, animated: true)
+        navigationController?.pushViewController(ATMTableViewController, animated: false)
     }
     
     // MARK: Search query
@@ -142,29 +136,107 @@ class WelcomeTableViewController: UITableViewController, UISearchResultsUpdating
         // Handle cell selection action here
     }
     
-    // MARK: - API Requests
-    
-    func getUserList() {
-        let parameters: [String: Any] = [
-            "page":"1",
-            "per_page":"55"
-        ]
-        AF.request(AppConst.baseurl+AppConst.usersListUrl,method: .get,parameters: parameters).validate().responseDecodable(of: UserListResponse.self) { [self] (response) in
-            guard let data = response.value else {
-                print(response)
-                print("Error")
-                return
-            }
-            self.userListData = data
-            self.orignalUserList = data
-            self.tableView.reloadData()
-        }
-    }
+   
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.leftBarButtonItem = nil
     }
     
-}
+    
+    // MARK: - API Requests
+    
+    func loginAndFetchUserDetails() {
+        let email = "admin@demo.io"
+        let password = "Demo123!"
+        
+        let parameters: [String: Any] = [
+            "username": email,
+            "password": password
+        ]
+        
+        AF.request(AppConst.baseurl + "api/v1/auth", method: .post, parameters: parameters).validate().responseJSON { [weak self] response in
+            guard let self = self else { return }
+            
+            switch response.result {
+            case .success(let value):
+                print("API Success: \(value)")
+                
+                if let json = value as? [String: Any], let token = json["authToken"] as? String {
+                    self.authToken = token // Store token for further use
+                    self.fetchUserDetails(email: email, token: token)
+                } else {
+                    print("Token not found in response")
+                }
+                
+            case .failure(let error):
+                print("API Error: \(error)")
+                // Handle API error
+            }
+        }
+    }
+    
 
+    func fetchUserDetails(email: String, token: String) {
+
+        guard let userEmail = userEmail else {
+             print("User email is nil")
+             return
+        }
+        
+        let url = AppConst.baseurl + "api/v1/user/find?username=" + userEmail
+        
+            let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        AF.request(url, method: .get, headers: headers).validate().responseJSON { [weak self] response in
+            guard let self = self else { return }
+            
+            switch response.result {
+                // Inside the fetchUserDetails method
+
+                case .success(let value):
+                    print("User Details Success: \(value)")
+                    
+                    if let json = value as? [String: Any], let userProfile = json["userProfile"] as? [String: Any] {
+                        // Extract user details
+                        if let firstName = userProfile["firstName"] as? String,
+                           let lastName = userProfile["lastName"] as? String,
+                           let title = userProfile["title"] as? String,
+                           let id = userProfile["id"] as? Int {
+                            // Display user details
+                            print("First Name: \(firstName)")
+                            print("Last Name: \(lastName)")
+                            print("Title: \(title)")
+                            print("ID: \(id)")
+                            
+                            // Display user details on the screen
+                       //     DispatchQueue.main.async {
+                                // Assuming you have labels for displaying user details
+                         //       let welcomeMessage = "Welcome \(title) \(firstName) \(lastName)"
+
+                                // Assuming you have a label named welcomeLabel
+                           //     self.welcome.text = welcomeMessage
+                             //   print(welcomeMessage)
+                         //   }
+                        }
+                    } else {
+                        print("User details not found in response")
+                    }
+
+                
+            case .failure(let error):
+                print("User Details Error: \(error)")
+                // Handle user details fetch error
+            }
+        }
+    }
+    
+    func getUserList() {
+        // Perform login and fetch user details before fetching user list
+        loginAndFetchUserDetails()
+
+    }
+}

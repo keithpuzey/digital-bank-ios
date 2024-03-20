@@ -306,6 +306,34 @@
             </objects>
             <point key="canvasLocation" x="-1706" y="-74"/>
         </scene>
+        <!--Welcome-->
+        <scene sceneID="pSp-It-3YB">
+            <objects>
+                <viewController title="Welcome" id="xGq-vq-Ux4" customClass="WelcomeTableViewController" customModule="Digital_Bank" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A3V-io-aTW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="welcomeLabel" text="Test" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XTu-l7-r1f" userLabel="welcomeLabel" colorLabel="IBBuiltInLabel-Red">
+                                <rect key="frame" x="119" y="372" width="176" height="152"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uTC-RP-5BR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <outlet property="UpdateWelcome" destination="XTu-l7-r1f" id="ykD-ds-Xbk"/>
+                        <outlet property="welcomeLabel" destination="XTu-l7-r1f" id="vzI-ZN-GFk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UeU-Fj-bX0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2842.0289855072465" y="667.63392857142856"/>
+        </scene>
         <!--Main App-->
         <scene sceneID="ebg-Cy-6kR">
             <objects>

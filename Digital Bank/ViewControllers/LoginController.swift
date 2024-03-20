@@ -32,10 +32,11 @@ class LoginController: UIViewController {
             showToast(message: "Please enter your password")
             return
         }
-        
+        // Store email in UserDefaults
+        UserDefaults.standard.set(email, forKey: "loggedinuseremail")
+
         userLoginApi(email: email, password: password)
     }
-
     func userLoginApi(email: String, password: String) {
         let postData: [String: Any] = [
             "username": email,
@@ -51,9 +52,17 @@ class LoginController: UIViewController {
                 
                 if let json = value as? [String: Any], let token = json["authToken"] as? String {
                     self.showToast(message: token)
+                    UserDefaults.standard.set(token, forKey: "authToken")
                     // Save logged-in user information
-                   // UserFlow.saveLoggedInUser(isUserLoggedIn: true)
-                    self.performSegue(withIdentifier: "toMainAppVC", sender: nil)
+                    // UserFlow.saveLoggedInUser(isUserLoggedIn: true)
+                    // self.performSegue(withIdentifier: "toMainAppVC", sender: nil)
+                    // Navigate to WelcomeTableViewController
+                    DispatchQueue.main.async {
+                        let welcomeVC = WelcomeTableViewController()
+                        welcomeVC.userEmail = email // Pass the email to WelcomeTableViewController
+                        self.navigationController?.pushViewController(welcomeVC, animated: true)
+                    }
+                    
                 } else {
                     print("Token not found in response")
                 }
@@ -67,6 +76,7 @@ class LoginController: UIViewController {
             }
         }
     }
+
     
     func showToast(message: String) {
         // Implement your toast functionality here
