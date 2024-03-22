@@ -30,8 +30,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Set up the picker view
         Accounts.delegate = self // Assign delegate to the correct outlet
         Accounts.dataSource = self // Assign data source to the correct outlet
+        // Register TransactionCell class for "TransactionCell" reuse identifier
+        transactionsTableView.register(TransactionCell.self, forCellReuseIdentifier: "TransactionCell")
         
-        transactionsTableView.dataSource = self
+                
+        // Set the data source for the table view
+       transactionsTableView.dataSource = self
         getUserList()
     }
     struct UserAccount {
@@ -227,29 +231,36 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return transactions.count
      }
      
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as! TransactionCell
-         
-         let transaction = transactions[indexPath.row]
-         // Configure the cell with transaction data
-         cell.descriptionLabel.text = transaction.description
-         cell.amountLabel.text = "\(transaction.amount)"
-         cell.runningBalanceLabel.text = "\(transaction.runningBalance)"
-         cell.transactionDateLabel.text = transaction.transactionDate
-         
-         return cell
-     }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as! TransactionCell
+        
+        let transaction = transactions[indexPath.row]
+        // Configure the cell with transaction data
+        cell.descriptionLabel.text = transaction.description
+        cell.amountLabel.text = "\(transaction.amount)"
+        cell.runningBalanceLabel.text = "\(transaction.runningBalance)"
+        cell.transactionDateLabel.text = transaction.transactionDate
+        
+        return cell
+    }
+
  
 
     class TransactionCell: UITableViewCell {
+        @IBOutlet weak var TransactionCell: UIView!
+
+        
         @IBOutlet weak var descriptionLabel: UILabel!
+        @IBOutlet weak var transactionDateLabel: UILabel!
         @IBOutlet weak var amountLabel: UILabel!
         @IBOutlet weak var runningBalanceLabel: UILabel!
-        @IBOutlet weak var transactionDateLabel: UILabel!
+        
+ 
     }
 }
 
