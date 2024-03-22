@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "DB14E30A-DD25-4E4F-A611-E25794883FAA"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7F2EC728-C8B2-4DEF-A0F1-8FBAA485F124"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Digital Bank/ViewControllers/WelcomeTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "6"
+            endingLineNumber = "6"
+            landmarkName = "WelcomeTableViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "7F2EC728-C8B2-4DEF-A0F1-8FBAA485F124 - f18abe283ec2a290"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.WelcomeTableViewController.userListData.getter : Swift.Optional&lt;Digital_Bank.UserListResponse&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/WelcomeTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "308">
+               </Location>
+               <Location
+                  uuid = "7F2EC728-C8B2-4DEF-A0F1-8FBAA485F124 - 13a1249586905e84"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.WelcomeTableViewController.userListData.setter : Swift.Optional&lt;Digital_Bank.UserListResponse&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/WelcomeTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "326">
+               </Location>
+               <Location
+                  uuid = "7F2EC728-C8B2-4DEF-A0F1-8FBAA485F124 - 7483152d99693793"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.WelcomeTableViewController.userListData.modify : Swift.Optional&lt;Digital_Bank.UserListResponse&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/WelcomeTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "7F2EC728-C8B2-4DEF-A0F1-8FBAA485F124 - ee109c134c0b8035"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.WelcomeTableViewController.userListData.modify : Swift.Optional&lt;Digital_Bank.UserListResponse&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/WelcomeTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  uuid = "7F2EC728-C8B2-4DEF-A0F1-8FBAA485F124 - faa5710a9c86fb9f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.WelcomeTableViewController.init(style: __C.UITableViewStyle) -&gt; Digital_Bank.WelcomeTableViewController"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/WelcomeTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "7F2EC728-C8B2-4DEF-A0F1-8FBAA485F124 - 124465389cfd0cb5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.WelcomeTableViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Digital_Bank.WelcomeTableViewController"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/WelcomeTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "241">
+               </Location>
+               <Location
+                  uuid = "7F2EC728-C8B2-4DEF-A0F1-8FBAA485F124 - 3dd3e0ccda38a8d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.WelcomeTableViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Digital_Bank.WelcomeTableViewController&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/WelcomeTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7"
+                  endingLineNumber = "7"
+                  offsetFromSymbolStart = "189">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "39FE8BFA-212E-4368-9A59-4751B96270EC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Digital Bank/ViewControllers/WelcomeTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "fetchUserDetails(email:token:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

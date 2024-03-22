@@ -5,14 +5,15 @@ class LoginController: UIViewController {
     
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set default values for email and password
         emailInput.text = "jsmith@demo.io"
         passwordInput.text = "Demo123!"
+        
     }
-    
+ 
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
@@ -37,6 +38,8 @@ class LoginController: UIViewController {
 
         userLoginApi(email: email, password: password)
     }
+    
+    
     func userLoginApi(email: String, password: String) {
         let postData: [String: Any] = [
             "username": email,
@@ -53,16 +56,17 @@ class LoginController: UIViewController {
                 if let json = value as? [String: Any], let token = json["authToken"] as? String {
                     self.showToast(message: token)
                     UserDefaults.standard.set(token, forKey: "authToken")
-                    // Save logged-in user information
-                    // UserFlow.saveLoggedInUser(isUserLoggedIn: true)
-                    // self.performSegue(withIdentifier: "toMainAppVC", sender: nil)
-                    // Navigate to WelcomeTableViewController
-                    DispatchQueue.main.async {
-                        let welcomeVC = WelcomeTableViewController()
-                        welcomeVC.userEmail = email // Pass the email to WelcomeTableViewController
-                        self.navigationController?.pushViewController(welcomeVC, animated: true)
-                    }
+
                     
+                    // Instantiate the UITabBarController
+                    DispatchQueue.main.async {
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        guard let tabBarController = storyboard.instantiateViewController(withIdentifier: "TabBar") as? UITabBarController else {
+                            return
+                        }
+                        // Present the UITabBarController
+                        self.present(tabBarController, animated: true, completion: nil)
+                    }
                 } else {
                     print("Token not found in response")
                 }
