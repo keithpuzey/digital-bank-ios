@@ -6,8 +6,9 @@
 //
 
 struct AppConst {
-    static let baseurl = "http://dbankdemo.com/bank/"
+    static var baseurl = "http://dbankdemo.com/bank/"
     static let LoginUrl = "api/v1/auth"
+    static var MockUrl = "http://mockurl.com"
     static let usersListUrl = "users"
 }
 

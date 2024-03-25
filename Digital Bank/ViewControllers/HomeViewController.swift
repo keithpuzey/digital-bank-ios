@@ -11,11 +11,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var userEmail: String?
     var userAccounts: [UserAccount] = []
     var transactions: [Transaction] = []
-    
+ 
     @IBOutlet weak var Accounts: UIPickerView!
 
     @IBOutlet weak var transactionsTableView: UITableView!
     @IBOutlet weak var AccountSummary: UILabel!
+    
+    @IBOutlet weak var Logout: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
        transactionsTableView.dataSource = self
         getUserList()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getUserList()
+    }
+
+
     struct UserAccount {
         let accountId: Int
         let name: String
@@ -46,6 +55,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let openingBalance: Double
     }
     
+    @IBAction func LogoutButton(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     // MARK: - API Requests
     
     func loginAndFetchUserDetails() {
@@ -240,28 +253,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as! TransactionCell
         
         let transaction = transactions[indexPath.row]
+        
         // Configure the cell with transaction data
-        cell.descriptionLabel.text = transaction.description
+        cell.descriptionLabel.text = transaction.description ?? "N/A"
         cell.amountLabel.text = "\(transaction.amount)"
         cell.runningBalanceLabel.text = "\(transaction.runningBalance)"
-        cell.transactionDateLabel.text = transaction.transactionDate
+        cell.transactionDateLabel.text = transaction.transactionDate ?? "N/A"
         
         return cell
     }
-
  
-
-    class TransactionCell: UITableViewCell {
-        @IBOutlet weak var TransactionCell: UIView!
-
-        
-        @IBOutlet weak var descriptionLabel: UILabel!
-        @IBOutlet weak var transactionDateLabel: UILabel!
-        @IBOutlet weak var amountLabel: UILabel!
-        @IBOutlet weak var runningBalanceLabel: UILabel!
-        
- 
-    }
 }
 
 extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -294,7 +295,7 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
                 accountSummary.text = summary
                 print("Selected Account : \(summary)")
                 // Fetch transactions for the selected account
-                self.fetchTransactions(for: selectedAccount.accountId)
+          //      self.fetchTransactions(for: selectedAccount.accountId)
             } else {
                 print("Error: Account Summary Label is nil")
             }
@@ -326,4 +327,5 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             self.transactionDate = transactionDate
         }
     }
+
 }

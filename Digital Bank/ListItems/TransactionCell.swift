@@ -7,7 +7,10 @@
 import UIKit
 
 class TransactionCell: UITableViewCell {
+    
+    
     @IBOutlet weak var descriptionLabel: UILabel!
+
     @IBOutlet weak var transactionDateLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var runningBalanceLabel: UILabel!
