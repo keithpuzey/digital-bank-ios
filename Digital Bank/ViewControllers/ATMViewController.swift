@@ -94,7 +94,7 @@ class ATMViewController: UIViewController {
             handleError(errorMessage: "Invalid response data")
             return
         }
-        print("start processing")
+        
         do {
             // Parse JSON data
             let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
@@ -107,8 +107,7 @@ class ATMViewController: UIViewController {
                 return
             }
 
-            print("start processing before if ")
-            print("Address dictionary: \(address)")
+
 
             //Extract address components
             if let road = address["road"] as? String,
@@ -117,8 +116,7 @@ class ATMViewController: UIViewController {
                let postcode = address["postcode"] as? String,
                let country = address["country"] as? String {
                 DispatchQueue.main.async {
-                    print("In the if")
-                    self.LocationOutput.text = "test"
+        
                 }
                 let formattedAddress = """
                     Road: \(road)
@@ -128,7 +126,9 @@ class ATMViewController: UIViewController {
                     Country: \(country)
                     """
 
-                print("start processing3")
+                
+                      // Set the flag to true to indicate that a location update is in progress
+                 isUpdatingLocation = false
                 
                 // Update UI to display formatted address
                 DispatchQueue.main.async {
