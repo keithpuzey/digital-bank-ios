@@ -29,9 +29,9 @@ class TransferViewController: UIViewController {
         getUserList()
     }
     
+ 
     @IBAction func Logout(_ sender: UIButton) {
-        // Implement logout functionality here
-    }
+        self.dismiss(animated: true, completion: nil)    }
     
     @IBAction func TransferSubmit(_ sender: UIButton) {
         // Check if there's a selected row

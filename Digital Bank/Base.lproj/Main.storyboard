@@ -62,6 +62,15 @@
                                 <rect key="frame" x="-20" y="95" width="414" height="128"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87A-b2-fsa">
+                                <rect key="frame" x="326" y="56" width="70" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                <connections>
+                                    <action selector="Logout:" destination="BSO-bN-UnB" eventType="touchUpInside" id="f91-BF-vly"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="inS-ZH-YW1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -156,12 +165,37 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Get Location"/>
+                                <connections>
+                                    <action selector="LocationButton:" destination="2A0-hZ-paq" eventType="touchUpInside" id="HQp-rw-bJY"/>
+                                </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YMx-P4-lvv">
+                                <rect key="frame" x="327" y="67" width="67" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="Logout:" destination="2A0-hZ-paq" eventType="touchUpInside" id="DD4-Uc-Ndq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqt-K0-H3k">
+                                <rect key="frame" x="49" y="476" width="192" height="222"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xd4-kZ-O9r"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="ATM" image="map.fill" catalog="system" id="UwU-ak-y4p"/>
+                    <connections>
+                        <outlet property="ATMSearch" destination="Vzg-QU-Abe" id="tZN-kz-uv9"/>
+                        <outlet property="GPSLocatior" destination="aqv-yI-b55" id="xdE-Uf-K0A"/>
+                        <outlet property="IPLocator" destination="HKy-bJ-JFY" id="AwV-xL-mzb"/>
+                        <outlet property="LocationOutput" destination="Cqt-K0-H3k" id="ryr-ip-dzC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hcu-Cx-ear" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
