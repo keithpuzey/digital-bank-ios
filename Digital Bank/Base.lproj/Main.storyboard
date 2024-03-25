@@ -178,12 +178,13 @@
                                     <action selector="Logout:" destination="2A0-hZ-paq" eventType="touchUpInside" id="DD4-Uc-Ndq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqt-K0-H3k">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqt-K0-H3k">
                                 <rect key="frame" x="49" y="476" width="192" height="222"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" name="AccentColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Xd4-kZ-O9r"/>
@@ -194,7 +195,7 @@
                         <outlet property="ATMSearch" destination="Vzg-QU-Abe" id="tZN-kz-uv9"/>
                         <outlet property="GPSLocatior" destination="aqv-yI-b55" id="xdE-Uf-K0A"/>
                         <outlet property="IPLocator" destination="HKy-bJ-JFY" id="AwV-xL-mzb"/>
-                        <outlet property="LocationOutput" destination="Cqt-K0-H3k" id="ryr-ip-dzC"/>
+                        <outlet property="LocationOutput" destination="Cqt-K0-H3k" id="9x9-TM-DOY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hcu-Cx-ear" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
