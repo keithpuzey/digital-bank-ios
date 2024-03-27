@@ -5,22 +5,27 @@ import Alamofire
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
        
-    
-    @IBOutlet weak var Welcome: UILabel!
+ 
     var authToken: String? // Token to be stored
     var userEmail: String?
     var userAccounts: [UserAccount] = []
     var transactions: [Transaction] = []
  
+    @IBOutlet weak var LoggedInUser: UILabel!
     @IBOutlet weak var Accounts: UIPickerView!
 
-    @IBOutlet weak var transactionsTableView: UITableView!
+
+    @IBOutlet weak var UITableView: UITableView!
     @IBOutlet weak var AccountSummary: UILabel!
     
     @IBOutlet weak var Logout: UIButton!
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        
+        // Register custom cell class for the reuse identifier
+   //     tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomCell")
         
         if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
             print("Stored email: \(storedEmail)")
@@ -29,18 +34,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             print("Email not found in UserDefaults")
         }
+               
         // Set up the picker view
-        Accounts.delegate = self // Assign delegate to the correct outlet
-        Accounts.dataSource = self // Assign data source to the correct outlet
+        Accounts.delegate = self
+        // Assign delegate to the correct outlet
+        Accounts.dataSource = self
+        // Assign data source to the correct outlet
         // Register TransactionCell class for "TransactionCell" reuse identifier
-        transactionsTableView.register(TransactionCell.self, forCellReuseIdentifier: "TransactionCell")
-        
-                
-        // Set the data source for the table view
-       transactionsTableView.dataSource = self
+       // transactionsTableView.register(TransactionCell.self, forCellReuseIdentifier: "TransactionCell")
+        // Set the data source and delegate of the table view
+        UITableView.dataSource = self
+        UITableView.delegate = self        // Set the data source for the table view
+   //    transactionsTableView.dataSource = self
         getUserList()
+
     }
     
+
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getUserList()
@@ -122,16 +133,16 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         print("First Name: \(firstName)")
                         print("Last Name: \(lastName)")
                         print("Title: \(title)")
-                        
+                      //  self.LoggedInUser.text = " \(title) \(firstName) \(lastName)"
                         // Call fetchUserAccounts with token
                         self.fetchUserAccounts(userId: id, token: token)
                         
                         // Display user details on the screen
                         DispatchQueue.main.async { [weak self] in
                             guard let self = self else { return }
-                            if let Welcome = self.Welcome {
+                            if let Welcome = self.LoggedInUser {
                                 let welcomeMessage = " \(title) \(firstName) \(lastName)"
-                                Welcome.text = welcomeMessage
+                                self.LoggedInUser.text = welcomeMessage
                                 print("Welcome Message : \(welcomeMessage)")
                             } else {
                                 print("Error: Welcome label is nil")
@@ -232,7 +243,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                       print("Transactions Array: \(self.transactions)")
                     // Update transactions table view
                     DispatchQueue.main.async {
-                        self.transactionsTableView.reloadData()
+                        self.UITableView.reloadData()
                     }
  
                 } else {
@@ -248,20 +259,60 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return transactions.count
      }
-     
+   
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as! TransactionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomTableViewCell
         
         let transaction = transactions[indexPath.row]
         
-        // Configure the cell with transaction data
-        cell.descriptionLabel.text = transaction.description ?? "N/A"
+        // Print transaction details for debugging
+        print("Transaction Description: \(transaction.description)")
+        print("Transaction Amount: \(transaction.amount)")
+        print("Transaction Date: \(transaction.transactionDate)")
+        print("Transaction Balance: \(transaction.runningBalance)")
+        
+        
+         // Format the transaction date
+         let dateFormatter = DateFormatter()
+         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm"
+         
+         if let date = dateFormatter.date(from: transaction.transactionDate) {
+             if Calendar.current.isDateInToday(date) {
+                 // If the date is today, display "Today"
+                 cell.dateLabel.text = "Today"
+             } else {
+                 // Otherwise, format the date normally
+                 let newDateFormatter = DateFormatter()
+                 newDateFormatter.dateFormat = "d MMMM yyyy" // Format: 1 April 2024
+                 let formattedDate = newDateFormatter.string(from: date)
+                 cell.dateLabel.text = formattedDate
+             }
+         } else {
+             print("Failed to parse date: \(transaction.transactionDate)")
+             cell.dateLabel.text = "N/A" // Handle case where date parsing fails
+         }
+        
+        // Configure other cell labels
+        cell.descriptionLabel.text = transaction.description
+  
+        cell.balanceLabel.text = "\(transaction.runningBalance)"
+        // Configure amount label
         cell.amountLabel.text = "\(transaction.amount)"
-        cell.runningBalanceLabel.text = "\(transaction.runningBalance)"
-        cell.transactionDateLabel.text = transaction.transactionDate ?? "N/A"
+        if transaction.amount < 0 {
+            // If amount is negative, display in green
+            cell.amountLabel.textColor = UIColor.green
+        } else {
+            // Otherwise, use default text color
+            cell.amountLabel.textColor = UIColor.black
+        }
+        
         
         return cell
     }
+
+
+
  
 }
 
@@ -295,7 +346,7 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
                 accountSummary.text = summary
                 print("Selected Account : \(summary)")
                 // Fetch transactions for the selected account
-          //      self.fetchTransactions(for: selectedAccount.accountId)
+                self.fetchTransactions(for: selectedAccount.accountId)
             } else {
                 print("Error: Account Summary Label is nil")
             }
