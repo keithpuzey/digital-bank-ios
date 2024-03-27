@@ -10,21 +10,18 @@ class ATMViewController: UIViewController {
     
     @IBOutlet weak var LocationOutput: UILabel!
     
-    var isUpdatingLocation = false // Flag to track whether a location update is in progress
-
+    
+    // Location manager instance
     let locationManager = CLLocationManager()
-
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Request location authorization
-        locationManager.requestWhenInUseAuthorization()
-
-        // Set up CLLocationManager
+        // Set up location manager
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-
+        locationManager.requestWhenInUseAuthorization()
+       
         // By default, GPS Locator is on
         GPSLocatior.isOn = true
         IPLocator.isOn = false
@@ -41,7 +38,9 @@ class ATMViewController: UIViewController {
     @IBAction func LocationButton(_ sender: UIButton) {
         if GPSLocatior.isOn {
             print("GPS Clicked")
-            handleAtmLocationGPSClick()
+            // Request GPS location
+               locationManager.requestLocation()
+            
         } else if IPLocator.isOn {
            getIpAddress()
         } else if ATMSearch.isOn {
@@ -50,8 +49,7 @@ class ATMViewController: UIViewController {
         }
     }
 
-
-    
+   
     @objc func switchValueChanged(sender: UISwitch) {
         // If a switch is turned on, turn off the others
         if sender.isOn {
@@ -75,24 +73,59 @@ class ATMViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
   
+
     
-    private func handleAtmLocationGPSClick() {
-        // If location update is already in progress, return
-        if isUpdatingLocation {
-            return
+    
+
+    private func callAPI(with apiUrl: String) {
+        guard let url = URL(string: apiUrl) else { return }
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self else { return }
+            if let error = error {
+                print("Error: \(error)")
+                self.handleError(errorMessage: error.localizedDescription)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200..<300).contains(httpResponse.statusCode),
+                  let data = data else {
+                self.handleError(errorMessage: "Invalid response or data")
+                return
+            }
+            
+            // Process API response directly here
+            self.processGPSApiResponse(data: data)
+        }.resume()
+    }
+
+    func processGPSApiResponse(data: Data) {
+        do {
+            guard let gpsJsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                  let gpsaddressObject = gpsJsonResponse["address"] as? [String: Any],
+                  let gpscountry = gpsaddressObject["country"] as? String,
+                  let gpspostcode = gpsaddressObject["postcode"] as? String,
+                  let gpsstate = gpsaddressObject["state"] as? String,
+                  let gpsroad = gpsaddressObject["road"] as? String else {
+                self.handleError(errorMessage: "Error parsing GPS response")
+                return
+            }
+
+            let formattedInfo =
+                "Road:      \(gpsroad) \n" +
+                "State:     \(gpsstate)\n" +
+                "Postcode:  \(gpspostcode)\n" +
+                "Country:   \(gpscountry)\n"
+          
+            // Update UI on the main thread
+            DispatchQueue.main.async {
+                self.LocationOutput.text = formattedInfo
+            }
+
+        } catch {
+            self.handleError(errorMessage: error.localizedDescription)
         }
-        
-        // Set the flag to true to indicate that a location update is in progress
-        isUpdatingLocation = true
-        print("in the handle ATM click function")
-        // Remove previous CLLocationManager delegate
-        locationManager.delegate = nil
-        
-        // Request location updates
-        locationManager.delegate = self
-        print("in the handle ATM click function2")
-        locationManager.startUpdatingLocation()
- 
     }
 
 
@@ -351,12 +384,9 @@ func getIpAddress() {
                     return
                 }
 
-                // Process the GPS API response with the extracted information
-                self.processGPSApiResponse(data, country: country, postcode: postcode, state: state, lat: String(lat), lon: String(lon))
-            }
-
-            // Start the data task
-            task.resume()
+                // Process API response
+                 self.processGPSApiResponse(data, country: country, postcode: postcode, state: state, lat: String(lat), lon: String(lon))
+             }.resume()
         } catch {
             self.handleError(errorMessage: error.localizedDescription)
         }
@@ -406,62 +436,36 @@ func getIpAddress() {
 
 extension ATMViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-  
-        // Check if a location update is already in progress
-        print("Received locations: \(locations)")
-        guard isUpdatingLocation, let location = locations.last else {
-            return
-        }
-
-        // Process the location update
+        // If location is updated successfully
+        guard let location = locations.first else { return }
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
-        let apiUrl =  AppConst.MockUrl + "gps?type=atm&lat=\(latitude)&lon=\(longitude)" // Replace with your actual API URL
-        print("\(apiUrl)") // Log the API URL for debugging
         
-        // Set the flag to false to prevent handling subsequent location updates
-        isUpdatingLocation = false
-        
-        // Perform network request using URLSession
-        URLSession.shared.dataTask(with: URL(string: apiUrl)!) { data, response, error in
-            defer {
-                // Reset the flag to indicate that location update is completed
-            //    self.isUpdatingLocation = false
-            }
-            
-            // Check for errors
-            if let error = error {
-                DispatchQueue.main.async {
-                    self.handleError(errorMessage: error.localizedDescription)
-                }
-                return
-            }
-
-            // Check for valid response and data
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode),
-                  let data = data else {
-                DispatchQueue.main.async {
-                    self.handleError(errorMessage: "Invalid response")
-                }
-                return
-            }
-
-            // Parse the response data
-            do {
-                let responseString = String(data: data, encoding: .utf8)
-                print("\(responseString ?? "No response")") // Log the API response for debugging
-                
-
-            } catch {
-                DispatchQueue.main.async {
-                    self.handleError(errorMessage: error.localizedDescription)
-                }
-            }
-        }.resume()
-
+        // Call API with the obtained coordinates
+        let apiUrl = AppConst.MockUrl + "gps?type=atm&lat=\(latitude)&lon=\(longitude)"
+        callAPI(with: apiUrl)
     }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Handle location error
+        if let clError = error as? CLError {
+            switch clError.code {
+            case .locationUnknown:
+                print("Location error: Location unknown")
+                self.handleError(errorMessage: "Unable to determine location. Please ensure that location services are enabled and try again.")
+            default:
+                print("Location error: \(clError.localizedDescription)")
+                self.handleError(errorMessage: clError.localizedDescription)
+            }
+        } else {
+            print("Location error: \(error.localizedDescription)")
+            self.handleError(errorMessage: error.localizedDescription)
+        }
+    }
+
 }
+
+    
+
 
 
