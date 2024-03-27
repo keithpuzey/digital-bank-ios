@@ -34,6 +34,7 @@ class TransferViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)    }
     
     @IBAction func TransferSubmit(_ sender: UIButton) {
+        
         // Check if there's a selected row
         let selectedRow = TransferAccountPicker.selectedRow(inComponent: 0)
         if selectedRow >= 0 && selectedRow < userAccounts.count {
@@ -70,7 +71,9 @@ class TransferViewController: UIViewController {
                             print("Transaction Success: \(value)")
                             // Handle successful transaction
                             self.getUserList()
-
+                            
+                            self.TransferDescription.text = " "
+                            self.TransferAmount.text = " "
                         case .failure(let error):
                             print("Transaction Error: \(error)")
                             // Handle transaction failure
