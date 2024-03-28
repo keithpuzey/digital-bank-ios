@@ -143,5 +143,113 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Digital Bank/ViewControllers/CreateAccountController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "MyViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 141d02b6ef67469b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.MyViewController.regAddressTextField.getter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "85">
+               </Location>
+               <Location
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 7c15624d19a5728f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.MyViewController.regAddressTextField.setter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 436f1f544258ad9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.MyViewController.regAddressTextField.modify : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 8f1484370ddc910a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.MyViewController.regAddressTextField.modify : Swift.Optional&lt;__C.UITextField&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 1dde8649f4d9e872"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.MyViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Digital_Bank.MyViewController"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "918">
+               </Location>
+               <Location
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 8df88f64c9edda2e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.MyViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Digital_Bank.MyViewController&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "872">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
