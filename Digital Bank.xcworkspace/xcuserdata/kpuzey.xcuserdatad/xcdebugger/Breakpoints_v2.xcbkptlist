@@ -159,7 +159,7 @@
             landmarkType = "3">
             <Locations>
                <Location
-                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 141d02b6ef67469b"
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 141d02b6ef6746ba"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -169,12 +169,12 @@
                   urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
                   offsetFromSymbolStart = "85">
                </Location>
                <Location
-                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 7c15624d19a5728f"
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 7c15624d19a572ae"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -184,12 +184,12 @@
                   urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
                   offsetFromSymbolStart = "136">
                </Location>
                <Location
-                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 436f1f544258ad9c"
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 436f1f544258adbd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -199,12 +199,12 @@
                   urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
                   offsetFromSymbolStart = "0">
                </Location>
                <Location
-                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 8f1484370ddc910a"
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 8f1484370ddc912b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -214,12 +214,12 @@
                   urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
                   offsetFromSymbolStart = "26">
                </Location>
                <Location
-                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 1dde8649f4d9e872"
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 1dde8649f4d9e853"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -229,12 +229,12 @@
                   urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "918">
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "970">
                </Location>
                <Location
-                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 8df88f64c9edda2e"
+                  uuid = "7AAAE2FC-60B0-4677-B47D-3E650AADC8D1 - 8df88f64c9edda0f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -244,9 +244,117 @@
                   urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/CreateAccountController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "872">
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "924">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6AC01071-4789-4244-9133-BC2AF9058F77"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Digital Bank/ViewControllers/userRegistration.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "userRegistration"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "6AC01071-4789-4244-9133-BC2AF9058F77 - d5749b241b84ae4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.userRegistration.regSSNTextField.getter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/userRegistration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "85">
+               </Location>
+               <Location
+                  uuid = "6AC01071-4789-4244-9133-BC2AF9058F77 - c656a1f5fb7a96f0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.userRegistration.regSSNTextField.setter : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/userRegistration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "6AC01071-4789-4244-9133-BC2AF9058F77 - 50a04e2a89acefe1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.userRegistration.regSSNTextField.modify : Swift.Optional&lt;__C.UITextField&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/userRegistration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "6AC01071-4789-4244-9133-BC2AF9058F77 - 5cb28c3676c1e6d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.userRegistration.regSSNTextField.modify : Swift.Optional&lt;__C.UITextField&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/userRegistration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "6AC01071-4789-4244-9133-BC2AF9058F77 - 58a7f44b0160c8d6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.userRegistration.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Digital_Bank.userRegistration"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/userRegistration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "366">
+               </Location>
+               <Location
+                  uuid = "6AC01071-4789-4244-9133-BC2AF9058F77 - f1ac21851302b01a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Digital_Bank.userRegistration.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Digital_Bank.userRegistration&gt;"
+                  moduleName = "Digital Bank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kpuzey/Desktop/digital-bank/digital-bank-ios/Digital%20Bank/ViewControllers/userRegistration.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "323">
                </Location>
             </Locations>
          </BreakpointContent>

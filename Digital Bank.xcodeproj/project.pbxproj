@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		477DB3CE2BBC4B210057E75A /* userRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477DB3CD2BBC4B210057E75A /* userRegistration.swift */; };
 		479630502BB33F5D00D6C6BC /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4796304F2BB33F5D00D6C6BC /* CustomTableViewCell.swift */; };
 		47D509E72BAD873E004EF6B6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D509E62BAD873E004EF6B6 /* HomeViewController.swift */; };
 		47D509E92BAD8F38004EF6B6 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D509E82BAD8F38004EF6B6 /* DashboardViewController.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		477DB3CD2BBC4B210057E75A /* userRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userRegistration.swift; sourceTree = "<group>"; };
 		4796304F2BB33F5D00D6C6BC /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		47D509E62BAD873E004EF6B6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		47D509E82BAD8F38004EF6B6 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				F466F45A26D0CF0B00E624DA /* LoginController.swift */,
 				F42D1B9226D0FF4900B01019 /* CreateAccountController.swift */,
 				47D509F62BB161B3004EF6B6 /* ConfigViewController.swift */,
+				477DB3CD2BBC4B210057E75A /* userRegistration.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47D509E92BAD8F38004EF6B6 /* DashboardViewController.swift in Sources */,
+				477DB3CE2BBC4B210057E75A /* userRegistration.swift in Sources */,
 				F42D1B9126D0F1F400B01019 /* AppToast.swift in Sources */,
 				479630502BB33F5D00D6C6BC /* CustomTableViewCell.swift in Sources */,
 				47D509E72BAD873E004EF6B6 /* HomeViewController.swift in Sources */,
