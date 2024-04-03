@@ -69,7 +69,14 @@ class userRegistration: UIViewController {
             let titleIndex = regTitle.selectedSegmentIndex
             let title = regTitle.titleForSegment(at: titleIndex) ?? ""
             let genderIndex = regGender.selectedSegmentIndex
-            let gender = regGender.titleForSegment(at: genderIndex) ?? ""
+            var gender = regGender.titleForSegment(at: genderIndex) ?? ""
+
+            // Convert gender to single letter format
+            if gender == "Male" {
+                gender = "M"
+            } else if gender == "Female" {
+                gender = "F"
+            }
             
             let firstName = regFNameTextField.text ?? ""
             let lastName = regLNameTextField.text ?? ""
@@ -89,19 +96,145 @@ class userRegistration: UIViewController {
             let postalCode = regPostalCodeTextField.text ?? ""
             let phone = regPhoneTextField.text ?? ""
             
-            print("Form is valid")
-            
             // Call API with collected data
             callAPI(title: title, gender: gender, firstName: firstName, lastName: lastName, ssn: ssn, email: email, password: password, address: address, region: region, locality: locality, postalCode: postalCode, phone: phone, formattedDOB: formattedDOB )
-        } else {
-            // Display error message or handle invalid form
-            let validationResult = isFormValid()
-            showAlert(title: "Form Validation Error", message: "\(validationResult.errorMessage)")
-                      
-            print("Form is invalid: \(validationResult.errorMessage)")
-        }
+            
+            
+            // Create payload dictionary
+            let payload: [String: Any] = [
+                "address": address,
+                "country": "USA",
+                "dob": formattedDOB,
+                "emailAddress": email,
+                "firstName": firstName,
+                "gender": gender,
+                "homePhone": phone,
+                "lastName": lastName,
+                "locality": locality,
+                "mobilePhone": phone,
+                "password": password,
+                "postalCode": postalCode,
+                "region": region,
+                "ssn": ssn,
+                "title": title,
+                "workPhone": phone
+                ]
+            
+            // Usage: In your signUpButtonTapped function
+            authenticateAndGetToken(username: "admin@demo.io", password: "Demo123!") { result in
+                switch result {
+                case .success(let authToken):
+                    // Token obtained, make your second API call using this token
+                    print("Auth token: \(authToken)")
+                    
 
+                    // Perform API call
+                    if let url = URL(string: AppConst.baseurl + "api/v1/user?role=USER") {
+                        var request = URLRequest(url: url)
+                        request.httpMethod = "POST"
+                        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                        
+                        // Set the Authorization header with the auth token
+                        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+
+                        // Convert payload dictionary to JSON data
+                        do {
+                            let jsonData = try JSONSerialization.data(withJSONObject: payload, options: [])
+                            request.httpBody = jsonData
+                        } catch {
+                            print("Error encoding JSON: \(error)")
+                        }
+                        
+                        
+                        
+                        // Print the payload
+                     //   print("Request payload: \(payload)")
+                        URLSession.shared.dataTask(with: request) { (data, response, error) in
+                            if let error = error {
+                                print("Error making POST request: \(error)")
+ 
+                                return
+                            }
+                            
+                            guard let httpResponse = response as? HTTPURLResponse else {
+                                print("Invalid HTTP response")
+    
+                       
+                                
+                                // Handle invalid response
+                                return
+                            }
+                            
+                            print("Response code: \(httpResponse.statusCode)")
+                            
+                            if httpResponse.statusCode == 400 {
+                                // Handle bad request
+                                self.showBadRequestError(response: httpResponse)
+                                return
+                            }
+                            
+                            if httpResponse.statusCode == 201 {
+                                // Extract ID and email address from the response data
+                                if let data = data,
+                                   let responseData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                                   let id = responseData["id"] as? Int,
+                                   let emailAddress = responseData["username"] as? String {
+                                    // Display ID and email address
+                                    let message = "ID: \(id)\nEmail Address: \(emailAddress)"
+                                    self.showAlert(title: "Success", message: message)
+                                } else {
+                                    // Unable to extract ID and email address
+                                    self.showErrorMessage(title: "Error", error: "Unable to extract ID and email address from the response" as! Error)
+                                }
+                                return
+                            }
+                            
+                            
+                            if let data = data,
+                               let responseData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                                print("Response data: \(responseData)")
+                                self.showAlert(title: "Success", message: "New User account Created: \(responseData)")
+                                DispatchQueue.main.async {
+                                    self.clearFormFields()
+                                }
+                            }
+                        }.resume()
+                    } else {
+                         print("Invalid URL")
+                     }
+                case .failure(let error):
+                    print("Error obtaining auth token: \(error)")
+                    // Handle error
+                }
+            }
+            
+       
+             
+         } else {
+             // Display error message or handle invalid form
+             let validationResult = isFormValid()
+             showAlert(title: "Form Validation Error", message: "\(validationResult.errorMessage)")
+                       
+             print("Form is invalid: \(validationResult.errorMessage)")
+         }
+     }
+    
+    func clearFormFields() {
+        regFNameTextField.text = ""
+        regLNameTextField.text = ""
+        regSSNTextField.text = ""
+        regEmailTextField.text = ""
+        regPasswordTextField.text = ""
+        regAddressTextField.text = ""
+        regRegionTextField.text = ""
+        regLocalTextField.text = ""
+        regPostalCodeTextField.text = ""
+        regPhoneTextField.text = ""
+        regDobPicker.date = Date()
+        regGender.selectedSegmentIndex = 0
+        regTitle.selectedSegmentIndex = 0
     }
+    
     
     // MARK: - Form Validation
     
@@ -200,11 +333,57 @@ class userRegistration: UIViewController {
         // Check if the license agreement switch is turned on
         return regAccept.isOn
     }
+    // Function to authenticate and obtain the auth token
+    func authenticateAndGetToken(username: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let urlString = AppConst.baseurl + "api/v1/auth?password=\(password)&username=\(username)"
+        if let url = URL(string: urlString) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("*/*", forHTTPHeaderField: "accept")
 
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+
+                guard let data = data else {
+                    completion(.failure(NSError(domain: "InvalidData", code: 0, userInfo: nil)))
+                    return
+                }
+
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    if let authToken = json?["authToken"] as? String {
+                        completion(.success(authToken))
+                    } else {
+                        completion(.failure(NSError(domain: "InvalidResponse", code: 0, userInfo: nil)))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }.resume()
+        } else {
+            completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
+        }
+    }
+    
     func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func showErrorMessage(title: String, error: Error) {
+        let message = "An error occurred: \(error.localizedDescription)"
+        showAlert(title: title, message: message)
+    }
+
+    func showBadRequestError(response: HTTPURLResponse) {
+        let message = "Bad request. Status code: \(response.statusCode)"
+        showAlert(title: "Error", message: message)
     }
 
     // MARK: - API Call
