@@ -611,6 +611,10 @@
                                     <segment title="Female"/>
                                 </segments>
                             </segmentedControl>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="8cF-WX-k1R" userLabel="regDOB">
+                                <rect key="frame" x="178" y="312" width="156" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPj-KD-2He">
                                 <rect key="frame" x="76" y="195" width="57" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -625,6 +629,7 @@
                     <navigationItem key="navigationItem" id="Cjz-eB-Niw"/>
                     <connections>
                         <outlet property="regAddressTextField" destination="X2a-Qc-qFc" id="er1-Bu-ydR"/>
+                        <outlet property="regDobPicker" destination="8cF-WX-k1R" id="OfG-eh-MaP"/>
                         <outlet property="regEmailTextField" destination="GBt-Ra-2WR" id="XpD-ds-hZh"/>
                         <outlet property="regFNameTextField" destination="Jpj-v1-GlX" id="502-ED-HGL"/>
                         <outlet property="regGender" destination="cV4-Ty-kxf" id="IRa-y8-IuM"/>
@@ -650,10 +655,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="8cF-WX-k1R" userLabel="regDOB">
-                                <rect key="frame" x="77" y="344" width="156" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </datePicker>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0D-GG-DtL" userLabel="regAccept">
                                 <rect key="frame" x="125" y="755" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
