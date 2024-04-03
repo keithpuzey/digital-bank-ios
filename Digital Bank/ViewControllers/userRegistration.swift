@@ -10,31 +10,11 @@ import UIKit
 class userRegistration: UIViewController {
 
 
-    @IBOutlet weak var regFNameTextField: UITextField!
-    @IBOutlet weak var regLNameTextField: UITextField!
-    
-
-    @IBOutlet weak var regEmailTextField: UITextField!
-    
-    @IBOutlet weak var regSSNTextField: UITextField!
-    
  
-    @IBOutlet weak var regAddressTextField: UITextField!
     
-    @IBOutlet weak var regPasswordTextField: UITextField!
-    
-    @IBOutlet weak var  regRegionTextField: UITextField!
-    
-    @IBOutlet weak var regLocalTextField: UITextField!
-    
-    @IBOutlet weak var regPostalCodeTextField: UITextField!
-    
-    @IBOutlet weak var regPhoneNumber: UITextField!
+//    @IBOutlet weak var regPhoneNumber: UITextField!
 
-    
-    @IBOutlet weak var regMFSegmentedControl: UISegmentedControl!
-    
-    @IBOutlet weak var regDOBDatePicker: UIDatePicker!
+
  
 
     override func viewDidLoad() {
@@ -42,26 +22,50 @@ class userRegistration: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    // MARK: - IBActions
+
+
+    @IBOutlet weak var regFNameTextField: UITextField!
     
-    @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        // Validate form before proceeding
+    @IBOutlet weak var regLNameTextField: UITextField!
+    
+    @IBOutlet weak var regEmailTextField: UITextField!
+    
+    @IBOutlet weak var regSSNTextField: UITextField!
+    
+    @IBOutlet weak var regPasswordTextField: UITextField!
+    
+    @IBOutlet weak var regAddressTextField: UITextField!
+    
+    @IBOutlet weak var regRegionTextField: UITextField!
+    @IBOutlet weak var regLocalTextField: UITextField!
+    
+    @IBOutlet weak var regPostalCodeTextField: UITextField!
+    
+    
+    @IBOutlet weak var regPhoneTextField: UITextField!
+    
+    @IBAction func signUpButtonTapped(_ sender: Any) {
+       // Validate form before proceeding
         if isFormValid() {
             // Collect data from form fields
             let firstName = regFNameTextField.text ?? ""
             let lastName = regLNameTextField.text ?? ""
-            let genderIndex = regMFSegmentedControl.selectedSegmentIndex
-            let gender = regMFSegmentedControl.titleForSegment(at: genderIndex) ?? ""
-            let dob = regDOBDatePicker.date
+         //   let genderIndex = regMFSegmentedControl.selectedSegmentIndex
+          //  let gender = regMFSegmentedControl.titleForSegment(at: genderIndex) ?? ""
+          //  let dob = regDOBDatePicker.date
             let ssn = regSSNTextField.text ?? ""
             let email = regEmailTextField.text ?? ""
             let password = regPasswordTextField.text ?? ""
             let address = regAddressTextField.text ?? ""
+            let region = regRegionTextField.text ?? ""
             let locality = regLocalTextField.text ?? ""
             let postalCode = regPostalCodeTextField.text ?? ""
-
+            let phone = regPhoneTextField.text ?? ""
+            
+            print("Form is valid")
+            
             // Call API with collected data
-            callAPI(firstName: firstName, lastName: lastName, gender: gender, dob: dob, ssn: ssn, email: email, password: password, address: address, locality: locality, postalCode: postalCode)
+            callAPI(firstName: firstName, lastName: lastName, ssn: ssn, email: email, password: password, address: address, region: region, locality: locality, postalCode: postalCode, phone: phone)
         } else {
             // Display error message or handle invalid form
             print("Please fill in all fields and accept terms.")
@@ -72,40 +76,44 @@ class userRegistration: UIViewController {
     
     func isFormValid() -> Bool {
         // Check if all fields are filled and terms are accepted
+        print("Entering is valid funciton")
         return !(regFNameTextField.text?.isEmpty ?? true) &&
                !(regLNameTextField.text?.isEmpty ?? true) &&
                !(regSSNTextField.text?.isEmpty ?? true) &&
                !(regEmailTextField.text?.isEmpty ?? true) &&
                !(regPasswordTextField.text?.isEmpty ?? true) &&
                !(regAddressTextField.text?.isEmpty ?? true) &&
-               !(regLocalTextField.text?.isEmpty ?? true) &&
-               !(regPostalCodeTextField.text?.isEmpty ?? true) 
+                !(regRegionTextField.text?.isEmpty ?? true) &&
+                !(regLocalTextField.text?.isEmpty ?? true) &&
+               !(regPostalCodeTextField.text?.isEmpty ?? true)
+                    &&
+                !(regPhoneTextField.text?.isEmpty ?? true)
+        
     }
-    
+
     // MARK: - API Call
-    
-    func callAPI(firstName: String, lastName: String, gender: String, dob: Date, ssn: String, email: String, password: String, address: String, locality: String, postalCode: String) {
+
+
+
+
+    func callAPI(firstName: String, lastName: String,   ssn: String, email: String, password: String, address: String, region: String, locality: String, postalCode: String, phone: String)
+    {
         // Perform your API call here using the collected data
         print("API Call:")
         print("First Name: \(firstName)")
         print("Last Name: \(lastName)")
-        print("Gender: \(gender)")
-        print("Date of Birth: \(dob)")
+     //   print("Gender: \(gender)")
+     //   print("Date of Birth: \(dob)")
         print("SSN: \(ssn)")
         print("Email: \(email)")
         print("Password: \(password)")
         print("Address: \(address)")
+        print("Region: \(region)")
         print("Locality: \(locality)")
         print("Postal Code: \(postalCode)")
+        print("Phone: \(phone)")
 
     }
     
-    // Switch value changed event
-    @IBAction func switchValueChanged(_ sender: UISwitch) {
-        // Handle switch value change here
-        if sender.isOn {
-            print("Switch is ON")
-        } else {
-            print("Switch is OFF")
-        }
-    }}
+
+ }
