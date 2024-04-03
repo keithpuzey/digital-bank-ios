@@ -615,6 +615,10 @@
                                 <rect key="frame" x="178" y="312" width="156" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </datePicker>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0D-GG-DtL" userLabel="regAccept">
+                                <rect key="frame" x="62" y="822" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPj-KD-2He">
                                 <rect key="frame" x="76" y="195" width="57" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -628,6 +632,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Cjz-eB-Niw"/>
                     <connections>
+                        <outlet property="regAccept" destination="L0D-GG-DtL" id="b8U-yo-uqd"/>
                         <outlet property="regAddressTextField" destination="X2a-Qc-qFc" id="er1-Bu-ydR"/>
                         <outlet property="regDobPicker" destination="8cF-WX-k1R" id="OfG-eh-MaP"/>
                         <outlet property="regEmailTextField" destination="GBt-Ra-2WR" id="XpD-ds-hZh"/>
@@ -646,27 +651,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIa-Xf-vyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1533.3333333333335" y="203.57142857142856"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="lri-7S-DLf">
-            <objects>
-                <viewController id="IuE-r3-GGZ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dKY-AI-QWB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L0D-GG-DtL" userLabel="regAccept">
-                                <rect key="frame" x="125" y="755" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="w6J-qf-1PB"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZOL-4M-JYD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-639" y="196"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="dGQ-EP-8Zo">

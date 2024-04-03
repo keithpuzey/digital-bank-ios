@@ -47,9 +47,11 @@ class userRegistration: UIViewController {
     
     @IBOutlet weak var regPhoneTextField: UITextField!
     
+    @IBOutlet weak var regAccept: UISwitch!
     @IBAction func signUpButtonTapped(_ sender: Any) {
-       // Validate form before proceeding
-        if isFormValid() {
+        // Validate form before proceeding
+        if isFormValid() && isLicenseAgreementAccepted() {
+            
             // Collect data from form fields
             let titleIndex = regTitle.selectedSegmentIndex
             let title = regTitle.titleForSegment(at: titleIndex) ?? ""
@@ -96,6 +98,12 @@ class userRegistration: UIViewController {
                     &&
                 !(regPhoneTextField.text?.isEmpty ?? true)
         
+    }
+
+    
+    func isLicenseAgreementAccepted() -> Bool {
+        // Check if the license agreement switch is turned on
+        return regAccept.isOn
     }
 
     // MARK: - API Call
