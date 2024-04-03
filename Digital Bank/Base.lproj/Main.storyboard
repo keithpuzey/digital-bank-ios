@@ -498,13 +498,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jpj-v1-GlX" userLabel="regFNameTextField">
-                                <rect key="frame" x="70" y="203" width="274" height="34"/>
+                                <rect key="frame" x="80" y="233" width="274" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="edJ-Zl-a7l" userLabel="regLNameTextField">
-                                <rect key="frame" x="70" y="261" width="274" height="34"/>
+                                <rect key="frame" x="81" y="275" width="274" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -581,7 +581,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8q-qD-ief">
-                                <rect key="frame" x="70" y="174" width="33" height="21"/>
+                                <rect key="frame" x="70" y="162" width="33" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -594,6 +594,30 @@
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wg7-BD-vcW">
+                                <rect key="frame" x="197" y="152" width="154" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Mr."/>
+                                    <segment title="Mrs."/>
+                                    <segment title="Ms."/>
+                                </segments>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cV4-Ty-kxf" userLabel="regMF">
+                                <rect key="frame" x="197" y="191" width="154" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Male"/>
+                                    <segment title="Female"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPj-KD-2He">
+                                <rect key="frame" x="76" y="195" width="57" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="F3v-th-fl4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -603,6 +627,7 @@
                         <outlet property="regAddressTextField" destination="X2a-Qc-qFc" id="er1-Bu-ydR"/>
                         <outlet property="regEmailTextField" destination="GBt-Ra-2WR" id="XpD-ds-hZh"/>
                         <outlet property="regFNameTextField" destination="Jpj-v1-GlX" id="502-ED-HGL"/>
+                        <outlet property="regGender" destination="cV4-Ty-kxf" id="IRa-y8-IuM"/>
                         <outlet property="regLNameTextField" destination="edJ-Zl-a7l" id="etL-za-W2e"/>
                         <outlet property="regLocalTextField" destination="zIA-R2-cfc" id="LJx-Ac-mos"/>
                         <outlet property="regPasswordTextField" destination="BHk-ea-rFg" id="sZt-0A-Hed"/>
@@ -610,27 +635,12 @@
                         <outlet property="regPostalCodeTextField" destination="tsk-f8-80T" id="1Yc-te-SD8"/>
                         <outlet property="regRegionTextField" destination="TSy-ba-gSO" id="Sn7-wr-mP0"/>
                         <outlet property="regSSNTextField" destination="bkx-Fd-Ubx" id="wUW-1T-9SO"/>
+                        <outlet property="regTitle" destination="Wg7-BD-vcW" id="d5F-Uk-fSt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIa-Xf-vyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1532" y="204"/>
-        </scene>
-        <!--userRegistration-->
-        <scene sceneID="5jW-Hf-vAH">
-            <objects>
-                <viewController id="eRb-mD-br6" userLabel="userRegistration" customClass="userRegistration" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="OYZ-gd-ioa" customClass="UserRegistration">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="EUn-gH-7Vf"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="6e6-jF-CL9"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LZw-DX-x70" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-888.40579710144937" y="182.8125"/>
+            <point key="canvasLocation" x="-1533.3333333333335" y="203.57142857142856"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="lri-7S-DLf">
@@ -640,23 +650,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Wg7-BD-vcW">
-                                <rect key="frame" x="79" y="160" width="140" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Mr."/>
-                                    <segment title="Mrs."/>
-                                    <segment title="Ms."/>
-                                </segments>
-                            </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cV4-Ty-kxf" userLabel="regMF">
-                                <rect key="frame" x="79" y="277" width="154" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Male"/>
-                                    <segment title="Female"/>
-                                </segments>
-                            </segmentedControl>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="8cF-WX-k1R" userLabel="regDOB">
                                 <rect key="frame" x="77" y="344" width="156" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -672,7 +665,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZOL-4M-JYD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-232" y="183"/>
+            <point key="canvasLocation" x="-639" y="196"/>
         </scene>
         <!--Login Controller-->
         <scene sceneID="dGQ-EP-8Zo">

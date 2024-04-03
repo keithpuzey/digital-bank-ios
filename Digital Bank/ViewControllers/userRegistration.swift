@@ -23,7 +23,9 @@ class userRegistration: UIViewController {
     }
 
 
-
+    @IBOutlet weak var regTitle: UISegmentedControl!
+    
+    @IBOutlet weak var regGender: UISegmentedControl!
     @IBOutlet weak var regFNameTextField: UITextField!
     
     @IBOutlet weak var regLNameTextField: UITextField!
@@ -48,6 +50,11 @@ class userRegistration: UIViewController {
        // Validate form before proceeding
         if isFormValid() {
             // Collect data from form fields
+            let titleIndex = regTitle.selectedSegmentIndex
+            let title = regTitle.titleForSegment(at: titleIndex) ?? ""
+            let genderIndex = regGender.selectedSegmentIndex
+            let gender = regGender.titleForSegment(at: genderIndex) ?? ""
+            
             let firstName = regFNameTextField.text ?? ""
             let lastName = regLNameTextField.text ?? ""
          //   let genderIndex = regMFSegmentedControl.selectedSegmentIndex
@@ -65,7 +72,7 @@ class userRegistration: UIViewController {
             print("Form is valid")
             
             // Call API with collected data
-            callAPI(firstName: firstName, lastName: lastName, ssn: ssn, email: email, password: password, address: address, region: region, locality: locality, postalCode: postalCode, phone: phone)
+            callAPI(title: title, gender: gender, firstName: firstName, lastName: lastName, ssn: ssn, email: email, password: password, address: address, region: region, locality: locality, postalCode: postalCode, phone: phone)
         } else {
             // Display error message or handle invalid form
             print("Please fill in all fields and accept terms.")
@@ -96,7 +103,7 @@ class userRegistration: UIViewController {
 
 
 
-    func callAPI(firstName: String, lastName: String,   ssn: String, email: String, password: String, address: String, region: String, locality: String, postalCode: String, phone: String)
+    func callAPI(title: String, gender: String, firstName: String, lastName: String,   ssn: String, email: String, password: String, address: String, region: String, locality: String, postalCode: String, phone: String)
     {
         // Perform your API call here using the collected data
         print("API Call:")
@@ -112,7 +119,8 @@ class userRegistration: UIViewController {
         print("Locality: \(locality)")
         print("Postal Code: \(postalCode)")
         print("Phone: \(phone)")
-
+        print("Title: \(title)")
+         print("Gender: \(gender)")
     }
     
 
