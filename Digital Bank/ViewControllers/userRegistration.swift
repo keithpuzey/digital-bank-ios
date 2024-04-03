@@ -169,7 +169,17 @@ class userRegistration: UIViewController {
                             
                             if httpResponse.statusCode == 400 {
                                 // Handle bad request
-                                self.showBadRequestError(response: httpResponse)
+                                if let data = data {
+                                    if let responseData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                                       let errorMessage = responseData["message"] as? String {
+                                        self.showAlert(title: "Bad Request", message: errorMessage)
+                                    } else {
+                                        let responseString = String(data: data, encoding: .utf8)
+                                        self.showAlert(title: "Bad Request", message: responseString ?? "Unknown Error")
+                                    }
+                                } else {
+                                    self.showAlert(title: "Bad Request", message: "Unknown Error")
+                                }
                                 return
                             }
                             
@@ -182,7 +192,10 @@ class userRegistration: UIViewController {
                                     // Display ID and email address
                                     let message = "ID: \(id)\nEmail Address: \(emailAddress)"
                                     self.showAlert(title: "Success", message: message)
-                                } else {
+                                    
+                                    DispatchQueue.main.async { [self] in
+                                        clearFormFields()
+                                    }                                } else {
                                     // Unable to extract ID and email address
                                     self.showErrorMessage(title: "Error", error: "Unable to extract ID and email address from the response" as! Error)
                                 }
@@ -191,12 +204,12 @@ class userRegistration: UIViewController {
                             
                             
                             if let data = data,
-                               let responseData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                               let responseData = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                               let errorMessage = responseData["message"] as? String {
+                                self.showAlert(title: "Error", message: errorMessage)
                                 print("Response data: \(responseData)")
-                                self.showAlert(title: "Success", message: "New User account Created: \(responseData)")
-                                DispatchQueue.main.async {
-                                    self.clearFormFields()
-                                }
+                               // self.showAlert(title: "Error", message: "Account Creation Failurent Created: \(responseData)")
+    
                             }
                         }.resume()
                     } else {
@@ -233,6 +246,8 @@ class userRegistration: UIViewController {
         regDobPicker.date = Date()
         regGender.selectedSegmentIndex = 0
         regTitle.selectedSegmentIndex = 0
+        self.regAccept.isOn = false
+        
     }
     
     
