@@ -24,6 +24,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
        
         
+        Accounts.layer.borderWidth = 1.0
+        Accounts.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+        Accounts.layer.cornerRadius = 5.0
+        
+        AccountSummary.layer.borderWidth = 1.0
+        AccountSummary.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+        AccountSummary.layer.cornerRadius = 5.0
+        
+        UITableView.layer.borderWidth = 1.0
+        UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+        UITableView.layer.cornerRadius = 5.0
+
+        
+        // Select the first row in the picker view
+        if userAccounts.isEmpty == false {
+            let firstAccountRow = 0
+            Accounts.selectRow(firstAccountRow, inComponent: 0, animated: false)
+            pickerView(Accounts, didSelectRow: firstAccountRow, inComponent: 0) // Manually call didSelectRow method to update AccountSummary and fetch transactions
+        }
+        UITableView.layer.borderWidth = 1.0
+        UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+        UITableView.layer.cornerRadius = 5.0
+
+        
         // Register custom cell class for the reuse identifier
    //     tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomCell")
         
@@ -311,9 +335,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
 
-
-
- 
 }
 
 extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -331,7 +352,18 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         let account = userAccounts[row]
         return "\(account.name) = \(account.currentBalance)"
     }
-    
+
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let account = userAccounts[row]
+        
+        // Customize font and size for the picker view text
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), // Adjust the font size as needed
+            NSAttributedString.Key.foregroundColor: UIColor.black // Adjust the text color as needed
+        ]
+        
+        return NSAttributedString(string: "\(account.name) = \(account.currentBalance)", attributes: attributes)
+    }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // Perform the necessary action when a row is selected
         let selectedAccount = userAccounts[row]
@@ -378,5 +410,20 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             self.transactionDate = transactionDate
         }
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Calculate the height of the bottom portion (40% of the screen height)
+        let bottomPortionHeight = self.view.bounds.height * 0.4
+        
+        // Calculate the origin y-coordinate for the table view
+        let tableViewY = self.view.bounds.height - bottomPortionHeight - self.tabBarController!.tabBar.frame.height
+        
+        // Set the frame for the table view
+        self.UITableView.frame = CGRect(x: 0, y: tableViewY, width: self.view.bounds.width, height: bottomPortionHeight)
+    }
+
+
+
 
 }

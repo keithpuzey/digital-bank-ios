@@ -23,13 +23,21 @@ class DashboardViewController: UIViewController {
     var authToken: String?
     var userEmail: String?
     var userAccounts: [UserAccount] = []
-   
+
+
     @IBOutlet weak var UITableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
+        
+        
+              UITableView.layer.borderWidth = 1.0
+              UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+              
+              UITableView.layer.cornerRadius = 5.0
+                  
+            if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
             print("Stored email: \(storedEmail)")
             userEmail = storedEmail
         } else {
@@ -39,6 +47,8 @@ class DashboardViewController: UIViewController {
         getUserList()
     }
 
+
+    
     
     // MARK: - API Requests
     

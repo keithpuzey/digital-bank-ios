@@ -26,6 +26,11 @@ class ATMViewController: UIViewController {
         GPSLocatior.isOn = true
         IPLocator.isOn = false
         ATMSearch.isOn = false
+  
+        LocationOutput.layer.borderWidth = 1.0
+        LocationOutput.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+        
+        LocationOutput.layer.cornerRadius = 5.0
         
         // Add actions for switch value changes
         GPSLocatior.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
@@ -112,11 +117,12 @@ class ATMViewController: UIViewController {
                 return
             }
 
-            let formattedInfo =
-                "Road:      \(gpsroad) \n" +
-                "State:     \(gpsstate)\n" +
-                "Postcode:  \(gpspostcode)\n" +
-                "Country:   \(gpscountry)\n"
+            let formattedInfo = "\n" +
+                "    Road:      \(gpsroad) \n   " +
+                "    State:     \(gpsstate)\n   " +
+                "    Postcode:  \(gpspostcode)\n    " +
+                "    Country:   \(gpscountry)\n    " +
+            " \n"
           
             // Update UI on the main thread
             DispatchQueue.main.async {
@@ -167,6 +173,7 @@ class ATMViewController: UIViewController {
         
                 }
                 let formattedAddress = """
+                    
                     Road: \(road)
                     City: \(city)
                     County: \(state)

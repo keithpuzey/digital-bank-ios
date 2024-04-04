@@ -1,11 +1,15 @@
 import UIKit
 import Alamofire
+import AVFoundation
+
 
 class TransferViewController: UIViewController {
     
     var authToken: String? // Token to be stored
     var userEmail: String?
     var userAccounts: [UserAccount] = []
+    var ocrProcessor: OCRProcessor?
+    
     
     @IBOutlet weak var TransferDescription: UITextField!
     @IBOutlet weak var TransferAmount: UITextField!
@@ -15,6 +19,13 @@ class TransferViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Initialize OCR Processor
+        ocrProcessor = OCRProcessor()
+        ocrProcessor?.delegate = self
+        
+        TransferAccountPicker.layer.borderWidth = 1.0
+        TransferAccountPicker.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+        TransferAccountPicker.layer.cornerRadius = 5.0
         
         if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
             print("Stored email: \(storedEmail)")
@@ -26,6 +37,9 @@ class TransferViewController: UIViewController {
         
         TransferAccountPicker.delegate = self
         TransferAccountPicker.dataSource = self
+        
+        
+        
         getUserList()
     }
     
@@ -92,7 +106,43 @@ class TransferViewController: UIViewController {
         }
     }
 
+    
+    @IBAction func takePhotoButtonTapped(_ sender: UIButton) {
+        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch cameraAuthorizationStatus {
+        case .authorized:
+            presentImagePickerWithCamera()
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                guard let self = self else { return }
+                if granted {
+                    DispatchQueue.main.async {
+                        self.presentImagePickerWithCamera()
+                    }
+                } else {
+                    // Handle case where camera access is denied by user
+                    print("Camera access denied by user")
+                    // You might want to display an alert or take appropriate action here
+                }
+            }
+        case .denied, .restricted:
+            // Handle case where camera access is denied or restricted
+            print("Camera access denied or restricted")
+            // You might want to display an alert or guide the user to settings here
+        @unknown default:
+            fatalError("Unknown camera authorization status.")
+        }
+    }
 
+    private func presentImagePickerWithCamera() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .camera
+        imagePicker.allowsEditing = false
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     
     struct UserAccount {
         let accountId: Int
@@ -255,3 +305,27 @@ extension TransferViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         print("Selected account: \(selectedAccount)")
     }
 }
+    extension TransferViewController: OCRProcessorDelegate {
+        func didExtractOCRResult(description: String, amount: String) {
+            DispatchQueue.main.async {
+                self.TransferDescription.text = description
+                self.TransferAmount.text = amount
+            }
+        }
+    }
+
+    extension TransferViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            picker.dismiss(animated: true, completion: nil)
+
+            guard let image = info[.originalImage] as? UIImage else {
+                print("No image found")
+                return
+            }
+
+            // Process the captured image with OCR
+            ocrProcessor?.process(image: image)
+        }
+    }
+    
+//}
