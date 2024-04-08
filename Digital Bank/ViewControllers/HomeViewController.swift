@@ -22,7 +22,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Register your custom cell class for the reuse identifier
+   //     UITableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomCell")
        
+        
         
         Accounts.layer.borderWidth = 1.0
         Accounts.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
@@ -334,7 +338,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return cell
     }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        headerView.backgroundColor = UIColor.lightGray
+        
+        // Create labels for column headings
+        let descriptionLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width / 3, height: 50))
+        descriptionLabel.text = "Description"
+        descriptionLabel.textAlignment = .center
+        headerView.addSubview(descriptionLabel)
+        
+        let amountLabel = UILabel(frame: CGRect(x: tableView.frame.width / 3, y: 0, width: tableView.frame.width / 3, height: 50))
+        amountLabel.text = "    Amount"
+        amountLabel.textAlignment = .center
+        headerView.addSubview(amountLabel)
+        
+        let balanceLabel = UILabel(frame: CGRect(x: (tableView.frame.width / 3) * 2, y: 0, width: tableView.frame.width / 3, height: 50))
+        balanceLabel.text = "Balance"
+        balanceLabel.textAlignment = .center
+        headerView.addSubview(balanceLabel)
+        
+        return headerView
+    }
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    
 }
 
 extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
