@@ -23,9 +23,9 @@ class TransferViewController: UIViewController {
         ocrProcessor = OCRProcessor()
         ocrProcessor?.delegate = self
         
-        TransferAccountPicker.layer.borderWidth = 1.0
-        TransferAccountPicker.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
-        TransferAccountPicker.layer.cornerRadius = 5.0
+  //      TransferAccountPicker.layer.borderWidth = 1.0
+  //      TransferAccountPicker.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+ //       TransferAccountPicker.layer.cornerRadius = 5.0
         
         if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
             print("Stored email: \(storedEmail)")
@@ -267,7 +267,9 @@ class TransferViewController: UIViewController {
                     // Reload the picker view data after fetching accounts
                     DispatchQueue.main.async {
                         self.TransferAccountPicker.reloadAllComponents()
-                    }
+
+                    
+                }
                     print("User Accounts: \(self.userAccounts)")
                     
                 } else {

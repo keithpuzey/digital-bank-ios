@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		473B889C2BC44DA90010B233 /* LocationOutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473B889B2BC44DA90010B233 /* LocationOutputView.swift */; };
 		477DB3CE2BBC4B210057E75A /* userRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477DB3CD2BBC4B210057E75A /* userRegistration.swift */; };
 		479630502BB33F5D00D6C6BC /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4796304F2BB33F5D00D6C6BC /* CustomTableViewCell.swift */; };
 		47D509E72BAD873E004EF6B6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D509E62BAD873E004EF6B6 /* HomeViewController.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		473B889B2BC44DA90010B233 /* LocationOutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationOutputView.swift; sourceTree = "<group>"; };
 		477DB3CD2BBC4B210057E75A /* userRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userRegistration.swift; sourceTree = "<group>"; };
 		4796304F2BB33F5D00D6C6BC /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		47D509E62BAD873E004EF6B6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			children = (
 				4796304F2BB33F5D00D6C6BC /* CustomTableViewCell.swift */,
 				47FBDBAD2BBE7E7B0097923E /* OCRProcessor.swift */,
+				473B889B2BC44DA90010B233 /* LocationOutputView.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				473B889C2BC44DA90010B233 /* LocationOutputView.swift in Sources */,
 				47D509E92BAD8F38004EF6B6 /* DashboardViewController.swift in Sources */,
 				477DB3CE2BBC4B210057E75A /* userRegistration.swift in Sources */,
 				F42D1B9126D0F1F400B01019 /* AppToast.swift in Sources */,

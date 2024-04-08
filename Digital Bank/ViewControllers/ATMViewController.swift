@@ -8,9 +8,10 @@ class ATMViewController: UIViewController {
     @IBOutlet weak var ATMSearch: UISwitch!
 
     
+   
+    @IBOutlet weak var LocationOutputView: UIView!
+    
     @IBOutlet weak var LocationOutput: UILabel!
-    
-    
     // Location manager instance
     let locationManager = CLLocationManager()
    
@@ -31,6 +32,15 @@ class ATMViewController: UIViewController {
         LocationOutput.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
         
         LocationOutput.layer.cornerRadius = 5.0
+        
+        LocationOutputView!.backgroundColor = UIColor.white
+            LocationOutputView!.layer.cornerRadius = 25
+            LocationOutputView!.layer.shadowColor = UIColor.black.cgColor
+        LocationOutputView!.layer.shadowOpacity = 0.5
+        LocationOutputView!.layer.shadowOffset = CGSize(width: 0, height: 2)
+        LocationOutputView!.layer.shadowRadius = 4
+        
+        
         
         // Add actions for switch value changes
         GPSLocatior.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
@@ -104,7 +114,85 @@ class ATMViewController: UIViewController {
             self.processGPSApiResponse(data: data)
         }.resume()
     }
+    
+    func updateLocationOutputView() {
+           // Create account summary view if it doesn't exist
+           if LocationOutputView == nil {
+               LocationOutputView = UIView()
+               LocationOutputView!.backgroundColor = UIColor.white
+               LocationOutputView!.layer.cornerRadius = 10
+               LocationOutputView!.layer.shadowColor = UIColor.black.cgColor
+               LocationOutputView!.layer.shadowOpacity = 0.5
+               LocationOutputView!.layer.shadowOffset = CGSize(width: 0, height: 2)
+               LocationOutputView!.layer.shadowRadius = 4
+               
+               // Add account summary view to the view hierarchy
+               self.view.addSubview(LocationOutputView)
+           } else {
+               // Remove existing subviews (labels) from account summary view
+               LocationOutputView!.subviews.forEach { $0.removeFromSuperview() }
+           }
 
+
+
+
+        // Create and configure labels for account details
+        let accountNumberLabel = UILabel()
+        accountNumberLabel.textColor = UIColor(named: "Green")
+        accountNumberLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
+        accountNumberLabel.text = "Account Number:"
+
+        let accountNumberSelected = UILabel()
+        accountNumberSelected.textColor = UIColor.black
+        accountNumberSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
+        accountNumberSelected.text = "test"
+
+        let accountTypeLabel = UILabel()
+        accountTypeLabel.textColor = UIColor(named: "Green")
+        accountTypeLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
+        accountTypeLabel.text = "Account Type:"
+
+        let accountTypeSelected = UILabel()
+        accountTypeSelected.textColor = UIColor.black
+        accountTypeSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
+        accountTypeSelected.text = "test)"
+
+        let balanceLabel = UILabel()
+        balanceLabel.textColor = UIColor(named: "Green")
+        balanceLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
+        balanceLabel.text = "Balance:"
+
+        let balanceSelected = UILabel()
+        balanceSelected.textColor = UIColor.black
+        balanceSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
+        balanceSelected.text = "test"
+
+        // Add labels to the account summary view
+        LocationOutputView!.addSubview(accountNumberLabel)
+        LocationOutputView!.addSubview(accountNumberSelected)
+        LocationOutputView!.addSubview(accountTypeLabel)
+        LocationOutputView!.addSubview(accountTypeSelected)
+        LocationOutputView!.addSubview(balanceLabel)
+        LocationOutputView!.addSubview(balanceSelected)
+
+        // Position the labels inside the account summary view with adjusted padding
+        let padding: CGFloat = 10
+        let labelHeight: CGFloat = 20
+        let lineSpacing: CGFloat = 1 // Adjust spacing between lines
+
+        accountNumberLabel.frame = CGRect(x: padding, y: 5, width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
+        accountNumberSelected.frame = CGRect(x: padding, y: 5 + labelHeight + lineSpacing, width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
+        accountTypeLabel.frame = CGRect(x: padding, y: 5 + 2 * (labelHeight + lineSpacing), width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
+        accountTypeSelected.frame = CGRect(x: padding, y: 5 + 3 * (labelHeight + lineSpacing), width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
+        balanceLabel.frame = CGRect(x: padding, y: 5 + 4 * (labelHeight + lineSpacing), width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
+        balanceSelected.frame = CGRect(x: padding, y: 5 + 5 * (labelHeight + lineSpacing), width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
+
+
+    }
+    
+    
+    
+    
     func processGPSApiResponse(data: Data) {
         do {
             guard let gpsJsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
@@ -188,6 +276,7 @@ class ATMViewController: UIViewController {
                 // Update UI to display formatted address
                 DispatchQueue.main.async {
                     self.LocationOutput.text = formattedAddress
+                    self.updateLocationOutputView()
                 }
             } else {
                 handleError(errorMessage: "Address components not found")
