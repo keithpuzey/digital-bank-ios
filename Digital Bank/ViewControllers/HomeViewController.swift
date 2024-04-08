@@ -3,50 +3,43 @@ import UIKit
 import Alamofire
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-       
+    
  
     var authToken: String? // Token to be stored
     var userEmail: String?
     var userAccounts: [UserAccount] = []
     var transactions: [Transaction] = []
- 
+
+
+      
+    @IBOutlet weak var accountSummaryView: UIView!
     @IBOutlet weak var LoggedInUser: UILabel!
     @IBOutlet weak var Accounts: UIPickerView!
-
-
+ 
     @IBOutlet weak var UITableView: UITableView!
-    @IBOutlet weak var AccountSummary: UILabel!
-    
+  
+
     @IBOutlet weak var Logout: UIButton!
-   
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Register your custom cell class for the reuse identifier
-   //     UITableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomCell")
-       
-        
-        
-        Accounts.layer.borderWidth = 1.0
-        Accounts.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
-        Accounts.layer.cornerRadius = 5.0
-        
-        AccountSummary.layer.borderWidth = 1.0
-        AccountSummary.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
-        AccountSummary.layer.cornerRadius = 5.0
+    
+        accountSummaryView!.backgroundColor = UIColor.white
+        accountSummaryView!.layer.cornerRadius = 25
+        accountSummaryView!.layer.shadowColor = UIColor.black.cgColor
+        accountSummaryView!.layer.shadowOpacity = 0.5
+        accountSummaryView!.layer.shadowOffset = CGSize(width: 0, height: 2)
+        accountSummaryView!.layer.shadowRadius = 4
+
         
         UITableView.layer.borderWidth = 1.0
         UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
         UITableView.layer.cornerRadius = 5.0
 
-        
-        // Select the first row in the picker view
-        if userAccounts.isEmpty == false {
-            let firstAccountRow = 0
-            Accounts.selectRow(firstAccountRow, inComponent: 0, animated: false)
-            pickerView(Accounts, didSelectRow: firstAccountRow, inComponent: 0) // Manually call didSelectRow method to update AccountSummary and fetch transactions
-        }
+       
+ 
         UITableView.layer.borderWidth = 1.0
         UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
         UITableView.layer.cornerRadius = 5.0
@@ -67,15 +60,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         Accounts.delegate = self
         // Assign delegate to the correct outlet
         Accounts.dataSource = self
-        // Assign data source to the correct outlet
-        // Register TransactionCell class for "TransactionCell" reuse identifier
-       // transactionsTableView.register(TransactionCell.self, forCellReuseIdentifier: "TransactionCell")
         // Set the data source and delegate of the table view
         UITableView.dataSource = self
-        UITableView.delegate = self        // Set the data source for the table view
+        UITableView.delegate = self
+        // Set the data source for the table view
    //    transactionsTableView.dataSource = self
         getUserList()
-
+        // Select the first row in the picker view
+        if userAccounts.isEmpty == false {
+            let firstAccountRow = 1
+            Accounts.selectRow(firstAccountRow, inComponent: 1, animated: false)
+            pickerView(Accounts, didSelectRow: firstAccountRow, inComponent: 1) // Manually call didSelectRow method to update AccountSummary and fetch transactions
+        }
     }
     
 
@@ -146,11 +142,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             switch response.result {
             case .success(let value):
-                print("User Details Success: \(value)")
+              //  print("User Details Success: \(value)")
                 
                 if let json = value as? [String: Any],
                    let id = json["id"] as? Int {
-                    print("ID from root object: \(id)")
+                //   print("ID from root object: \(id)")
                     
                     // Extract user profile from root object
                     if let userProfile = json["userProfile"] as? [String: Any],
@@ -158,9 +154,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                        let lastName = userProfile["lastName"] as? String,
                        let title = userProfile["title"] as? String {
                         // Display user details
-                        print("First Name: \(firstName)")
-                        print("Last Name: \(lastName)")
-                        print("Title: \(title)")
+                  //      print("First Name: \(firstName)")
+                  //      print("Last Name: \(lastName)")
+                  //      print("Title: \(title)")
                       //  self.LoggedInUser.text = " \(title) \(firstName) \(lastName)"
                         // Call fetchUserAccounts with token
                         self.fetchUserAccounts(userId: id, token: token)
@@ -170,6 +166,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                             guard let self = self else { return }
                             if let Welcome = self.LoggedInUser {
                                 let welcomeMessage = " \(title) \(firstName) \(lastName)"
+                                
+
+                                self.LoggedInUser.textColor = UIColor(named: "Green")
                                 self.LoggedInUser.text = welcomeMessage
                                 print("Welcome Message : \(welcomeMessage)")
                             } else {
@@ -206,7 +205,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             switch response.result {
             case .success(let value):
-                print("User Accounts Success: \(value)")
+             //   print("User Accounts Success: \(value)")
                 
                 if let jsonArray = value as? [[String: Any]] {
                     // Parse each user account
@@ -223,12 +222,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     }
                     
-                    print("User Accounts: \(self.userAccounts)")
+                  //  print("User Accounts: \(self.userAccounts)")
                     
                     // Reload the picker view data after fetching accounts
                     DispatchQueue.main.async {
                         self.Accounts.reloadAllComponents()
-                    }
+                        
+                        // Select the first row if available
+                         if !self.userAccounts.isEmpty {
+                             self.Accounts.selectRow(0, inComponent: 0, animated: false)
+                             // Call pickerView manually to trigger didSelectRow method
+                             self.pickerView(self.Accounts, didSelectRow: 0, inComponent: 0)
+                         }
+                             
+                         }
                 } else {
                     print("User accounts not found in response or invalid format")
                 }
@@ -255,7 +262,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             switch response.result {
             case .success(let value):
-                print("Transactions Fetch Success: \(value)")
+            //    print("Transactions Fetch Success: \(value)")
                 
                 if let jsonArray = value as? [[String: Any]] {
                     // Parse transaction data
@@ -268,7 +275,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     
                     
                       // Print the contents of the transactions array
-                      print("Transactions Array: \(self.transactions)")
+               //       print("Transactions Array: \(self.transactions)")
                     // Update transactions table view
                     DispatchQueue.main.async {
                         self.UITableView.reloadData()
@@ -295,10 +302,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let transaction = transactions[indexPath.row]
         
         // Print transaction details for debugging
-        print("Transaction Description: \(transaction.description)")
-        print("Transaction Amount: \(transaction.amount)")
-        print("Transaction Date: \(transaction.transactionDate)")
-        print("Transaction Balance: \(transaction.runningBalance)")
+   //     print("Transaction Description: \(transaction.description)")
+   //     print("Transaction Amount: \(transaction.amount)")
+   //     print("Transaction Date: \(transaction.transactionDate)")
+   //     print("Transaction Balance: \(transaction.runningBalance)")
         
         
          // Format the transaction date
@@ -384,37 +391,88 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return "\(account.name) = \(account.currentBalance)"
     }
 
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let account = userAccounts[row]
-        
-        // Customize font and size for the picker view text
-        let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), // Adjust the font size as needed
-            NSAttributedString.Key.foregroundColor: UIColor.black // Adjust the text color as needed
-        ]
-        
-        return NSAttributedString(string: "\(account.name) = \(account.currentBalance)", attributes: attributes)
-    }
+    // UIPickerViewDelegate method to handle row selection
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // Perform the necessary action when a row is selected
         let selectedAccount = userAccounts[row]
-        // Perform another query or action based on the selected account
-        print("Selected account: \(selectedAccount)")
-        // Display user details on the screen
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if let accountSummary = self.AccountSummary {
-                accountSummary.numberOfLines = 0 // Allow multiple lines
-                let summary = "Account =  \(selectedAccount.name) \n Account Number =  \(selectedAccount.accountNumber) \n Balance  = \(selectedAccount.currentBalance)"
-                accountSummary.text = summary
-                print("Selected Account : \(summary)")
-                // Fetch transactions for the selected account
-                self.fetchTransactions(for: selectedAccount.accountId)
-            } else {
-                print("Error: Account Summary Label is nil")
-            }
-        }
+        updateAccountSummaryView(with: selectedAccount)
+        fetchTransactions(for: selectedAccount.accountId)
     }
+    
+    func updateAccountSummaryView(with selectedAccount: UserAccount) {
+           // Create account summary view if it doesn't exist
+           if accountSummaryView == nil {
+               accountSummaryView = UIView()
+               accountSummaryView!.backgroundColor = UIColor.white
+               accountSummaryView!.layer.cornerRadius = 10
+               accountSummaryView!.layer.shadowColor = UIColor.black.cgColor
+               accountSummaryView!.layer.shadowOpacity = 0.5
+               accountSummaryView!.layer.shadowOffset = CGSize(width: 0, height: 2)
+               accountSummaryView!.layer.shadowRadius = 4
+               
+               // Add account summary view to the view hierarchy
+               self.view.addSubview(accountSummaryView!)
+           } else {
+               // Remove existing subviews (labels) from account summary view
+               accountSummaryView!.subviews.forEach { $0.removeFromSuperview() }
+           }
+
+
+
+
+        // Create and configure labels for account details
+        let accountNumberLabel = UILabel()
+        accountNumberLabel.textColor = UIColor(named: "Green")
+        accountNumberLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
+        accountNumberLabel.text = "Account Number:"
+
+        let accountNumberSelected = UILabel()
+        accountNumberSelected.textColor = UIColor.black
+        accountNumberSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
+        accountNumberSelected.text = "\(selectedAccount.accountNumber)"
+
+        let accountTypeLabel = UILabel()
+        accountTypeLabel.textColor = UIColor(named: "Green")
+        accountTypeLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
+        accountTypeLabel.text = "Account Type:"
+
+        let accountTypeSelected = UILabel()
+        accountTypeSelected.textColor = UIColor.black
+        accountTypeSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
+        accountTypeSelected.text = "\(selectedAccount.name)"
+
+        let balanceLabel = UILabel()
+        balanceLabel.textColor = UIColor(named: "Green")
+        balanceLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
+        balanceLabel.text = "Balance:"
+
+        let balanceSelected = UILabel()
+        balanceSelected.textColor = UIColor.black
+        balanceSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
+        balanceSelected.text = "\(selectedAccount.currentBalance)"
+
+        // Add labels to the account summary view
+        accountSummaryView!.addSubview(accountNumberLabel)
+        accountSummaryView!.addSubview(accountNumberSelected)
+        accountSummaryView!.addSubview(accountTypeLabel)
+        accountSummaryView!.addSubview(accountTypeSelected)
+        accountSummaryView!.addSubview(balanceLabel)
+        accountSummaryView!.addSubview(balanceSelected)
+
+        // Position the labels inside the account summary view with adjusted padding
+        let padding: CGFloat = 10
+        let labelHeight: CGFloat = 20
+        let lineSpacing: CGFloat = 1 // Adjust spacing between lines
+
+        accountNumberLabel.frame = CGRect(x: padding, y: 5, width: accountSummaryView!.bounds.width - 2 * padding, height: labelHeight)
+        accountNumberSelected.frame = CGRect(x: padding, y: 5 + labelHeight + lineSpacing, width: accountSummaryView!.bounds.width - 2 * padding, height: labelHeight)
+        accountTypeLabel.frame = CGRect(x: padding, y: 5 + 2 * (labelHeight + lineSpacing), width: accountSummaryView!.bounds.width - 2 * padding, height: labelHeight)
+        accountTypeSelected.frame = CGRect(x: padding, y: 5 + 3 * (labelHeight + lineSpacing), width: accountSummaryView!.bounds.width - 2 * padding, height: labelHeight)
+        balanceLabel.frame = CGRect(x: padding, y: 5 + 4 * (labelHeight + lineSpacing), width: accountSummaryView!.bounds.width - 2 * padding, height: labelHeight)
+        balanceSelected.frame = CGRect(x: padding, y: 5 + 5 * (labelHeight + lineSpacing), width: accountSummaryView!.bounds.width - 2 * padding, height: labelHeight)
+
+
+    }
+
     
     struct Transaction {
         let id: Int
