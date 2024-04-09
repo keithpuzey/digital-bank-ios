@@ -1,20 +1,18 @@
-# Reqres-App
+# Digital Bank Mobile App
 
-Reqres-App is a simple iOS app built using Swift and UIKit to demonstrate how to consume a REST API using the popular Swift networking library, Alamofire.
+Digital Bank Mobile App is a simple iOS app built using Swift and UIKit, it communicates with a demoinstration server using REST API utilising the popular Swift networking library, Alamofire.
+which provides a simple REST API for testing and prototyping. The app allows users to browse the list of available users and view their details, including their name, avatar, and email address.
 
-The app connects to the Reqres.in API, which provides a simple REST API for testing and prototyping. The app allows users to browse the list of available users and view their details, including their name, avatar, and email address.
-
-<img width="1604"  src="app_image/banner.png?raw=true">
 
 | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|
-|<img width="1604"  src="app_image/login.png">  Login Screen |  <img width="1604" src="app_image/welcome.png"> Welcome Screen |<img width="1604" src="app_image/userinfo.png"> Userinfo Screen |  <img width="1604" src="app_image/logout.png"> Logout Screen |
-| <img width="1604" src="app_image/logout.png"> Logout Screen 
+|<img width="1604"  src="app_image/login.png">  Login Screen |  <img width="1604" src="app_image/account-screen.png"> Account Summary Screen |<img width="1604" src="app_image/atm-search.png"> ATM Search Screen  
 
 ## Features
- * Bullet list
- * List of users
- * User details screen
- * Integration with Reqres.in API
+ * Login / Logout
+ * Account Summary
+ * Dashboard view
+ * Update Account using transfer screen
+ * Queries using GPS and network
  * Network requests with Alamofire
  * JSON parsing
