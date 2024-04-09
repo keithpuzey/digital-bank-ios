@@ -408,6 +408,7 @@
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWi-k4-Ndx">
                                 <rect key="frame" x="28" y="71" width="129" height="60"/>
+                                <accessibility key="accessibilityConfiguration" label="Welcome"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" name="Green"/>
                                 <nil key="highlightedColor"/>
@@ -437,8 +438,19 @@
                                     <action selector="LogoutButton:" destination="hrh-tE-g0Y" eventType="touchUpInside" id="zxR-GN-YnJ"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mk5-Et-H09">
+                                <rect key="frame" x="56" y="162" width="298" height="154"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="Selected Account Summary"/>
+                            </view>
+                            <pickerView contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bFr-4D-gX5">
+                                <rect key="frame" x="0.0" y="340" width="414" height="78"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" name="Green"/>
+                                <accessibility key="accessibilityConfiguration" label="Select Account"/>
+                            </pickerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="D0w-oN-VZh">
-                                <rect key="frame" x="20" y="415" width="362" height="376"/>
+                                <rect key="frame" x="20" y="405" width="362" height="376"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="separatorColor" name="AccentColor"/>
@@ -490,15 +502,6 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mk5-Et-H09">
-                                <rect key="frame" x="56" y="162" width="298" height="154"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </view>
-                            <pickerView contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bFr-4D-gX5">
-                                <rect key="frame" x="0.0" y="340" width="414" height="78"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" name="Green"/>
-                            </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pCU-vx-iPP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -624,6 +627,7 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jpj-v1-GlX" userLabel="regFNameTextField">
                                 <rect key="frame" x="77" y="175" width="275" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="First Name"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="JpQ-CY-1hz"/>
                                     <constraint firstAttribute="width" constant="275" id="rIS-BZ-pGo"/>
@@ -633,6 +637,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="edJ-Zl-a7l" userLabel="regLNameTextField">
                                 <rect key="frame" x="77" y="223" width="275" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Last Name"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="fck-7t-Eql"/>
                                     <constraint firstAttribute="height" constant="40" id="jXf-IT-9G5"/>
@@ -642,6 +647,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GBt-Ra-2WR" userLabel="regEmailTextField">
                                 <rect key="frame" x="77" y="361" width="275" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Email Address"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="KT0-73-K9X"/>
                                     <constraint firstAttribute="height" constant="40" id="wjO-eM-VGj"/>
@@ -651,6 +657,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Social Security Number xxxxxx" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bkx-Fd-Ubx" userLabel="regSSNTextField">
                                 <rect key="frame" x="77" y="405" width="275" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Social Security Number"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="N8V-0J-F0X"/>
                                     <constraint firstAttribute="width" constant="275" id="p16-cA-cna"/>
@@ -660,6 +667,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BHk-ea-rFg" userLabel="regPasswordTextField">
                                 <rect key="frame" x="76" y="453" width="253" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Password"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Kko-q2-mkm"/>
                                     <constraint firstAttribute="width" constant="275" id="Opu-6i-4kl"/>
@@ -669,6 +677,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X2a-Qc-qFc" userLabel="regAddressTextField">
                                 <rect key="frame" x="76" y="507" width="275" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Address"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="NrQ-qU-W42"/>
                                     <constraint firstAttribute="width" constant="275" id="vaq-GX-Xtj"/>
@@ -678,6 +687,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Region" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TSy-ba-gSO" userLabel="regRegionTextField">
                                 <rect key="frame" x="77" y="555" width="275" height="34"/>
+                                <accessibility key="accessibilityConfiguration" label="Region"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="1ss-Hx-2hl"/>
                                     <constraint firstAttribute="height" constant="34" id="w3U-Mm-zme"/>
@@ -687,6 +697,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Locality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zIA-R2-cfc" userLabel="regLocalTextField">
                                 <rect key="frame" x="77" y="597" width="275" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Locality"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="1ik-0o-dTu"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="30n-wA-JAF"/>
@@ -696,6 +707,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tsk-f8-80T" userLabel="regPostalCodeTextField">
                                 <rect key="frame" x="77" y="645" width="275" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Zip Code"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="MWI-y3-Y8S"/>
                                     <constraint firstAttribute="width" constant="275" id="oDx-4S-l2i"/>
@@ -705,6 +717,7 @@
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number i.e ### ### ####" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OAe-WV-McL" userLabel="regPhoneNumber">
                                 <rect key="frame" x="76" y="693" width="275" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Phone Number"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="0Rj-Kn-CGF"/>
                                     <constraint firstAttribute="height" constant="40" id="QkE-9F-bat"/>
@@ -720,6 +733,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5we-As-pJX">
                                 <rect key="frame" x="158" y="781" width="107" height="31"/>
+                                <accessibility key="accessibilityConfiguration" label="Register"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Register">
                                     <color key="baseBackgroundColor" name="AccentColor"/>
@@ -730,6 +744,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create a new account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XH6-gA-V9l">
                                 <rect key="frame" x="86" y="96" width="242.5" height="32"/>
+                                <accessibility key="accessibilityConfiguration" label="Create a new account"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
@@ -746,10 +761,12 @@
                             </datePicker>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="L0D-GG-DtL" userLabel="regAccept">
                                 <rect key="frame" x="51.5" y="750" width="51" height="31"/>
+                                <accessibility key="accessibilityConfiguration" label="Agree to Term and Conditions"/>
                                 <color key="onTintColor" name="AccentColor"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of Birth" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Gd-PV-FvK">
                                 <rect key="frame" x="77" y="320" width="96" height="21"/>
+                                <accessibility key="accessibilityConfiguration" label="Date Of Birth"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGray4Color"/>
                                 <nil key="highlightedColor"/>
@@ -846,6 +863,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djK-UO-raC">
                                 <rect key="frame" x="107" y="480" width="200" height="60"/>
+                                <accessibility key="accessibilityConfiguration" label="Click Login"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                 <color key="tintColor" name="AccentColor"/>
                                 <state key="normal" title="LOGIN">
@@ -861,6 +879,7 @@
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Password" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="8br-ea-zrl">
                                 <rect key="frame" x="20" y="368" width="365" height="60"/>
+                                <accessibility key="accessibilityConfiguration" label="Enter Password"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="JQA-YW-g4A"/>
                                 </constraints>
@@ -869,6 +888,7 @@
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="dblogo" translatesAutoresizingMaskIntoConstraints="NO" id="PE6-Kv-geE">
                                 <rect key="frame" x="19.5" y="54.5" width="375" height="216"/>
+                                <accessibility key="accessibilityConfiguration" label="Digital Bank Logo"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="PE6-Kv-geE" secondAttribute="height" multiplier="347:200" id="XOf-eI-eay"/>
                                     <constraint firstAttribute="width" constant="375" id="mmr-bc-hhf"/>
@@ -877,6 +897,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lkw-Rq-QNu">
                                 <rect key="frame" x="128.5" y="794" width="157" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="New User Registration"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <color key="tintColor" name="AccentColor"/>
                                 <state key="normal" title="Sign Up"/>
@@ -908,6 +929,7 @@
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter User Name" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="giO-E8-p8h">
                                 <rect key="frame" x="19" y="267" width="365" height="60"/>
+                                <accessibility key="accessibilityConfiguration" label="Enter UserName"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="5CK-VZ-WT0"/>
                                 </constraints>
