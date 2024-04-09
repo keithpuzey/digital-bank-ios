@@ -6,16 +6,18 @@ class ATMViewController: UIViewController {
     @IBOutlet weak var GPSLocatior: UISwitch!
     @IBOutlet weak var IPLocator: UISwitch!
     @IBOutlet weak var ATMSearch: UISwitch!
-
+  
+    @IBOutlet weak var LocationOutputView: UIView!
+    @IBOutlet weak var crash: UILabel!
     
    
-    @IBOutlet weak var LocationOutputView: UIView!
-    
-    @IBOutlet weak var LocationOutput: UILabel!
+    @IBOutlet weak var outputIPAddress: UILabel!
     // Location manager instance
     let locationManager = CLLocationManager()
-   
     
+    @IBOutlet weak var outputLabel: UILabel!
+    
+    @IBOutlet weak var outputIcon: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,19 +30,14 @@ class ATMViewController: UIViewController {
         IPLocator.isOn = false
         ATMSearch.isOn = false
   
-        LocationOutput.layer.borderWidth = 1.0
-        LocationOutput.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
-        
-        LocationOutput.layer.cornerRadius = 5.0
-        
+
         LocationOutputView!.backgroundColor = UIColor.white
-            LocationOutputView!.layer.cornerRadius = 25
-            LocationOutputView!.layer.shadowColor = UIColor.black.cgColor
+        LocationOutputView!.layer.cornerRadius = 25
+        LocationOutputView!.layer.shadowColor = UIColor.black.cgColor
         LocationOutputView!.layer.shadowOpacity = 0.5
         LocationOutputView!.layer.shadowOffset = CGSize(width: 0, height: 2)
         LocationOutputView!.layer.shadowRadius = 4
-        
-        
+ 
         
         // Add actions for switch value changes
         GPSLocatior.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
@@ -53,12 +50,21 @@ class ATMViewController: UIViewController {
     @IBAction func LocationButton(_ sender: UIButton) {
         if GPSLocatior.isOn {
             print("GPS Clicked")
+            outputLabel.text = "ATM Location - GPS"
+            outputIcon.image = UIImage(systemName: "mappin.and.ellipse")
+
             // Request GPS location
                locationManager.requestLocation()
             
         } else if IPLocator.isOn {
            getIpAddress()
+            outputLabel.text = "ATM Location - Network"
+            outputIcon.image = UIImage(systemName: "scope")
+            
         } else if ATMSearch.isOn {
+            outputLabel.text = "ATM Location - Mock Service"
+            outputIcon.image = UIImage(systemName: "magnifyingglass.circle.fill")?.withRenderingMode(.alwaysTemplate)
+
             showCustomRequestDialog()
             
         }
@@ -69,16 +75,42 @@ class ATMViewController: UIViewController {
         // If a switch is turned on, turn off the others
         if sender.isOn {
             if sender == GPSLocatior {
-                self.LocationOutput.text = " "
+    
+                DispatchQueue.main.async {
+                    for subview in self.LocationOutputView.subviews {
+                        subview.removeFromSuperview()
+                    }
+                }
                 IPLocator.isOn = false
                 ATMSearch.isOn = false
+                self.outputIPAddress.text = " "
+                outputLabel.text = ""
+                outputIcon.image = UIImage(named: "scope")
+                
             } else if sender == IPLocator {
-                self.LocationOutput.text = " "
+      
+                DispatchQueue.main.async {
+                    for subview in self.LocationOutputView.subviews {
+                        subview.removeFromSuperview()
+                    }
+                }
                 GPSLocatior.isOn = false
                 ATMSearch.isOn = false
+                self.outputIPAddress.text = " "
+                outputLabel.text = ""
+                outputIcon.image = UIImage(named: "scope")
+                
             } else if sender == ATMSearch {
-                self.LocationOutput.text = " "
+  
+                DispatchQueue.main.async {
+                    for subview in self.LocationOutputView.subviews {
+                        subview.removeFromSuperview()
+                    }
+                }
                 GPSLocatior.isOn = false
+                outputLabel.text = ""
+                self.outputIPAddress.text = " "
+                outputIcon.image = UIImage(named: "scope")
                 IPLocator.isOn = false
             }
         }
@@ -115,80 +147,58 @@ class ATMViewController: UIViewController {
         }.resume()
     }
     
-    func updateLocationOutputView() {
-           // Create account summary view if it doesn't exist
-           if LocationOutputView == nil {
-               LocationOutputView = UIView()
-               LocationOutputView!.backgroundColor = UIColor.white
-               LocationOutputView!.layer.cornerRadius = 10
-               LocationOutputView!.layer.shadowColor = UIColor.black.cgColor
-               LocationOutputView!.layer.shadowOpacity = 0.5
-               LocationOutputView!.layer.shadowOffset = CGSize(width: 0, height: 2)
-               LocationOutputView!.layer.shadowRadius = 4
-               
-               // Add account summary view to the view hierarchy
-               self.view.addSubview(LocationOutputView)
-           } else {
-               // Remove existing subviews (labels) from account summary view
-               LocationOutputView!.subviews.forEach { $0.removeFromSuperview() }
-           }
+    func handleNorthPoleLocation() {
+        
+        print("North Pole Selected")
+        self.crash.text = ""
+    }
 
 
+    func updateLocationOutputView(formattedInfo: String) {
+        // Create account summary view if it doesn't exist
+        if LocationOutputView == nil {
+            LocationOutputView = UIView()
+            LocationOutputView!.backgroundColor = UIColor.white
+            LocationOutputView!.layer.cornerRadius = 25
+            LocationOutputView!.layer.shadowColor = UIColor.black.cgColor
+            LocationOutputView!.layer.shadowOpacity = 0.5
+            LocationOutputView!.layer.shadowOffset = CGSize(width: 0, height: 2)
+            LocationOutputView!.layer.shadowRadius = 4
 
+            // Add account summary view to the view hierarchy
+            self.view.addSubview(LocationOutputView)
+        } else {
+            // Remove existing subviews (labels) from account summary view
+            LocationOutputView!.subviews.forEach { $0.removeFromSuperview() }
+        }
 
-        // Create and configure labels for account details
-        let accountNumberLabel = UILabel()
-        accountNumberLabel.textColor = UIColor(named: "Green")
-        accountNumberLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
-        accountNumberLabel.text = "Account Number:"
+        // Create and configure label for formatted information
+        let formattedInfoLabel = UILabel()
+        formattedInfoLabel.textColor = UIColor.black
+        formattedInfoLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
+        formattedInfoLabel.numberOfLines = 0
+        formattedInfoLabel.text = formattedInfo // Use the provided formatted information
 
-        let accountNumberSelected = UILabel()
-        accountNumberSelected.textColor = UIColor.black
-        accountNumberSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
-        accountNumberSelected.text = "test"
+        // Add the formatted information label to the account summary view
+        LocationOutputView!.addSubview(formattedInfoLabel)
+        // Define padding values
+        let topPadding: CGFloat = 20
+        let horizontalPadding: CGFloat = 20
 
-        let accountTypeLabel = UILabel()
-        accountTypeLabel.textColor = UIColor(named: "Green")
-        accountTypeLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
-        accountTypeLabel.text = "Account Type:"
+        // Calculate label width
+        let labelWidth = LocationOutputView!.bounds.width - 2 * horizontalPadding
 
-        let accountTypeSelected = UILabel()
-        accountTypeSelected.textColor = UIColor.black
-        accountTypeSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
-        accountTypeSelected.text = "test)"
+        // Calculate label size based on the width and maximum height
+        let labelSize = formattedInfoLabel.sizeThatFits(CGSize(width: labelWidth, height: .greatestFiniteMagnitude))
 
-        let balanceLabel = UILabel()
-        balanceLabel.textColor = UIColor(named: "Green")
-        balanceLabel.font = UIFont.systemFont(ofSize: 14) // Adjust font size
-        balanceLabel.text = "Balance:"
+        // Set the frame for the label with padding
+        formattedInfoLabel.frame = CGRect(x: horizontalPadding, y: topPadding, width: labelWidth, height: labelSize.height)
 
-        let balanceSelected = UILabel()
-        balanceSelected.textColor = UIColor.black
-        balanceSelected.font = UIFont.systemFont(ofSize: 18) // Adjust font size
-        balanceSelected.text = "test"
-
-        // Add labels to the account summary view
-        LocationOutputView!.addSubview(accountNumberLabel)
-        LocationOutputView!.addSubview(accountNumberSelected)
-        LocationOutputView!.addSubview(accountTypeLabel)
-        LocationOutputView!.addSubview(accountTypeSelected)
-        LocationOutputView!.addSubview(balanceLabel)
-        LocationOutputView!.addSubview(balanceSelected)
-
-        // Position the labels inside the account summary view with adjusted padding
-        let padding: CGFloat = 10
-        let labelHeight: CGFloat = 20
-        let lineSpacing: CGFloat = 1 // Adjust spacing between lines
-
-        accountNumberLabel.frame = CGRect(x: padding, y: 5, width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
-        accountNumberSelected.frame = CGRect(x: padding, y: 5 + labelHeight + lineSpacing, width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
-        accountTypeLabel.frame = CGRect(x: padding, y: 5 + 2 * (labelHeight + lineSpacing), width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
-        accountTypeSelected.frame = CGRect(x: padding, y: 5 + 3 * (labelHeight + lineSpacing), width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
-        balanceLabel.frame = CGRect(x: padding, y: 5 + 4 * (labelHeight + lineSpacing), width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
-        balanceSelected.frame = CGRect(x: padding, y: 5 + 5 * (labelHeight + lineSpacing), width: LocationOutputView!.bounds.width - 2 * padding, height: labelHeight)
-
+        // Set text alignment to left
+        formattedInfoLabel.textAlignment = .left
 
     }
+    
     
     
     
@@ -214,7 +224,8 @@ class ATMViewController: UIViewController {
           
             // Update UI on the main thread
             DispatchQueue.main.async {
-                self.LocationOutput.text = formattedInfo
+      
+                self.updateLocationOutputView(formattedInfo: formattedInfo)
             }
 
         } catch {
@@ -261,22 +272,20 @@ class ATMViewController: UIViewController {
         
                 }
                 let formattedAddress = """
-                    
-                    Road: \(road)
-                    City: \(city)
-                    County: \(state)
-                    PostCode: \(postcode)
-                    Country: \(country)
+                    " \n \n "
+                    "Road:       \(road) \n " +
+                    "City:       \(city) \n " +
+                    "County:     \(state) \n " +
+                    "PostCode: \(postcode) \n " +
+                    "Country:   \(country) \n "
                     """
 
-                
-                      // Set the flag to true to indicate that a location update is in progress
-            //     isUpdatingLocation = false
+  
                 
                 // Update UI to display formatted address
                 DispatchQueue.main.async {
-                    self.LocationOutput.text = formattedAddress
-                    self.updateLocationOutputView()
+             
+                    self.updateLocationOutputView(formattedInfo: formattedAddress)
                 }
             } else {
                 handleError(errorMessage: "Address components not found")
@@ -371,7 +380,8 @@ class ATMViewController: UIViewController {
                         // Use the formatted response as needed, such as displaying in UI or logging
                         print("Formatted Response: \(formattedResponse)")
                         DispatchQueue.main.async {
-                            self.LocationOutput.text = formattedResponse
+                        
+                            self.updateLocationOutputView(formattedInfo: formattedResponse)
                         }
                         
                         
@@ -414,7 +424,7 @@ func getIpAddress() {
         print("Second API URL: \(secondApiUrl)")
         // Update UI on the main thread
         DispatchQueue.main.async {
-            self.LocationOutput.text = ipAddress
+        self.outputIPAddress.text = ipAddress
         }
         
         // Perform the second network request on a background thread
@@ -509,7 +519,10 @@ func getIpAddress() {
 
                 // Update UI on the main thread
                 DispatchQueue.main.async {
-                    self.LocationOutput.text = formattedInfo
+                 //   self.LocationOutput.text = formattedInfo
+                //    DispatchQueue.main.async {
+                        self.updateLocationOutputView(formattedInfo:    formattedInfo)
+                //    }
                 }
 
         } catch
@@ -540,6 +553,13 @@ extension ATMViewController: CLLocationManagerDelegate {
         // Call API with the obtained coordinates
         let apiUrl = AppConst.MockUrl + "gps?type=atm&lat=\(latitude)&lon=\(longitude)"
         callAPI(with: apiUrl)
+        
+        // Check if the location corresponds to the North Pole
+         if latitude > 89.9 || latitude < -89.9 {
+             // Call your specific function here for the North Pole location
+             handleNorthPoleLocation()
+         }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

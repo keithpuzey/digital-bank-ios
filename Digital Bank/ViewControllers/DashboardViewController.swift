@@ -33,10 +33,22 @@ class DashboardViewController: UIViewController {
         
         
               UITableView.layer.borderWidth = 1.0
-              UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
+  //            UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
               
-              UITableView.layer.cornerRadius = 5.0
-                  
+                    
+        
+        UITableView.backgroundColor = UIColor.white
+        UITableView.layer.cornerRadius = 25
+        UITableView.layer.shadowColor = UIColor.black.cgColor
+        UITableView.layer.shadowOpacity = 0.5
+        UITableView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        UITableView.layer.shadowRadius = 4
+        
+        
+        
+        
+        
+        
             if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
             print("Stored email: \(storedEmail)")
             userEmail = storedEmail

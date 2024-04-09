@@ -163,7 +163,7 @@
                                 <color key="onTintColor" name="AccentColor"/>
                             </switch>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XCj-Xb-SdF">
-                                <rect key="frame" x="21" y="360" width="367" height="412"/>
+                                <rect key="frame" x="21" y="394" width="367" height="341"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -186,13 +186,6 @@
                                     <action selector="Logout:" destination="2A0-hZ-paq" eventType="touchUpInside" id="DD4-Uc-Ndq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="22" baselineAdjustment="none" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqt-K0-H3k">
-                                <rect key="frame" x="32" y="360" width="356" height="412"/>
-                                <color key="tintColor" name="AccentColor"/>
-                                <attributedString key="attributedText"/>
-                                <nil key="highlightedColor"/>
-                                <color key="shadowColor" name="AccentColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="ATM Location GPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCg-33-HBV">
                                 <rect key="frame" x="177" y="112" width="142" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -237,12 +230,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bfO-QQ-Usb">
+                                <rect key="frame" x="21" y="336" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" name="AccentColor"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Un0-lh-Xtj">
+                                <rect key="frame" x="96" y="345" width="234" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iu-Kj-DGz">
+                                <rect key="frame" x="125" y="365" width="143" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6hn-jQ-6Fo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Vzg-QU-Abe" firstAttribute="top" secondItem="HKy-bJ-JFY" secondAttribute="bottom" constant="12" id="0hj-Vr-9gm"/>
-                            <constraint firstItem="Cqt-K0-H3k" firstAttribute="centerX" secondItem="6hn-jQ-6Fo" secondAttribute="centerX" id="BLG-44-s8N"/>
                             <constraint firstItem="yCg-33-HBV" firstAttribute="leading" secondItem="RQm-6H-c5c" secondAttribute="trailing" constant="8" symbolic="YES" id="FCX-jX-nl3"/>
                             <constraint firstItem="rt9-GD-fCj" firstAttribute="top" secondItem="WgZ-Y0-gpA" secondAttribute="bottom" constant="71" id="I7x-9C-PhT"/>
                             <constraint firstItem="RQm-6H-c5c" firstAttribute="top" secondItem="6hn-jQ-6Fo" secondAttribute="top" constant="64" id="I8e-LV-mgi"/>
@@ -253,7 +264,6 @@
                             <constraint firstItem="RMX-i9-GXH" firstAttribute="leading" secondItem="xDs-ho-pG1" secondAttribute="trailing" constant="19" id="PZi-p4-RiX"/>
                             <constraint firstItem="WgZ-Y0-gpA" firstAttribute="top" secondItem="RMX-i9-GXH" secondAttribute="bottom" constant="21" id="Q7F-MD-Tef"/>
                             <constraint firstItem="Vzg-QU-Abe" firstAttribute="leading" secondItem="6hn-jQ-6Fo" secondAttribute="leading" constant="39" id="bvl-Ou-vr7"/>
-                            <constraint firstItem="Cqt-K0-H3k" firstAttribute="top" secondItem="rt9-GD-fCj" secondAttribute="bottom" multiplier="1.2" constant="8" symbolic="YES" id="dEb-xR-p1b"/>
                             <constraint firstItem="aqv-yI-b55" firstAttribute="top" secondItem="6hn-jQ-6Fo" secondAttribute="top" constant="64" id="eD6-2A-UC1"/>
                             <constraint firstItem="xDs-ho-pG1" firstAttribute="top" secondItem="RQm-6H-c5c" secondAttribute="bottom" constant="14.5" id="fRC-ED-Ihi"/>
                             <constraint firstItem="HKy-bJ-JFY" firstAttribute="top" secondItem="aqv-yI-b55" secondAttribute="bottom" constant="12" id="fmU-d4-Lsh"/>
@@ -270,8 +280,10 @@
                         <outlet property="ATMSearch" destination="Vzg-QU-Abe" id="tZN-kz-uv9"/>
                         <outlet property="GPSLocatior" destination="aqv-yI-b55" id="xdE-Uf-K0A"/>
                         <outlet property="IPLocator" destination="HKy-bJ-JFY" id="AwV-xL-mzb"/>
-                        <outlet property="LocationOutput" destination="Cqt-K0-H3k" id="ETL-s2-6iD"/>
                         <outlet property="LocationOutputView" destination="XCj-Xb-SdF" id="BGv-6i-B0L"/>
+                        <outlet property="outputIPAddress" destination="4iu-Kj-DGz" id="j7S-zL-RIJ"/>
+                        <outlet property="outputIcon" destination="bfO-QQ-Usb" id="6cD-4f-XFT"/>
+                        <outlet property="outputLabel" destination="Un0-lh-Xtj" id="922-yW-zyz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hcu-Cx-ear" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
