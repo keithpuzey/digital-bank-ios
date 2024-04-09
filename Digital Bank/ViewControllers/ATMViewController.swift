@@ -147,9 +147,9 @@ class ATMViewController: UIViewController {
         }.resume()
     }
     
-    func handleNorthPoleLocation() {
+    func area51Location() {
         
-        print("North Pole Selected")
+        print("Area 51 Selected")
         self.crash.text = ""
     }
 
@@ -554,11 +554,19 @@ extension ATMViewController: CLLocationManagerDelegate {
         let apiUrl = AppConst.MockUrl + "gps?type=atm&lat=\(latitude)&lon=\(longitude)"
         callAPI(with: apiUrl)
         
-        // Check if the location corresponds to the North Pole
-         if latitude > 89.9 || latitude < -89.9 {
-             // Call your specific function here for the North Pole location
-             handleNorthPoleLocation()
-         }
+        // Define the latitude and longitude ranges for Area 51
+        let minLatitude = 37.2098
+        let maxLatitude = 37.2639
+        let minLongitude = -115.8167
+        let maxLongitude = -115.7814
+
+        // Check if the location corresponds to the Area 51
+        if latitude >= minLatitude && latitude <= maxLatitude && longitude >= minLongitude && longitude <= maxLongitude {
+            // Call your specific function here for the Area 51 location
+            area51Location()
+        }
+
+
         
     }
     
@@ -580,8 +588,3 @@ extension ATMViewController: CLLocationManagerDelegate {
     }
 
 }
-
-    
-
-
-
