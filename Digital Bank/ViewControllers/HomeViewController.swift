@@ -385,10 +385,15 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return userAccounts.count // Number of rows should be equal to the number of accounts
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        // Display both account name and balance for each row
+  //  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let account = userAccounts[row]
-        return "\(account.name) = \(account.currentBalance)"
+        let fontSize: CGFloat = 6 // Adjust the font size as needed
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: fontSize)
+        ]
+        return NSAttributedString(string: "\(account.name) = \(account.currentBalance)", attributes: attributes)
     }
 
     // UIPickerViewDelegate method to handle row selection
@@ -397,6 +402,14 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         updateAccountSummaryView(with: selectedAccount)
         fetchTransactions(for: selectedAccount.accountId)
     }
+ //   func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+   //     let selectAccount = UILabel()
+      
+     //   selectAccount.font = UIFont.systemFont(ofSize: 16) // Change the font size here
+  //      selectAccount.textAlignment = .center
+       // return selectAccount
+ //   }//
+    
     
     func updateAccountSummaryView(with selectedAccount: UserAccount) {
            // Create account summary view if it doesn't exist
@@ -415,8 +428,6 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
                // Remove existing subviews (labels) from account summary view
                accountSummaryView!.subviews.forEach { $0.removeFromSuperview() }
            }
-
-
 
 
         // Create and configure labels for account details
@@ -511,8 +522,5 @@ extension HomeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         // Set the frame for the table view
         self.UITableView.frame = CGRect(x: 0, y: tableViewY, width: self.view.bounds.width, height: bottomPortionHeight)
     }
-
-
-
 
 }

@@ -64,7 +64,13 @@ class ATMViewController: UIViewController {
         } else if ATMSearch.isOn {
             outputLabel.text = "ATM Location - Mock Service"
             outputIcon.image = UIImage(systemName: "magnifyingglass.circle.fill")?.withRenderingMode(.alwaysTemplate)
-
+            
+            DispatchQueue.main.async {
+                 for subview in self.LocationOutputView.subviews {
+                     subview.removeFromSuperview()
+                      }
+             }
+            
             showCustomRequestDialog()
             
         }
