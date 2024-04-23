@@ -21,7 +21,16 @@ class userRegistration: UIViewController {
         regDobPicker.locale = Locale(identifier: "en_US_POSIX")
         
         super.viewDidLoad()
-        
+        regFNameTextField.delegate = self
+        regLNameTextField.delegate = self
+        regSSNTextField.delegate = self
+        regEmailTextField.delegate = self
+        regPasswordTextField.delegate = self
+        regAddressTextField.delegate = self
+        regRegionTextField.delegate = self
+        regLocalTextField.delegate = self
+        regPostalCodeTextField.delegate = self
+        regPhoneTextField.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -427,3 +436,13 @@ class userRegistration: UIViewController {
     
 
  }
+extension userRegistration: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() // Dismiss the keyboard when return key is pressed
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true) // Dismiss the keyboard when the screen is touched
+    }
+}
