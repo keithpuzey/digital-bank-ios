@@ -3,7 +3,7 @@ import Alamofire
 import AVFoundation
 
 
-class TransferViewController: UIViewController {
+class TransferViewController: UIViewController, UITextFieldDelegate {
     
     var authToken: String? // Token to be stored
     var userEmail: String?
@@ -15,6 +15,7 @@ class TransferViewController: UIViewController {
     @IBOutlet weak var TransferAmount: UITextField!
     @IBOutlet weak var TransferAccountPicker: UIPickerView!
 
+    @IBOutlet weak var AccountView: UIView!
     @IBOutlet weak var TransactionTypeSwitch: UISwitch!
     
     override func viewDidLoad() {
@@ -23,10 +24,11 @@ class TransferViewController: UIViewController {
         ocrProcessor = OCRProcessor()
         ocrProcessor?.delegate = self
         
-  //      TransferAccountPicker.layer.borderWidth = 1.0
-  //      TransferAccountPicker.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
- //       TransferAccountPicker.layer.cornerRadius = 5.0
+        TransferAccountPicker.layer.borderWidth = 1.0
+          TransferAccountPicker.layer.borderColor = UIColor.black.cgColor
+          TransferAccountPicker.layer.cornerRadius = 5.0 // Optionally, add corner radius for a rounded border
         
+    
         if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
             print("Stored email: \(storedEmail)")
             userEmail = storedEmail
@@ -38,6 +40,9 @@ class TransferViewController: UIViewController {
         TransferAccountPicker.delegate = self
         TransferAccountPicker.dataSource = self
         
+        // Add tap gesture recognizer to dismiss keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
         
         
         getUserList()
@@ -299,7 +304,18 @@ extension TransferViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         let account = userAccounts[row]
         return "\(account.name) = \(account.currentBalance)"
     }
+    // Function to dismiss keyboard
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
+    // MARK: - UITextFieldDelegate
+    
+    // Dismiss keyboard when return key is pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // Perform the necessary action when a row is selected
         let selectedAccount = userAccounts[row]
