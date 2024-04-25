@@ -574,7 +574,8 @@ extension ATMViewController: CLLocationManagerDelegate {
             area51Location()
         }
 
-
+        // Stop location updates after the first successful update
+        manager.stopUpdatingLocation()
         
     }
     
