@@ -25,8 +25,11 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
         ocrProcessor?.delegate = self
         
         TransferAccountPicker.layer.borderWidth = 1.0
-          TransferAccountPicker.layer.borderColor = UIColor.black.cgColor
-          TransferAccountPicker.layer.cornerRadius = 5.0 // Optionally, add corner radius for a rounded border
+        TransferAccountPicker.layer.borderColor = UIColor.black.cgColor
+        TransferAccountPicker.layer.cornerRadius = 25.0 // Optionally, add corner radius for a rounded border
+       
+       
+        
         
     
         if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {

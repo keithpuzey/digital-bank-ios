@@ -33,6 +33,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         accountSummaryView!.layer.shadowOffset = CGSize(width: 0, height: 2)
         accountSummaryView!.layer.shadowRadius = 4
 
+        Accounts.layer.borderWidth = 1.0
+        Accounts.layer.borderColor = UIColor.black.cgColor
+        Accounts.layer.cornerRadius = 25.0 // Optionally, add corner radius for a rounded border
+       
+        
         
         UITableView.layer.borderWidth = 1.0
         UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
