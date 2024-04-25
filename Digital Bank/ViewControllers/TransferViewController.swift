@@ -380,11 +380,13 @@ extension TransferViewController: OCRProcessorDelegate {
     }
     
     func didFailWithError(error: Error) {
+        print("OCR processing failed with error: \(error.localizedDescription)")
         DispatchQueue.main.async {
             // Show an alert indicating the OCR processing failure
             self.showAlert(title: "Error", message: "Failed to extract text from the image: \(error.localizedDescription)")
         }
     }
+
 }
 
 
