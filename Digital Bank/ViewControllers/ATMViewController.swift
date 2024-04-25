@@ -511,7 +511,7 @@ func getIpAddress() {
             }
 
             // Define fixed padding between header and variable
-            let fixedPadding = 10
+            let fixedPadding = 20
 
             // Format the information with consistent spacing
             let formattedInfo = "\n" +

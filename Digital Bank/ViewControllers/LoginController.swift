@@ -7,11 +7,24 @@ class LoginController: UIViewController {
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
 
+    @IBOutlet weak var touchIDButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set default values for email and password
         emailInput.text = "jsmith@demo.io"
         passwordInput.text = "Demo123!"
+        
+        // Resize and set the touch ID icon
+         if let touchIDImage = UIImage(systemName: "touchid") {
+             if let resizedTouchIDImage = touchIDImage.resized(to: CGSize(width: 50, height: 50)) {
+                 touchIDButton.setImage(resizedTouchIDImage, for: .normal)
+             } else {
+                 print("Failed to resize the touch ID icon.")
+             }
+         } else {
+             print("System touch ID icon not found.")
+         }
+        
     }
  
     @IBAction func FingerPrint(_ sender: UIButton) {

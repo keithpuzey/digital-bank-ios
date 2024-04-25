@@ -17,6 +17,8 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var AccountView: UIView!
     @IBOutlet weak var TransactionTypeSwitch: UISwitch!
+
+    @IBOutlet weak var takePhotoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,17 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
        
         TransferAmount.keyboardType = .numberPad
         
-        
+        if let cameraImage = UIImage(systemName: "camera") {
+            if let resizedImage = cameraImage.resized(to: CGSize(width: 70, height: 50)) {
+                takePhotoButton.setImage(resizedImage, for: .normal)
+            } else {
+                print("Failed to resize the camera image.")
+            }
+        } else {
+            print("System camera icon not found.")
+        }
+
+            
     
         if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
             print("Stored email: \(storedEmail)")
@@ -137,6 +149,7 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
+
     
     @IBAction func takePhotoButtonTapped(_ sender: UIButton) {
         let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
@@ -154,12 +167,15 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     // Handle case where camera access is denied by user
                     print("Camera access denied by user")
+                    self.showAlert(title: "Error", message: "Camera access is required to take a photo.")
                     // You might want to display an alert or take appropriate action here
                 }
             }
         case .denied, .restricted:
             // Handle case where camera access is denied or restricted
             print("Camera access denied or restricted")
+            self.showAlert(title: "Error", message: "Camera access is denied. Please enable camera access in Settings.")
+      
             // You might want to display an alert or guide the user to settings here
         @unknown default:
             fatalError("Unknown camera authorization status.")
@@ -349,27 +365,59 @@ extension TransferViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         print("Selected account: \(selectedAccount)")
     }
 }
-    extension TransferViewController: OCRProcessorDelegate {
-        func didExtractOCRResult(description: String, amount: String) {
-            DispatchQueue.main.async {
+extension TransferViewController: OCRProcessorDelegate {
+    func didExtractOCRResult(description: String, amount: String) {
+        DispatchQueue.main.async {
+            if description.isEmpty || amount.isEmpty {
+                // Show an alert indicating that no valid text was found
+                self.showAlert(title: "Error", message: "Insufficient text detected for extraction.")
+            } else {
+                // Set the extracted description and amount
                 self.TransferDescription.text = description
                 self.TransferAmount.text = amount
             }
         }
     }
-
-    extension TransferViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            picker.dismiss(animated: true, completion: nil)
-
-            guard let image = info[.originalImage] as? UIImage else {
-                print("No image found")
-                return
-            }
-
-            // Process the captured image with OCR
-            ocrProcessor?.process(image: image)
+    
+    func didFailWithError(error: Error) {
+        DispatchQueue.main.async {
+            // Show an alert indicating the OCR processing failure
+            self.showAlert(title: "Error", message: "Failed to extract text from the image: \(error.localizedDescription)")
         }
     }
-    
-//}
+}
+
+
+
+extension UIImage {
+    func resized(to newSize: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        defer { UIGraphicsEndImageContext() }
+        self.draw(in: CGRect(origin: .zero, size: newSize))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+}
+
+
+extension TransferViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        guard let image = info[.originalImage] as? UIImage else {
+            print("No image found")
+            // Show an alert indicating that no image was found
+            self.showAlert(title: "Error", message: "No image found.")
+            return
+        }
+
+        // Process the captured image with OCR
+        ocrProcessor?.process(image: image)
+    }
+   
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+   }
+
+

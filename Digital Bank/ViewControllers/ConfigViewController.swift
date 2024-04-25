@@ -1,6 +1,6 @@
 import UIKit
 
-class ConfigViewController: UIViewController {
+class ConfigViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var BaseURLConfig: UITextField!
     @IBOutlet weak var MockURLConfig: UITextField!
@@ -15,13 +15,24 @@ class ConfigViewController: UIViewController {
         MockUrl = AppConst.MockUrl
         BaseURLConfig.text = baseurl
         MockURLConfig.text = MockUrl
+        
+        // Set the delegate for text fields
+        BaseURLConfig.delegate = self
+        MockURLConfig.delegate = self
     }
-
+    
+    // Dismiss the keyboard when the return key is pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // Dismiss the keyboard when the screen is touched
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     @IBAction func ConfigApply(_ sender: UIButton) {
-        
-        
-
         if let baseURLText = BaseURLConfig.text {
             baseurl = baseURLText
         }

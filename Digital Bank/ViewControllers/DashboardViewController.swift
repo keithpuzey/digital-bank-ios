@@ -25,6 +25,7 @@ class DashboardViewController: UIViewController {
     var userAccounts: [UserAccount] = []
 
 
+    
     @IBOutlet weak var UITableView: UITableView!
     
     override func viewDidLoad() {
@@ -58,8 +59,11 @@ class DashboardViewController: UIViewController {
     }
 
 
+    @IBAction func Logout(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
-    
+      
     // MARK: - API Requests
     
     func loginAndFetchUserDetails() {
