@@ -180,7 +180,7 @@
                                 <color key="onTintColor" name="AccentColor"/>
                             </switch>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCj-Xb-SdF">
-                                <rect key="frame" x="21" y="383" width="367" height="352"/>
+                                <rect key="frame" x="21" y="383" width="367" height="450"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="magnifyingglass.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xWa-Sh-CYv">
@@ -271,7 +271,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Vzg-QU-Abe" firstAttribute="top" secondItem="HKy-bJ-JFY" secondAttribute="bottom" constant="8" id="0hj-Vr-9gm"/>
-                            <constraint firstItem="6hn-jQ-6Fo" firstAttribute="bottom" secondItem="XCj-Xb-SdF" secondAttribute="bottom" constant="114" id="2kL-rX-nSc"/>
+                            <constraint firstItem="6hn-jQ-6Fo" firstAttribute="bottom" secondItem="XCj-Xb-SdF" secondAttribute="bottom" constant="16" id="2kL-rX-nSc"/>
                             <constraint firstItem="bfO-QQ-Usb" firstAttribute="trailing" secondItem="xWa-Sh-CYv" secondAttribute="trailing" id="9qa-XV-zr3"/>
                             <constraint firstItem="XCj-Xb-SdF" firstAttribute="leading" secondItem="6hn-jQ-6Fo" secondAttribute="leading" constant="21" id="Abw-lv-yVL"/>
                             <constraint firstItem="XCj-Xb-SdF" firstAttribute="top" secondItem="Un0-lh-Xtj" secondAttribute="bottom" constant="40" id="ETw-j5-sQK"/>

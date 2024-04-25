@@ -28,7 +28,7 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
         TransferAccountPicker.layer.borderColor = UIColor.black.cgColor
         TransferAccountPicker.layer.cornerRadius = 25.0 // Optionally, add corner radius for a rounded border
        
-       
+        TransferAmount.keyboardType = .numberPad
         
         
     
@@ -56,17 +56,22 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)    }
     
     @IBAction func TransferSubmit(_ sender: UIButton) {
-        
         // Check if there's a selected row
         let selectedRow = TransferAccountPicker.selectedRow(inComponent: 0)
         if selectedRow >= 0 && selectedRow < userAccounts.count {
             let selectedAccount = userAccounts[selectedRow]
             let transactionTypeCode = TransactionTypeSwitch.isOn ? "RFD" : "DBT"
             
+            // Check if description field is empty
+            guard let description = TransferDescription.text, !description.isEmpty else {
+                showAlert(title: "Error", message: "Please enter a description.")
+                return
+            }
+            
             if let amountString = TransferAmount.text, let amount = Int(amountString) {
                 let parameters: [String: Any] = [
                     "amount": amount,
-                    "description": TransferDescription.text ?? "",
+                    "description": description,
                     "transactionTypeCode": transactionTypeCode
                 ]
                 
@@ -91,13 +96,20 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
                         switch response.result {
                         case .success(let value):
                             print("Transaction Success: \(value)")
+                            // Show confirmation dialog
+                            self.showAlert(title: "Success", message: "Transaction submitted successfully.")
+                            
                             // Handle successful transaction
                             self.getUserList()
                             
-                            self.TransferDescription.text = " "
-                            self.TransferAmount.text = " "
+                            // Clear text fields
+                            self.TransferDescription.text = ""
+                            self.TransferAmount.text = ""
+                            
                         case .failure(let error):
                             print("Transaction Error: \(error)")
+                            // Show error dialog
+                            self.showAlert(title: "Error", message: "Transaction failed: \(error.localizedDescription)")
                             // Handle transaction failure
                         }
                     }
@@ -107,13 +119,24 @@ class TransferViewController: UIViewController, UITextFieldDelegate {
                 }
             } else {
                 print("Invalid amount entered")
+                self.showAlert(title: "Error", message: "Transaction failed: Invalid Amount")
                 // Handle the case where the user entered an invalid amount
             }
         } else {
             print("Invalid selected account")
+            self.showAlert(title: "Error", message: "Transaction failed: Invalid Account Selected")
         }
     }
 
+    
+    // Function to show alert dialog
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     
     @IBAction func takePhotoButtonTapped(_ sender: UIButton) {
         let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)

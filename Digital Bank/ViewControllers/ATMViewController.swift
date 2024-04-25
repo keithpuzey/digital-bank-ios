@@ -18,6 +18,9 @@ class ATMViewController: UIViewController {
     @IBOutlet weak var outputLabel: UILabel!
     
     @IBOutlet weak var outputIcon: UIImageView!
+  
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +40,7 @@ class ATMViewController: UIViewController {
         LocationOutputView!.layer.shadowOpacity = 0.5
         LocationOutputView!.layer.shadowOffset = CGSize(width: 0, height: 2)
         LocationOutputView!.layer.shadowRadius = 4
+ 
  
         
         // Add actions for switch value changes
@@ -161,23 +165,9 @@ class ATMViewController: UIViewController {
 
 
     func updateLocationOutputView(formattedInfo: String) {
-        // Create account summary view if it doesn't exist
-        if LocationOutputView == nil {
-            LocationOutputView = UIView()
-            LocationOutputView!.backgroundColor = UIColor.white
-            LocationOutputView!.layer.cornerRadius = 25
-            LocationOutputView!.layer.shadowColor = UIColor.black.cgColor
-            LocationOutputView!.layer.shadowOpacity = 0.5
-            LocationOutputView!.layer.shadowOffset = CGSize(width: 0, height: 2)
-            LocationOutputView!.layer.shadowRadius = 4
-
-            // Add account summary view to the view hierarchy
-            self.view.addSubview(LocationOutputView)
-        } else {
-            // Remove existing subviews (labels) from account summary view
-            LocationOutputView!.subviews.forEach { $0.removeFromSuperview() }
-        }
-
+        // Remove existing subviews (labels) from LocationOutputView
+        LocationOutputView.subviews.forEach { $0.removeFromSuperview() }
+        
         // Create and configure label for formatted information
         let formattedInfoLabel = UILabel()
         formattedInfoLabel.textColor = UIColor.black
@@ -185,14 +175,15 @@ class ATMViewController: UIViewController {
         formattedInfoLabel.numberOfLines = 0
         formattedInfoLabel.text = formattedInfo // Use the provided formatted information
 
-        // Add the formatted information label to the account summary view
-        LocationOutputView!.addSubview(formattedInfoLabel)
+        // Add the formatted information label to the LocationOutputView
+        LocationOutputView.addSubview(formattedInfoLabel)
+
         // Define padding values
         let topPadding: CGFloat = 20
         let horizontalPadding: CGFloat = 20
 
         // Calculate label width
-        let labelWidth = LocationOutputView!.bounds.width - 2 * horizontalPadding
+        let labelWidth = LocationOutputView.bounds.width - 2 * horizontalPadding
 
         // Calculate label size based on the width and maximum height
         let labelSize = formattedInfoLabel.sizeThatFits(CGSize(width: labelWidth, height: .greatestFiniteMagnitude))
@@ -202,10 +193,8 @@ class ATMViewController: UIViewController {
 
         // Set text alignment to left
         formattedInfoLabel.textAlignment = .left
-
     }
-    
-    
+
     
     
     
@@ -221,16 +210,22 @@ class ATMViewController: UIViewController {
                 return
             }
 
+            // Find the maximum length among all headers
+            let maxHeaderLength = max("Road:".count, "State:".count, "Postcode:".count, "Country:".count)
+
+            // Format the information with consistent spacing
             let formattedInfo = "\n" +
-                "    Road:      \(gpsroad) \n   " +
-                "    State:     \(gpsstate)\n   " +
-                "    Postcode:  \(gpspostcode)\n    " +
-                "    Country:   \(gpscountry)\n    " +
-            " \n"
-          
+                "Road:".padding(toLength: maxHeaderLength, withPad: "   ", startingAt: 0) + "    \(gpsroad)\n" +
+                "State:".padding(toLength: maxHeaderLength, withPad: "   ", startingAt: 0) + "     \(gpsstate)\n" +
+                "Postcode:".padding(toLength: maxHeaderLength, withPad: " ", startingAt: 0) + "  \(gpspostcode)\n" +
+                "Country:".padding(toLength: maxHeaderLength, withPad: "   ", startingAt: 0) + "  \(gpscountry)\n" +
+                " \n"
+
+            // Print the formattedInfo for review
+            print("Formatted Info line221: \(formattedInfo)")
+
             // Update UI on the main thread
             DispatchQueue.main.async {
-      
                 self.updateLocationOutputView(formattedInfo: formattedInfo)
             }
 
@@ -239,6 +234,7 @@ class ATMViewController: UIViewController {
         }
     }
 
+    
 
     private func handleAtmLocationNetworkClick() {
         // Placeholder for handling network location click
@@ -266,32 +262,30 @@ class ATMViewController: UIViewController {
                 return
             }
 
-
-
-            //Extract address components
+            // Extract address components
             if let road = address["road"] as? String,
                let city = address["city"] as? String,
                let state = address["state"] as? String,
                let postcode = address["postcode"] as? String,
                let country = address["country"] as? String {
-                DispatchQueue.main.async {
-        
-                }
-                let formattedAddress = """
-                    " \n \n "
-                    "Road:       \(road) \n " +
-                    "City:       \(city) \n " +
-                    "County:     \(state) \n " +
-                    "PostCode: \(postcode) \n " +
-                    "Country:   \(country) \n "
-                    """
 
-  
+                // Define fixed padding between header and variable
+                let fixedPadding = 10
+
+                // Format the information with consistent spacing
+                let formattedInfo = "\n" +
+                    "Road:      \(road)\n" +
+                    "State:     \(state)\n" +
+                    "Postcode:  \(postcode)\n" +
+                    "Country:   \(country)\n" +
+                    " \n"
+      
+                // Print the formattedInfo for review
+                print("Formatted Info line 280: \(formattedInfo)")
                 
                 // Update UI to display formatted address
                 DispatchQueue.main.async {
-             
-                    self.updateLocationOutputView(formattedInfo: formattedAddress)
+                    self.updateLocationOutputView(formattedInfo: formattedInfo)
                 }
             } else {
                 handleError(errorMessage: "Address components not found")
@@ -516,27 +510,35 @@ func getIpAddress() {
                 return
             }
 
-                let formattedInfo =
-                    "Road:      \(gpsroad) \n" +
-                    "State:     \(gpsstate)\n" +
-                    "Postcode:  \(gpspostcode)\n" +
-                    "Country:   \(gpscountry)\n"
-                  
+            // Define fixed padding between header and variable
+            let fixedPadding = 10
 
-                // Update UI on the main thread
-                DispatchQueue.main.async {
-                 //   self.LocationOutput.text = formattedInfo
-                //    DispatchQueue.main.async {
-                        self.updateLocationOutputView(formattedInfo:    formattedInfo)
-                //    }
-                }
+            // Format the information with consistent spacing
+            let formattedInfo = "\n" +
+                "Road:        \(gpsroad)\n" +
+                "State:       \(gpsstate.padding(toLength: fixedPadding, withPad: " ", startingAt: 0))\n" +
+                "Postcode:  \(gpspostcode.padding(toLength: fixedPadding, withPad: " ", startingAt: 0))\n" +
+                "Country:     \(gpscountry.padding(toLength: fixedPadding, withPad: " ", startingAt: 0))\n"
+              
+            // Print the formattedInfo for review
+            print("Formatted Info: \(formattedInfo)")
 
-        } catch
-        {
+            // Update UI on the main thread
+            DispatchQueue.main.async {
+                self.updateLocationOutputView(formattedInfo: formattedInfo)
+            }
+
+        } catch {
             self.handleError(errorMessage: error.localizedDescription)
         }
     }
 
+
+    // Function to pad the string to a specified length
+    func pad(string: String, toLength length: Int) -> String {
+        let paddedString = string.padding(toLength: length, withPad: " ", startingAt: 0)
+        return paddedString
+    }
 
     }
 
@@ -555,7 +557,7 @@ extension ATMViewController: CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
-        
+        print("Location updated: \(locations)")
         // Call API with the obtained coordinates
         let apiUrl = AppConst.MockUrl + "gps?type=atm&lat=\(latitude)&lon=\(longitude)"
         callAPI(with: apiUrl)
@@ -578,6 +580,8 @@ extension ATMViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         // Handle location error
+        print("Location error: \(error.localizedDescription)")
+        
         if let clError = error as? CLError {
             switch clError.code {
             case .locationUnknown:
