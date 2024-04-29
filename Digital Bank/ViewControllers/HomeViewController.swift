@@ -83,6 +83,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+       
+        // Add border to the tab bar
+        self.tabBarController?.tabBar.layer.borderWidth = 0.5
+        self.tabBarController?.tabBar.layer.borderColor = UIColor.lightGray.cgColor
         getUserList()
     }
 
@@ -130,6 +134,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    
     func fetchUserDetails(email: String, token: String) {
         guard let userEmail = userEmail else {
             print("User email is nil")

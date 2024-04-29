@@ -379,6 +379,15 @@ extension TransferViewController: OCRProcessorDelegate {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add border to the tab bar
+        self.tabBarController?.tabBar.layer.borderWidth = 0.5
+        self.tabBarController?.tabBar.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    
     func didFailWithError(error: Error) {
         print("OCR processing failed with error: \(error.localizedDescription)")
         DispatchQueue.main.async {

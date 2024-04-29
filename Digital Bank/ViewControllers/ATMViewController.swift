@@ -356,7 +356,7 @@ class ATMViewController: UIViewController {
                             if let atmLocation = atm["atmLocation"] as? [String: Any],
                                let address = atmLocation["address"] as? [String: Any],
                                let name = atmLocation["name"] as? String,
-                               let locationDescription = atmLocation["locationDescription"] as? String,
+                    //           let locationDescription = atmLocation["locationDescription"] as? String,
                                let street = address["street"] as? String,
                                let city = address["city"] as? String,
                                let country = address["country"] as? String,
@@ -366,7 +366,7 @@ class ATMViewController: UIViewController {
                                 let zipFormattedInfo =
                                     "ATM Location: " + "\n" +
                                     "Name:             " + name + "\n" +
-                                    "Description:   " + locationDescription + "\n" +
+                  //                  "Description:   " + locationDescription + "\n" +
                                     "Street :             " + street + "\n" +
                                     "City:                  " + city + "\n" +
                                     "Country:          " + country + "\n" +
@@ -533,6 +533,14 @@ func getIpAddress() {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add border to the tab bar
+        self.tabBarController?.tabBar.layer.borderWidth = 0.5
+        self.tabBarController?.tabBar.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
 
     // Function to pad the string to a specified length
     func pad(string: String, toLength length: Int) -> String {

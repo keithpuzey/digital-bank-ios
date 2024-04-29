@@ -45,8 +45,10 @@ class DashboardViewController: UIViewController {
         UITableView.layer.shadowOffset = CGSize(width: 0, height: 2)
         UITableView.layer.shadowRadius = 4
   
-        
-        
+        // Adjust contentInset to avoid overlapping with the tab bar
+        let tabBarHeight = tabBarController?.tabBar.frame.height ?? 0
+        let inset = UIEdgeInsets(top: 0, left: 0, bottom: tabBarHeight, right: 0)
+        UITableView.contentInset = inset
         
             if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
             print("Stored email: \(storedEmail)")
@@ -95,6 +97,14 @@ class DashboardViewController: UIViewController {
              }
          }
      }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add border to the tab bar
+        self.tabBarController?.tabBar.layer.borderWidth = 0.5
+        self.tabBarController?.tabBar.layer.borderColor = UIColor.lightGray.cgColor
+    }
     
      func fetchUserDetails(email: String, token: String) {
          guard let userEmail = userEmail else {

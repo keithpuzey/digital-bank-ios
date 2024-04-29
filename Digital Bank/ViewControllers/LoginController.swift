@@ -28,10 +28,11 @@ class LoginController: UIViewController {
     }
  
     @IBAction func FingerPrint(_ sender: UIButton) {
-        authenticateWithBiometrics()
+        biometricLogin()
     }
 
-    func authenticateWithBiometrics() {
+    
+    func biometricLogin() {
         let context = LAContext()
         var error: NSError?
 
@@ -43,23 +44,24 @@ class LoginController: UIViewController {
                         // Biometric authentication successful
                         self?.userLoginApi(email: "nsmith@demo.io", password: "Demo123!")
                     } else {
-                    // Biometric authentication failed
-                    if let error = authenticationError {
-                        self?.showToast(message: "Authentication failed: \(error.localizedDescription)")
-                        // Show login rejected dialog
-                        self?.showAlert(title: "Login Rejected", message: "Biometric authentication failed.")
-                        // Return to the login page if authentication fails
-                        self?.navigationController?.popViewController(animated: true)
+                        // Biometric authentication failed
+                        if let error = authenticationError {
+                            self?.showToast(message: "Authentication failed: \(error.localizedDescription)")
+                            // Show login rejected dialog
+                            self?.showAlert(title: "Login Rejected", message: "Biometric authentication failed.")
+                            // Return to the login page if authentication fails
+                            self?.navigationController?.popViewController(animated: true)
+                        }
                     }
                 }
             }
-        }
         } else {
             // Biometric authentication not available
             showToast(message: "Biometric authentication not available")
             showAlert(title: "Error", message: "Biometric authentication not available")
         }
     }
+   
 
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -94,7 +96,7 @@ class LoginController: UIViewController {
             "username": email,
             "password": password
         ]
-        
+        print ("Post Data \(postData)")
         AF.request(AppConst.baseurl + "api/v1/auth", method: .post, parameters: postData).validate().responseJSON { [weak self] response in
             guard let self = self else { return }
             
@@ -105,7 +107,12 @@ class LoginController: UIViewController {
                 if let json = value as? [String: Any], let token = json["authToken"] as? String {
                     self.showToast(message: token)
                     UserDefaults.standard.set(token, forKey: "authToken")
-
+                    if let authToken = UserDefaults.standard.string(forKey: "authToken") {
+                        print("Auth Token line 109: \(authToken)")
+                    } else {
+                        print("No auth token found")
+                    }
+                    
                     // Instantiate the UITabBarController
                     DispatchQueue.main.async {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
