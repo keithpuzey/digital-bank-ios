@@ -464,7 +464,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = Y8TZ3U8SL4;
+				DEVELOPMENT_TEAM = PYYFSY54S7;
 				INFOPLIST_FILE = "$(SRCROOT)/Digital Bank/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Digital Bank";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -474,7 +474,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dbankdemo.perforce.com;
+				PRODUCT_BUNDLE_IDENTIFIER = demodbank.perforce.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -495,7 +495,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
-				DEVELOPMENT_TEAM = Y8TZ3U8SL4;
+				DEVELOPMENT_TEAM = PYYFSY54S7;
 				INFOPLIST_FILE = "$(SRCROOT)/Digital Bank/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Digital Bank";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -505,7 +505,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dbankdemo.perforce.com;
+				PRODUCT_BUNDLE_IDENTIFIER = demodbank.perforce.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
