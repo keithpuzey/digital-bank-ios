@@ -43,14 +43,17 @@ class LoginController: UIViewController {
                         // Biometric authentication successful
                         self?.userLoginApi(email: "nsmith@demo.io", password: "Demo123!")
                     } else {
-                        // Biometric authentication failed
-                        if let error = authenticationError {
-                            self?.showToast(message: "Authentication failed: \(error.localizedDescription)")
-                            
-                        }
+                    // Biometric authentication failed
+                    if let error = authenticationError {
+                        self?.showToast(message: "Authentication failed: \(error.localizedDescription)")
+                        // Show login rejected dialog
+                        self?.showAlert(title: "Login Rejected", message: "Biometric authentication failed.")
+                        // Return to the login page if authentication fails
+                        self?.navigationController?.popViewController(animated: true)
                     }
                 }
             }
+        }
         } else {
             // Biometric authentication not available
             showToast(message: "Biometric authentication not available")
