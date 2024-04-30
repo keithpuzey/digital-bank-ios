@@ -96,6 +96,11 @@ class LoginController: UIViewController {
             "username": email,
             "password": password
         ]
+        
+        // Store email in UserDefaults
+        UserDefaults.standard.set(email, forKey: "loggedinuseremail")
+        
+        
         print ("Post Data \(postData)")
         AF.request(AppConst.baseurl + "api/v1/auth", method: .post, parameters: postData).validate().responseJSON { [weak self] response in
             guard let self = self else { return }
@@ -107,6 +112,10 @@ class LoginController: UIViewController {
                 if let json = value as? [String: Any], let token = json["authToken"] as? String {
                     self.showToast(message: token)
                     UserDefaults.standard.set(token, forKey: "authToken")
+                  
+
+                    
+                    
                     if let authToken = UserDefaults.standard.string(forKey: "authToken") {
                         print("Auth Token line 109: \(authToken)")
                     } else {

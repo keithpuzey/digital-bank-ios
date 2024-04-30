@@ -124,6 +124,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let json = value as? [String: Any], let token = json["authToken"] as? String {
                     self.authToken = token // Store token for further use
                     self.fetchUserDetails(email: email, token: token)
+      
                 } else {
                     print("Token not found in response")
                 }

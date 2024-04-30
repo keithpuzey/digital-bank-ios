@@ -1,8 +1,7 @@
 # Digital Bank Mobile App
 
-Digital Bank Mobile App is a simple iOS app built using Swift and UIKit, it communicates with a demoinstration server using REST API utilising the popular Swift networking library, Alamofire.
-which provides a simple REST API for testing and prototyping. The app allows users to browse the list of available users and view their details, including their name, avatar, and email address.
-
+Digital Bank Mobile App is a simple iOS app built using Swift and UIKit, it communicates with a demonstration server using REST API utilising the popular Swift networking library, Alamofire.
+which provides a simple REST API for testing and prototyping. 
 
 | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|
