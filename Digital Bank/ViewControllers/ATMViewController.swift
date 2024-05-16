@@ -319,79 +319,83 @@ class ATMViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    private func performCustomRequest(_ zipCode: String) {
-        let apiUrl = AppConst.MockUrl + "zip?zipcode=" + zipCode
 
-        guard let url = URL(string: apiUrl) else { return }
 
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error: \(error)")
-                return
-            }
+      private func performCustomRequest(_ zipCode: String) {
+          let apiUrl = AppConst.MockUrl + "zip?zipcode=" + zipCode
 
-            if let httpResponse = response as? HTTPURLResponse {
-                let statusCode = httpResponse.statusCode
-                if (400..<500).contains(statusCode) {
-                    DispatchQueue.main.async {
-                        let errorMessage = statusCode == 404 ? "Zip Code Not found" : "Service Unavailable"
-                        let alertController = UIAlertController(title: "Mock Service Response Code", message: "\(errorMessage):\n\nResponse Code = \(statusCode)", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        alertController.addAction(okAction)
-                        self.present(alertController, animated: true, completion: nil)
-                    }
+          guard let url = URL(string: apiUrl) else { return }
 
-                } else if (200..<300).contains(statusCode), let data = data {
-                    // Handle successful response
-                    do {
-                        guard let responseJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                              let atms = responseJSON["atms"] as? [[String: Any]] else {
-                            print("Invalid JSON format")
-                            return
-                        }
-                        print("Number of ATM objects: \(atms.count)")
-                        var formattedResponse = ""
+          URLSession.shared.dataTask(with: url) { data, response, error in
+              if let error = error {
+                  print("Error: \(error)")
+                  return
+              }
 
-                        for atm in atms {
-                            if let atmLocation = atm["atmLocation"] as? [String: Any],
-                               let address = atmLocation["address"] as? [String: Any],
-                               let name = atmLocation["name"] as? String,
-                    //           let locationDescription = atmLocation["locationDescription"] as? String,
-                               let street = address["street"] as? String,
-                               let city = address["city"] as? String,
-                               let country = address["country"] as? String,
-                               let postalCode = address["postalCode"] as? String {
-                                
-                                // Build formatted information for this ATM location
-                                let zipFormattedInfo =
-                                    "ATM Location: " + "\n" +
-                                    "Name:             " + name + "\n" +
-                  //                  "Description:   " + locationDescription + "\n" +
-                                    "Street :             " + street + "\n" +
-                                    "City:                  " + city + "\n" +
-                                    "Country:          " + country + "\n" +
-                                    "Zip Code:        " + postalCode + "\n\n"
+              if let httpResponse = response as? HTTPURLResponse {
+                  let statusCode = httpResponse.statusCode
+                  if (400..<500).contains(statusCode) {
+                      DispatchQueue.main.async {
+                          let errorMessage = statusCode == 404 ? "Zip Code Not found" : "Service Unavailable"
+                          let alertController = UIAlertController(title: "Mock Service Response Code", message: "\(errorMessage):\n\nResponse Code = \(statusCode)", preferredStyle: .alert)
+                          let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                          alertController.addAction(okAction)
+                          self.present(alertController, animated: true, completion: nil)
+                      }
+                  } else if statusCode == 500 {
+                      DispatchQueue.main.async {
+                          let alertController = UIAlertController(title: "Mock Service Response Code", message: "Internal Server Error:\n\nResponse Code = \(statusCode)", preferredStyle: .alert)
+                          let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                          alertController.addAction(okAction)
+                          self.present(alertController, animated: true, completion: nil)
+                      }
+                  } else if (200..<300).contains(statusCode), let data = data {
+                      // Handle successful response
+                      do {
+                          guard let responseJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                                let atms = responseJSON["atms"] as? [[String: Any]] else {
+                              print("Invalid JSON format")
+                              return
+                          }
+                          print("Number of ATM objects: \(atms.count)")
+                          var formattedResponse = ""
 
-                                // Append the formatted information to the formattedResponse variable
-                                formattedResponse += zipFormattedInfo
-                            }
-                        }
+                          for atm in atms {
+                              if let atmLocation = atm["atmLocation"] as? [String: Any],
+                                 let address = atmLocation["address"] as? [String: Any],
+                                 let name = atmLocation["name"] as? String,
+                                 let street = address["street"] as? String,
+                                 let city = address["city"] as? String,
+                                 let country = address["country"] as? String,
+                                 let postalCode = address["postalCode"] as? String {
+                                  
+                                  // Build formatted information for this ATM location
+                                  let zipFormattedInfo =
+                                      "ATM Location: " + "\n" +
+                                      "Name:             " + name + "\n" +
+                                      "Street:           " + street + "\n" +
+                                      "City:             " + city + "\n" +
+                                      "Country:          " + country + "\n" +
+                                      "Zip Code:        " + postalCode + "\n\n"
 
-                        // Use the formatted response as needed, such as displaying in UI or logging
-                        print("Formatted Response: \(formattedResponse)")
-                        DispatchQueue.main.async {
-                        
-                            self.updateLocationOutputView(formattedInfo: formattedResponse)
-                        }
-                        
-                        
-                    } catch {
-                        print("Error parsing JSON: \(error)")
-                    }
-                }
-            }
-        }.resume()
-    }
+                                  // Append the formatted information to the formattedResponse variable
+                                  formattedResponse += zipFormattedInfo
+                              }
+                          }
+
+                          // Use the formatted response as needed, such as displaying in UI or logging
+                          print("Formatted Response: \(formattedResponse)")
+                          DispatchQueue.main.async {
+                              self.updateLocationOutputView(formattedInfo: formattedResponse)
+                          }
+                      } catch {
+                          print("Error parsing JSON: \(error)")
+                      }
+                  }
+              }
+          }.resume()
+      }
+
     
 func getIpAddress() {
             // URL for the IP address API
