@@ -1,4 +1,5 @@
 import UIKit
+import StoreKit
 
 class ConfigViewController: UIViewController, UITextFieldDelegate {
 

@@ -122,6 +122,13 @@ install_dsym() {
 # Used as a return value for each invocation of `strip_invalid_archs` function.
 STRIP_BINARY_RETVAL=0
 
+# Ensure ARCHS is set
+if [ -z "${ARCHS+x}" ]; then
+  echo "ARCHS is not set, defaulting to x86_64 arm64"
+  ARCHS=("x86_64" "arm64")
+fi
+
+
 # Strip invalid architectures
 strip_invalid_archs() {
   binary="$1"
