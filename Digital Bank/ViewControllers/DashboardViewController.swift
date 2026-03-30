@@ -2,220 +2,94 @@
 //  DashboardViewController.swift
 //  Digital Bank
 //
-//  Created by Keith Puzey on 3/22/24.
+//  Updated by Keith Puzey on 1 / 4/2026.
 //
 
 import UIKit
+import WebKit
 import Alamofire
-
-// Define UserAccount struct
-struct UserAccount {
-    let accountId: Int
-    let name: String
-    let accountNumber: Int
-    let currentBalance: Double
-    let openingBalance: Double
-}
-
 
 class DashboardViewController: UIViewController {
 
     var authToken: String?
     var userEmail: String?
-    var userAccounts: [UserAccount] = []
-
-
     
-    @IBOutlet weak var UITableView: UITableView!
+    // 1. Changed from UITableView to WKWebView
+    @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 2. Set the Title
+        self.navigationItem.title = "Financial Dashboard"
         
+        setupWebViewUI()
+        loadFinancialDashboard()
+    }
+    
+    private func setupWebViewUI() {
+        // 1. Clear any "Invisible Walls" (Gestures on the parent view)
+        // This stops the main view from "stealing" touches meant for the web content
+        view.gestureRecognizers?.forEach { view.removeGestureRecognizer($0) }
         
-              UITableView.layer.borderWidth = 1.0
-  //            UITableView.layer.borderColor = UIColor(red: 24/255, green: 29/255, blue: 47/255, alpha: 1.0).cgColor
-              
-                    
+        // 2. Force Auto Layout to use our code-based constraints
+        webView.translatesAutoresizingMaskIntoConstraints = false
         
-        UITableView.backgroundColor = UIColor.white
-        UITableView.layer.cornerRadius = 25
-        UITableView.layer.shadowColor = UIColor.black.cgColor
-        UITableView.layer.shadowOpacity = 0.5
-        UITableView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        UITableView.layer.shadowRadius = 4
-  
-        // Adjust contentInset to avoid overlapping with the tab bar
-        let tabBarHeight = tabBarController?.tabBar.frame.height ?? 0
-        let inset = UIEdgeInsets(top: 0, left: 0, bottom: tabBarHeight, right: 0)
-        UITableView.contentInset = inset
+        // 3. Force the Web View to the absolute top of the "stack"
+        view.bringSubviewToFront(webView)
         
-            if let storedEmail = UserDefaults.standard.string(forKey: "loggedinuseremail") {
-            print("Stored email: \(storedEmail)")
-            userEmail = storedEmail
-        } else {
-            print("Email not found in UserDefaults")
-        }
-        UITableView.dataSource = self
-        getUserList()
+        // 4. Pin to all four corners
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        // 5. Explicitly enable interaction on the View, the WebView, and the Internal Scroller
+        view.isUserInteractionEnabled = true
+        webView.isUserInteractionEnabled = true
+        webView.scrollView.isUserInteractionEnabled = true
+        webView.scrollView.isScrollEnabled = true
+        
+        // 6. Enable JavaScript (Crucial for dashboard buttons/menus to respond)
+        webView.configuration.preferences.javaScriptEnabled = true
+        
+        // 7. Visual Debug: (Optional) Set a border to see exactly where the touchable area is
+        // webView.layer.borderWidth = 2
+        // webView.layer.borderColor = UIColor.red.cgColor
     }
 
+    private func loadFinancialDashboard() {
+        // 1. Get the base URL (e.g., "http://dbankdemo.com/bank")
+        let rawBaseUrl = AppConst.baseurl
+        
+        // 2. Remove "/bank" if it exists at the end of the string
+        // This turns "http://dbankdemo.com/bank" into "http://dbankdemo.com"
+        let homeUrl = rawBaseUrl.replacingOccurrences(of: "/bank", with: "")
+        
+        // 3. Construct the final path (ensure there is a "/" between domain and file)
+        let fullUrlString = homeUrl + "/financedashboard.html"
+        
+        if let url = URL(string: fullUrlString) {
+            let request = URLRequest(url: url)
+            webView.load(request)
+            print("Loading URL: \(fullUrlString)")
+        } else {
+            print("Invalid URL: \(fullUrlString)")
+        }
+    }
 
     @IBAction func Logout(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
-      
-    // MARK: - API Requests
-    
-    func loginAndFetchUserDetails() {
-         let email = "admin@demo.io"
-         let password = "Demo123!"
-         
-         let parameters: [String: Any] = [
-             "username": email,
-             "password": password
-         ]
-         
-         AF.request(AppConst.baseurl + "api/v1/auth", method: .post, parameters: parameters).validate().responseJSON { [weak self] response in
-             guard let self = self else { return }
-             
-             switch response.result {
-             case .success(let value):
-                 print("API Success: \(value)")
-                 
-                 if let json = value as? [String: Any], let token = json["authToken"] as? String {
-                     self.authToken = token // Store token for further use
-                     self.fetchUserDetails(email: email, token: token)
-                 } else {
-                     print("Token not found in response")
-                 }
-                 
-             case .failure(let error):
-                 print("API Error: \(error)")
-                 // Handle API error
-             }
-         }
-     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Add border to the tab bar
         self.tabBarController?.tabBar.layer.borderWidth = 0.5
         self.tabBarController?.tabBar.layer.borderColor = UIColor.lightGray.cgColor
     }
-    
-     func fetchUserDetails(email: String, token: String) {
-         guard let userEmail = userEmail else {
-             print("User email is nil")
-             return
-         }
-         
-         let url = AppConst.baseurl + "api/v1/user/find?username=" + userEmail
-         
-         let headers: HTTPHeaders = [
-             "Authorization": "Bearer \(token)"
-         ]
-         
-         AF.request(url, method: .get, headers: headers).validate().responseJSON { [weak self] response in
-             guard let self = self else { return }
-             
-             switch response.result {
-             case .success(let value):
-                 print("User Details Success: \(value)")
-                 
-                 if let json = value as? [String: Any],
-                    let id = json["id"] as? Int {
-                     print("ID from root object: \(id)")
-                     
-                     // Extract user profile from root object
-                     if let userProfile = json["userProfile"] as? [String: Any],
-                        let firstName = userProfile["firstName"] as? String,
-                        let lastName = userProfile["lastName"] as? String,
-                        let title = userProfile["title"] as? String {
-
-                         // Call fetchUserAccounts with token
-                         self.fetchUserAccounts(userId: id, token: token)
-
-
-                     } else {
-                         print("User profile details not found or invalid in response")
-                     }
-                 } else {
-                     print("ID not found or invalid in response")
-                 }
-             case .failure(let error):
-                 print("User Details Error: \(error)")
-                 // Handle user details fetch error
-             }
-         }
-     }
-     
-     func getUserList() {
-         // Perform login and fetch user details before fetching user list
-         loginAndFetchUserDetails()
-     }
-     
-     func fetchUserAccounts(userId: Int, token: String) {
-         let url = AppConst.baseurl + "api/v1/user/\(userId)/account"
-         
-         let headers: HTTPHeaders = [
-             "Authorization": "Bearer \(token)"
-         ]
-         
-         AF.request(url, method: .get, headers: headers).validate().responseJSON { [weak self] response in
-             guard let self = self else { return }
-             
-             switch response.result {
-             case .success(let value):
-                 print("User Accounts Success: \(value)")
-                 
-                 if let jsonArray = value as? [[String: Any]] {
-                     // Parse each user account
-                     self.userAccounts.removeAll() // Clear existing user accounts
-                     for json in jsonArray {
-                         if let accountId = json["id"] as? Int,
-                            let name = json["name"] as? String,
-                            let accountNumber = json["accountNumber"] as? Int,
-                            let currentBalance = json["currentBalance"] as? Double,
-                            let openingBalance = json["openingBalance"] as? Double {
-                             // Create a UserAccount object
-                             let userAccount = UserAccount(accountId: accountId, name: name, accountNumber: accountNumber, currentBalance: currentBalance, openingBalance: openingBalance)
-                             self.userAccounts.append(userAccount)
-                         }
-                     }
-                     self.UITableView.reloadData()
-                     print("User Accounts: \(self.userAccounts)")
-
-                 } else {
-                     print("User accounts not found in response or invalid format")
-                 }
-                 
-             case .failure(let error):
-                 print("User Accounts Error: \(error)")
-                 // Handle user accounts fetch error
-             }
-         }
-     }
-
 }
 
-extension DashboardViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userAccounts.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AccountCell", for: indexPath)
-        
-        let account = userAccounts[indexPath.row]
-        cell.textLabel?.text = "Name: \(account.name)"
-        cell.detailTextLabel?.text = "Balance: \(account.currentBalance)"
-        cell.detailTextLabel?.text?.append ( "\nAccount Number: \(account.accountNumber)\nOpening Balance: \(account.openingBalance)")
-        
-        return cell
-    }
-
-
-}
+// Note: You can now delete the UITableViewDataSource extension
+// as the WebView handles its own rendering.
